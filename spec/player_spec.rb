@@ -1,11 +1,10 @@
-require "player.rb"
+require "player"
 
 describe Player do
 
-	it "should have a variable for piece X" do
-		player = Player.new
-		player
+  it "should take and hold a marker selection" do
+    player_x = Player.new('X')
+    player_x.get_marker.should == 'X'
+	 end
 	
-	end
-
 end
