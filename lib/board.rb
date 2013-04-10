@@ -9,11 +9,11 @@ class Board
 	end
 	
 	def get_state_of_board
-		@board
+    @board
 	end
 	
 	def get_state_of_square(square)
-	  @board[square - 1]
+    @board[square - 1]
 	end
 	
 	def set_square(square, marker)

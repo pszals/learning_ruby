@@ -25,4 +25,10 @@ class Runner
     @board.set_square(square, marker)
   end
   
+  def check_if_square_is_empty(current_board, square)
+    if current_board[square] == @board.reset_board[square]
+      true
+    end
+  end
+  
 end

@@ -10,7 +10,6 @@ describe Board do
 	it "should return an array of 9 board places" do
 		board = Board.new
 		board.get_state_of_board.should == [1,2,3,4,5,6,7,8,9]
-		#['1', '2', '3', '4', '5', '6', '7', '8', '9']
 	end
 	
 	
