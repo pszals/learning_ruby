@@ -11,9 +11,11 @@ describe Runner do
     runner.get_board.get_state_of_board.should == (1..9).to_a
   end
   
-  # it "should decide whether player_x or player_o goes first" do
-
-  # end
+=begin it "should decide whether player_x or player_o goes first" do
+      runner = Runner.new
+      runner.decide_first_mover.should  == random_number
+    end
+=end
   [
     # will become list of squares because markers are built into switching players
     [1, 'X']
@@ -39,6 +41,20 @@ describe Runner do
     current_state_of_board = board.get_state_of_board
     runner.check_if_square_is_empty(current_state_of_board, empty_square).should == true
   end  
+  
+  it "should return true if there is an open square on the board" do
+    runner = Runner.new
+    board = Board.new
+    state = board.reset_board
+    runner.check_if_board_is_open(state).should == true
+  end
+  
+  it "should return return false if there are no open squares on the board" do
+    runner = Runner.new
+    board = Board.new
+    state = [1,2,3,4,5,6,7,8,9]
+    runner.check_if_board_is_open(state).should == false  
+  end
   
   
 end
