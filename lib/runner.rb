@@ -26,18 +26,20 @@ class Runner
   end
   
   def check_if_square_is_empty(current_board, square)
-    if current_board[square] == @board.reset_board[square]
+    if current_board[square - 1] == @board.reset_board[square - 1]
       true
+    else
+      false
     end
   end
   
   def check_if_board_is_open(state)
     number_of_empty_squares = 0
     empty_board = @board.reset_board
-    state.each { |square| number_of_empty_squares += 1 if square == empty_board[square - 1]}
-    if number_of_empty_squares >= 1
-      true
-    end
+    state.map { |square| number_of_empty_squares += 1 if square == empty_board[square - 1]}
+      if number_of_empty_squares >= 1
+        true
+      end
   end
 
 end

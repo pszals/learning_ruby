@@ -5,7 +5,9 @@ class Board
 	end
 	
 	def reset_board
-	  (1..9).to_a
+	  integer_board = (1..9).to_a
+	  string_board = integer_board.map {|square| square.to_s}
+	  string_board
 	end
 	
 	def get_state_of_board

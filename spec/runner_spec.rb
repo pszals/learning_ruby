@@ -8,7 +8,7 @@ describe Runner do
     runner = Runner.new
     runner.get_player_x.get_marker.should ==  'X'
     runner.get_player_o.get_marker.should ==  'O'    
-    runner.get_board.get_state_of_board.should == (1..9).to_a
+    runner.get_board.get_state_of_board.should == ['1', '2', '3', '4', '5', '6', '7', '8', '9'] 
   end
   
 =begin it "should decide whether player_x or player_o goes first" do
@@ -31,16 +31,23 @@ describe Runner do
   it "should take turn by setting square 5 to 'X'" do
     runner = Runner.new 
     runner.take_turn(5, 'X')
-    runner.get_board.get_state_of_board.should == [1, 2, 3, 4, 'X', 6, 7, 8, 9] 
+    runner.get_board.get_state_of_board.should == ['1', '2', '3', '4', 'X', '6', '7', '8', '9'] 
   end
-  
+    
+  it "should return false if square 1 is marked" do
+    runner = Runner.new
+    runner.take_turn(1, 'X')
+    board_with_marked_square_one = runner.get_board.get_state_of_board
+    runner.check_if_square_is_empty(board_with_marked_square_one, 1).should == false
+  end  
+
   it "should return true if square 1 is empty" do
     empty_square = 1
     runner = Runner.new
     board = runner.get_board
     current_state_of_board = board.get_state_of_board
     runner.check_if_square_is_empty(current_state_of_board, empty_square).should == true
-  end  
+  end
   
   it "should return true if there is an open square on the board" do
     runner = Runner.new
@@ -49,10 +56,10 @@ describe Runner do
     runner.check_if_board_is_open(state).should == true
   end
   
-  it "should return return false if there are no open squares on the board" do
+  it "should return false if there are no open squares on the board" do
     runner = Runner.new
     board = Board.new
-    state = [1,2,3,4,5,6,7,8,9]
+    state = ['X', 'O', 'O', 'X', 'X', 'O', 'X', 'X', 'O']
     runner.check_if_board_is_open(state).should == false  
   end
   
