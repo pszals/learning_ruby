@@ -62,4 +62,75 @@ describe Runner do
     state = ['X', 'O', 'O', 'X', 'X', 'O', 'X', 'X', 'O']
     runner.check_if_board_is_open(state).should == false  
   end
+  
+  it "should return true if top row is all X’s" do
+    runner = Runner.new
+    board = Board.new
+    state = ['X', 'X', 'X', 'X', 'X', 'O', 'X', 'X', 'O']
+    runner.check_top_row(state).should == true
+  end
+  
+  it "should return false if top row is not homogeneous" do
+    runner = Runner.new
+    board = Board.new
+    state = ['O', 'O', 'X', 'X', 'X', 'O', 'X', 'X', 'O']
+    runner.check_top_row(state).should == false
+  end
+  
+  it "should return true if second row is all X's or all O's" do
+    runner = Runner.new
+    board = Board.new
+    state = ['X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'O']
+    runner.check_second_row(state).should == true
+  end
+
+  it "should return false if second row is not homogeneous" do
+    runner = Runner.new
+    board = Board.new
+    state = ['O', 'O', 'X', 'X', 'X', 'O', 'X', 'X', 'O']
+    runner.check_second_row(state).should == false
+  end
+  
+  it "should return true if third row is all X's or all O's" do
+    runner = Runner.new
+    board = Board.new
+    state = ['X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X']
+    runner.check_third_row(state).should == true
+  end
+
+  it "should return true if first column is all X's or all O's" do
+    runner = Runner.new
+    board = Board.new
+    state = ['X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X']
+    runner.check_first_column(state).should == true
+  end
+  
+  it "should return true if second column is all X's or all O's" do
+    runner = Runner.new
+    board = Board.new
+    state = ['X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X']
+    runner.check_second_column(state).should == true
+  end
+
+  it "should return true if third column is all X's or all O's" do
+    runner = Runner.new
+    board = Board.new
+    state = ['X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X']
+    runner.check_third_column(state).should == true
+  end
+
+  it "should return true if diagonal down is all X's or all O's" do
+    runner = Runner.new
+    board = Board.new
+    state = ['X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X']
+    runner.check_diagonal_down(state).should == true
+  end
+
+  it "should return true if diagonal up is all X's or all O's" do
+    runner = Runner.new
+    board = Board.new
+    state = ['X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X']
+    runner.check_diagonal_up(state).should == true
+  end
+
 end

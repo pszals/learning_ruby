@@ -7,6 +7,7 @@ class Io
   end
 
   def print_row_one
+ 	  # Consider refactoring to use each_slice
     state = @board.get_state_of_board
     row_one = state[0..2].join(' ')
     row_one += "\n"    
