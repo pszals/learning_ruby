@@ -62,7 +62,6 @@ describe Runner do
     state = ['X', 'O', 'O', 'X', 'X', 'O', 'X', 'X', 'O']
     runner.check_if_board_is_open(state).should == false  
   end
-<<<<<<< HEAD
   
   it "should return true if top row is all X’s" do
     runner = Runner.new
@@ -133,7 +132,4 @@ describe Runner do
     state = ['X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X']
     runner.check_diagonal_up(state).should == true
   end
-
-=======
->>>>>>> 65ed7fa7595a6f5441b91d488ae30c588df74c0c
 end
