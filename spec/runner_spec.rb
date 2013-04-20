@@ -62,6 +62,4 @@ describe Runner do
     state = ['X', 'O', 'O', 'X', 'X', 'O', 'X', 'X', 'O']
     runner.check_if_board_is_open(state).should == false  
   end
-  
-  
 end
