@@ -37,6 +37,7 @@ class Runner
     number_of_empty_squares = 0
     empty_board = @board.reset_board
     state.map { |square| number_of_empty_squares += 1 if square == empty_board[square.to_i - 1]}
+<<<<<<< HEAD
     if number_of_empty_squares >= 1
       true
     else
@@ -69,6 +70,14 @@ class Runner
     else
       false
     end
+=======
+      if number_of_empty_squares >= 1
+        true
+      else
+        false
+      end
+      
+>>>>>>> 65ed7fa7595a6f5441b91d488ae30c588df74c0c
   end
 
   def check_first_column(state)
