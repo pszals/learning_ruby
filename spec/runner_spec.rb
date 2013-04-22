@@ -146,21 +146,23 @@ describe Runner do
     board = ['X', 'X', 'X', 'O', 'O', '6', '7', '8', '9']
     runner.winner_name(board).should == 'X'
   end
-  
-  it "should pass marker type 'X' if it is X's turn" do
-    runner = Runner.new
-    board = ['O', 'X', '3', '4', 'X', '6', '7', '8', '9'] 
-  end
-  
+    
   it "should randomly decide if X or O goes first if board is empty" do
     runner = Runner.new
     board = ['1', '2', '3', '4', '5', '6', '7', '8', '9']
     runner.decide_first_player(board).should == 'X'
   end
   
-  it "should return 'X' if it is O's turn" do
+  it "should return 'X' if it is X's turn" do
     runner = Runner.new
     board = ['X', 'O', '3', '4', '5', '6', '7', '8', '9']
     runner.whos_turn?(board).should == 'X'
   end
+  
+  it "should return 'O' if it is O's turn" do
+    runner = Runner.new
+    board = ['X', 'O', 'X', '4', '5', '6', '7', '8', '9']
+    runner.whos_turn?(board).should == 'O'
+  end
+
 end

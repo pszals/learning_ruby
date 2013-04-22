@@ -33,4 +33,19 @@ describe Io do
     io.square_to_mark(user_input).should == 1
   end
   
+  it "should print 'It's X's turn" do
+    board = ['X', 'O', '3', '4', '5', '6', '7', '8', '9']
+    io = Io.new(board)
+    runner = Runner.new
+    marker_type = runner.whos_turn?(board)
+    io.print_turn('X').should == "It is X's turn"
+  end
+
+  it "should return 'X'" do
+    board = ['X', 'O', '3', '4', '5', '6', '7', '8', '9']
+    runner = Runner.new
+    marker_type = runner.whos_turn?(board)
+    marker_type.should == 'X'
+  end
+
 end

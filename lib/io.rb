@@ -38,5 +38,10 @@ class Io
     user_input
   end
   
+  def print_turn(marker_type)
+    marker = marker_type 
+    "It is #{marker}'s turn"    
+  end
+  
 
 end
