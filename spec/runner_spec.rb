@@ -38,7 +38,7 @@ describe Runner do
     runner = Runner.new
     runner.take_turn(1, 'X')
     board_with_marked_square_one = runner.get_board.get_state_of_board
-    runner.check_if_square_is_empty(board_with_marked_square_one, 1).should == false
+    runner.square_empty?(board_with_marked_square_one, 1).should == false
   end  
 
   it "should return true if square 1 is empty" do
@@ -46,90 +46,121 @@ describe Runner do
     runner = Runner.new
     board = runner.get_board
     current_state_of_board = board.get_state_of_board
-    runner.check_if_square_is_empty(current_state_of_board, empty_square).should == true
+    runner.square_empty?(current_state_of_board, empty_square).should == true
   end
   
   it "should return true if there is an open square on the board" do
     runner = Runner.new
     board = Board.new
-    state = board.reset_board
-    runner.check_if_board_is_open(state).should == true
+    board = board.reset_board
+    runner.board_open?(board).should == true
   end
-  
+
+  it "should return false if board is tied" do
+    runner = Runner.new
+    board = ['X', 'O', 'X', 'O', 'O', 'X', 'X', 'X', 'O']
+    runner.board_open?(board).should == false
+  end
+    
   it "should return false if there are no open squares on the board" do
     runner = Runner.new
-    board = Board.new
-    state = ['X', 'O', 'O', 'X', 'X', 'O', 'X', 'X', 'O']
-    runner.check_if_board_is_open(state).should == false  
+    board = ['X', 'O', 'O', 'X', 'X', 'O', 'X', 'X', 'O']
+    runner.board_open?(board).should == false  
   end
   
   it "should return true if top row is all X’s" do
     runner = Runner.new
     board = Board.new
-    state = ['X', 'X', 'X', 'X', 'X', 'O', 'X', 'X', 'O']
-    runner.check_top_row(state).should == true
+    board = ['X', 'X', 'X', 'X', 'X', 'O', 'X', 'X', 'O']
+    runner.check_top_row(board).should == true
   end
   
   it "should return false if top row is not homogeneous" do
     runner = Runner.new
-    board = Board.new
-    state = ['O', 'O', 'X', 'X', 'X', 'O', 'X', 'X', 'O']
-    runner.check_top_row(state).should == false
+    board = ['O', 'O', 'X', 'X', 'X', 'O', 'X', 'X', 'O']
+    runner.check_top_row(board).should == false
   end
   
   it "should return true if second row is all X's or all O's" do
     runner = Runner.new
-    board = Board.new
-    state = ['X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'O']
-    runner.check_second_row(state).should == true
+    board = ['X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'O']
+    runner.check_second_row(board).should == true
   end
 
   it "should return false if second row is not homogeneous" do
     runner = Runner.new
-    board = Board.new
-    state = ['O', 'O', 'X', 'X', 'X', 'O', 'X', 'X', 'O']
-    runner.check_second_row(state).should == false
+    board = ['O', 'O', 'X', 'X', 'X', 'O', 'X', 'X', 'O']
+    runner.check_second_row(board).should == false
   end
   
   it "should return true if third row is all X's or all O's" do
     runner = Runner.new
-    board = Board.new
-    state = ['X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X']
-    runner.check_third_row(state).should == true
+    board = ['X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X']
+    runner.check_third_row(board).should == true
   end
 
   it "should return true if first column is all X's or all O's" do
     runner = Runner.new
-    board = Board.new
-    state = ['X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X']
-    runner.check_first_column(state).should == true
+    board = ['X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X']
+    runner.check_first_column(board).should == true
   end
   
   it "should return true if second column is all X's or all O's" do
     runner = Runner.new
-    board = Board.new
-    state = ['X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X']
-    runner.check_second_column(state).should == true
+    board = ['X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X']
+    runner.check_second_column(board).should == true
   end
 
   it "should return true if third column is all X's or all O's" do
     runner = Runner.new
-    board = Board.new
-    state = ['X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X']
-    runner.check_third_column(state).should == true
+    board = ['X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X']
+    runner.check_third_column(board).should == true
   end
 
   it "should return true if diagonal down is all X's or all O's" do
     runner = Runner.new
-    board = Board.new
-    state = ['X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X']
-    runner.check_diagonal_down(state).should == true
+    board = ['X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X']
+    runner.check_diagonal_down(board).should == true
   end
 
   it "should return true if diagonal up is all X's or all O's" do
     runner = Runner.new
-    board = Board.new
-    state = ['X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X']
-    runner.check_diagonal_up(state).should == true
+    board = ['X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X']
+    runner.check_diagonal_up(board).should == true
+  end
+  
+  it "should return marker type of winner on board" do
+    runner = Runner.new
+    board = ['X', 'X', 'X', 'O', 'O', 'X', 'O', 'X', 'O']
+    runner.winner_on_board?(board).should == 'X'
+  end
+  
+  #it "should return false (not true) if there are three blanks in a row" do
+  #  runner = Runner.new
+  #  board = ['', '', '', 'O', 'O', 'X', 'O', 'X', 'O']
+  #  runner.check_all_combos(board).should == false
+  #end
+  
+  it "should pass winner of top row game" do
+    runner = Runner.new
+    board = ['X', 'X', 'X', 'O', 'O', '6', '7', '8', '9']
+    runner.winner_name(board).should == 'X'
+  end
+  
+  it "should pass marker type 'X' if it is X's turn" do
+    runner = Runner.new
+    board = ['O', 'X', '3', '4', 'X', '6', '7', '8', '9'] 
+  end
+  
+  it "should randomly decide if X or O goes first if board is empty" do
+    runner = Runner.new
+    board = ['1', '2', '3', '4', '5', '6', '7', '8', '9']
+    runner.decide_first_player(board).should == 'X'
+  end
+  
+  it "should return 'X' if it is O's turn" do
+    runner = Runner.new
+    board = ['X', 'O', '3', '4', '5', '6', '7', '8', '9']
+    runner.whos_turn?(board).should == 'X'
   end
 end

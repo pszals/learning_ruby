@@ -25,7 +25,7 @@ class Runner
     @board.set_square(square, marker)
   end
   
-  def check_if_square_is_empty(current_board, square)
+  def square_empty?(current_board, square)
     if current_board[square - 1] == @board.reset_board[square - 1]
       true
     else
@@ -33,10 +33,10 @@ class Runner
     end
   end
   
-  def check_if_board_is_open(state)
+  def board_open?(board)
     number_of_empty_squares = 0
     empty_board = @board.reset_board
-    state.map { |square| number_of_empty_squares += 1 if square == empty_board[square.to_i - 1]}
+    board.map { |square| number_of_empty_squares += 1 if square == empty_board[square.to_i - 1]}
     if number_of_empty_squares >= 1
       true
     else
@@ -44,37 +44,37 @@ class Runner
     end
   end
   
-  def check_top_row(state)
-    marker = state[0]
-    if state[0..2].all? { |square| square == marker }
+  def check_top_row(board)
+    marker = board[0]
+    if board[0..2].all? { |square| square == marker }
       true
     else
       false
     end
   end
   
-  def check_second_row(state)
-    marker = state[3]
-    if state[3..5].all? { |square| square == marker }
+  def check_second_row(board)
+    marker = board[3]
+    if board[3..5].all? { |square| square == marker }
       true
     else
       false
     end
   end
 
-  def check_third_row(state)
-    marker = state[6]
-    if state[6..8].all? { |square| square == marker }
+  def check_third_row(board)
+    marker = board[6]
+    if board[6..8].all? { |square| square == marker }
       true
     else
       false
     end
   end
 
-  def check_first_column(state)
-    marker = state[0]
+  def check_first_column(board)
+    marker = board[0]
     first_column = []
-    first_column << state[0] and state[3] and state[6]
+    first_column << board[0] and board[3] and board[6]
     if first_column.all? { |square| square == marker }
       true
     else
@@ -82,10 +82,10 @@ class Runner
     end
   end  
 
-  def check_second_column(state)
-    marker = state[1]
+  def check_second_column(board)
+    marker = board[1]
     column = []
-    column << state[1] and state[4] and state[7]
+    column << board[1] and board[4] and board[7]
     if column.all? { |square| square == marker }
       true
     else
@@ -93,10 +93,10 @@ class Runner
     end
   end  
 
-  def check_third_column(state)
-    marker = state[2]
+  def check_third_column(board)
+    marker = board[2]
     column = []
-    column << state[2] and state[5] and state[8]
+    column << board[2] and board[5] and board[8]
     if column.all? { |square| square == square }
       true
     else
@@ -104,10 +104,10 @@ class Runner
     end
   end  
 
-  def check_diagonal_down(state)
-    marker = state[0]
+  def check_diagonal_down(board)
+    marker = board[0]
     diagonal = []
-    diagonal << state[0] and state[4] and state[8]
+    diagonal << board[0] and board[4] and board[8]
     if diagonal.all? { |square| square == marker }
       true
     else
@@ -115,15 +115,60 @@ class Runner
     end
   end  
 
-  def check_diagonal_up(state)
-    marker = state[6]
+  def check_diagonal_up(board)
+    marker = board[6]
     diagonal = []
-    diagonal << state[6] and state[4] and state[2]
+    diagonal << board[6] and board[4] and board[2]
     if diagonal.all? { |square| square == marker }
       true
     else
       false
     end
   end  
-
+  
+  def winner_on_board?(board)
+    combos = [
+              [0, 1, 2],
+              [3, 4, 5],
+              [6, 7, 8],
+              [0, 3, 6],
+              [1, 4, 7],
+              [2, 5, 8],
+              [0, 4, 8],
+              [6, 4, 2]
+            ]
+    combos.each do |combo|
+      marker = board[combo[0]]
+      winner = []
+      winner << board[combo[0]] and board[combo[1]] and board[combo[2]]
+      if winner.all? { |square| square == marker }
+        return marker
+      else
+        return false
+      end                         
+    end
+  end
+  
+  def winner_name(board)
+    winner_on_board?(board)
+  end
+  
+  def number_of_markers(board)
+    count = 0
+    board.map {|square| count += 1 if square[board] == 'X' || sqauare[board] == 'O'}
+    count
+  end
+  
+  def whos_turn?(board)
+    number_of_empty_squares = 0
+    empty_board = @board.reset_board
+    board.map { |square| number_of_empty_squares += 1 if square == empty_board[square.to_i - 1]}
+    if number_of_empty_squares%2 == 0
+      return 'O'
+    else
+      return 'X'
+    end
+  end
 end
+  
+  
