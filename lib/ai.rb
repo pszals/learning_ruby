@@ -46,10 +46,8 @@ class Ai
       row = []
       row << board[combo[0]] and row << board[combo[1]] and row << board[combo[2]]
       if row[0] == row[1] || row[0] == row[2] || row[1] == row[2]
-        to_fill = row.detect { |square| square != marker }
+        to_fill = row.detect { |square| @board.square_empty?(board, square.to_i)}
         return to_fill
-      else
-        return false
       end
     end  
   end
