@@ -43,5 +43,13 @@ class Io
     "It is #{marker}'s turn"    
   end
   
+  def get_square(square)
+    square = gets.chomp
+    return square
+  end  
 
+  def print_winner(winning_marker)
+    winner = winning_marker
+    "Player #{winner} wins"
+  end
 end

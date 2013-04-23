@@ -10,12 +10,7 @@ describe Runner do
     runner.get_player_o.get_marker.should ==  'O'    
     runner.get_board.get_state_of_board.should == ['1', '2', '3', '4', '5', '6', '7', '8', '9'] 
   end
-  
-=begin it "should decide whether player_x or player_o goes first" do
-      runner = Runner.new
-      runner.decide_first_mover.should  == random_number
-    end
-=end
+
   [
     # will become list of squares because markers are built into switching players
     [1, 'X']
@@ -138,7 +133,7 @@ describe Runner do
   #it "should return false (not true) if there are three blanks in a row" do
   #  runner = Runner.new
   #  board = ['', '', '', 'O', 'O', 'X', 'O', 'X', 'O']
-  #  runner.check_all_combos(board).should == false
+  #  runner.winner_on_board?(board).should == false
   #end
   
   it "should pass winner of top row game" do
@@ -150,7 +145,7 @@ describe Runner do
   it "should randomly decide if X or O goes first if board is empty" do
     runner = Runner.new
     board = ['1', '2', '3', '4', '5', '6', '7', '8', '9']
-    runner.decide_first_player(board).should == 'X'
+    runner.whos_turn?(board).should == 'X'
   end
   
   it "should return 'X' if it is X's turn" do

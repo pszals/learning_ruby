@@ -163,7 +163,14 @@ class Runner
     number_of_empty_squares = 0
     empty_board = @board.reset_board
     board.map { |square| number_of_empty_squares += 1 if square == empty_board[square.to_i - 1]}
-    if number_of_empty_squares%2 == 0
+    if number_of_empty_squares == 9
+      rand = rand(10)
+      if rand>5 
+        return 'X'
+      else 
+        return 'O' 
+      end
+    elsif number_of_empty_squares%2 == 0
       return 'O'
     else
       return 'X'

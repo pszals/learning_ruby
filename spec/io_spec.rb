@@ -38,7 +38,8 @@ describe Io do
     io = Io.new(board)
     runner = Runner.new
     marker_type = runner.whos_turn?(board)
-    io.print_turn('X').should == "It is X's turn"
+#    STDOUT.should_receive(:puts).with("It is X's turn")
+    io.print_turn(marker_type).should == "It is X's turn"
   end
 
   it "should return 'X'" do
@@ -46,6 +47,29 @@ describe Io do
     runner = Runner.new
     marker_type = runner.whos_turn?(board)
     marker_type.should == 'X'
+  end
+  
+#  it "should get the square number to be marked from user" do
+#    board = Board.new
+#    io = Io.new(board)
+#    user_input = 1
+#    io.get_square(1).should == 1
+#  end
+
+  it "should print the winning marker type of the game" do
+    board = ['X', 'X', 'X', 'O', 'O', '6', '7', '8', '9']
+    io = Io.new(board)
+    runner = Runner.new
+    winning_marker = runner.winner_name(board)
+    io.print_winner(winning_marker).should == 'Player X wins'
+  end
+
+  it "should print the winning marker type of the game" do
+    board = ['O', 'O', 'O', 'X', 'X', '6', '7', '8', '9']
+    io = Io.new(board)
+    runner = Runner.new
+    winning_marker = runner.winner_name(board)
+    io.print_winner(winning_marker).should == 'Player O wins'
   end
 
 end
