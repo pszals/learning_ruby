@@ -32,6 +32,12 @@ describe Ai do
     ai.complete_any_row(board).should == nil
   end
   
+  it "should block opponents three in a row" do
+    board = ['1', '2', '3', 'O', '5', 'O', 'X', 'O', 'X']
+    ai = Ai.new
+    ai.complete_any_row(board).should == '5'  
+  end
+  
   it "should mark the center of the board if center is empty" do
     board = ['1', '2', '3', '4', '5', 'O', 'X', 'O', 'X']
     ai = Ai.new
