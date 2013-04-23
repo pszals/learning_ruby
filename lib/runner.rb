@@ -24,15 +24,7 @@ class Runner
   def take_turn(square, marker)
     @board.set_square(square, marker)
   end
-  
-  def square_empty?(current_board, square)
-    if current_board[square - 1] == @board.reset_board[square - 1]
-      true
-    else
-      false
-    end
-  end
-  
+    
   def board_open?(board)
     number_of_empty_squares = 0
     empty_board = @board.reset_board
@@ -140,7 +132,7 @@ class Runner
     combos.each do |combo|
       marker = board[combo[0]]
       winner = []
-      winner << board[combo[0]] and board[combo[1]] and board[combo[2]]
+      winner << board[combo[0]] and winner << board[combo[1]] and winner << board[combo[2]]
       if winner.all? { |square| square == marker }
         return marker
       else

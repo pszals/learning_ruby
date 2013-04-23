@@ -22,4 +22,13 @@ class Board
 	  @board[square - 1] = marker
 	end
 	
+  def square_empty?(current_board, square)
+    if current_board[square - 1] == reset_board[square - 1]
+      true
+    else
+      false
+    end
+  end
+	
+	
 end

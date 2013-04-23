@@ -29,21 +29,6 @@ describe Runner do
     runner.get_board.get_state_of_board.should == ['1', '2', '3', '4', 'X', '6', '7', '8', '9'] 
   end
     
-  it "should return false if square 1 is marked" do
-    runner = Runner.new
-    runner.take_turn(1, 'X')
-    board_with_marked_square_one = runner.get_board.get_state_of_board
-    runner.square_empty?(board_with_marked_square_one, 1).should == false
-  end  
-
-  it "should return true if square 1 is empty" do
-    empty_square = 1
-    runner = Runner.new
-    board = runner.get_board
-    current_state_of_board = board.get_state_of_board
-    runner.square_empty?(current_state_of_board, empty_square).should == true
-  end
-  
   it "should return true if there is an open square on the board" do
     runner = Runner.new
     board = Board.new
@@ -126,7 +111,7 @@ describe Runner do
   
   it "should return marker type of winner on board" do
     runner = Runner.new
-    board = ['X', 'X', 'X', 'O', 'O', 'X', 'O', 'X', 'O']
+    board = ['1', '2', '3', '4', 'O', 'O', 'X', 'X', 'X']
     runner.winner_on_board?(board).should == 'X'
   end
   
