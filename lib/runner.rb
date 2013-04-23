@@ -135,8 +135,6 @@ class Runner
       winner << board[combo[0]] and winner << board[combo[1]] and winner << board[combo[2]]
       if winner.all? { |square| square == marker }
         return marker
-      else
-        return false
       end                         
     end
   end

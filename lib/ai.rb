@@ -42,11 +42,12 @@ class Ai
               [6, 4, 2]
             ]
     combos.each do |combo|
+      marker = 'X'
       row = []
-      row << board[combo[0]] and board[combo[1]] and board[combo[2]]
+      row << board[combo[0]] and row << board[combo[1]] and row << board[combo[2]]
       if row[0] == row[1] || row[0] == row[2] || row[1] == row[2]
-        return row
-        to_fill = row.detect { |square| @board.square_empty?(board, square.to_i) }
+        to_fill = row.detect { |square| square != marker }
+        return to_fill
       else
         return false
       end

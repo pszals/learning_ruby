@@ -111,7 +111,7 @@ describe Runner do
   
   it "should return marker type of winner on board" do
     runner = Runner.new
-    board = ['1', '2', '3', '4', 'O', 'O', 'X', 'X', 'X']
+    board = ['1', '2', '3', '4', '5', '6', 'X', 'X', 'X']
     runner.winner_on_board?(board).should == 'X'
   end
   
