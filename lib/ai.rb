@@ -42,7 +42,6 @@ class Ai
               [6, 4, 2]
             ]
     combos.each do |combo|
-      marker = 'X'
       row = []
       row << board[combo[0]] and row << board[combo[1]] and row << board[combo[2]]
       if row[0] == row[1] || row[0] == row[2] || row[1] == row[2]
@@ -50,6 +49,12 @@ class Ai
         return to_fill
       end
     end  
+  end
+  
+  def mark_center(board)
+    if @board.square_empty?(board, 5)
+      '5'
+    end
   end
   
 end

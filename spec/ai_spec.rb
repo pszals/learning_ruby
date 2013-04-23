@@ -25,5 +25,22 @@ describe Ai do
     ai = Ai.new
     ai.complete_any_row(board).should == '8'  
   end
+  
+  it "should pass or something if there are two of same but one of other in row" do
+    board = ['1', '2', '3', '4', '5', 'O', 'X', 'O', 'X']
+    ai = Ai.new
+    ai.complete_any_row(board).should == nil
+  end
+  
+  it "should mark the center of the board if center is empty" do
+    board = ['1', '2', '3', '4', '5', 'O', 'X', 'O', 'X']
+    ai = Ai.new
+    ai.mark_center(board).should == '5'
+  end
 
+  it "should pass or something if center is already marked" do
+    board = ['1', '2', '3', '4', 'X', 'O', 'X', 'O', 'X']
+    ai = Ai.new
+    ai.mark_center(board).should == nil    
+  end
 end
