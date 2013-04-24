@@ -61,7 +61,7 @@ class Ai
   
   def mark_corner(board)
     open_corner = false
-    corners = [1, 3, 6, 9]
+    corners = [1, 3, 7, 9]
     corners.each do |corner|
       if @board.square_empty?(board, corner)
         open_corner = corner.to_s
@@ -72,7 +72,7 @@ class Ai
 
   def mark_opposite_corner(board)
     open_corner = false
-    corner_pairs = [[1, 9],[3, 6], [6, 3], [9, 1]]
+    corner_pairs = [[1, 9],[3, 7], [7, 3], [9, 1]]
     corner_pairs.each do |pair|
       if not @board.square_empty?(board, pair[0]) and @board.square_empty?(board, pair[1])
         open_corner = pair[1].to_s

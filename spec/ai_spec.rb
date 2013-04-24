@@ -68,4 +68,10 @@ describe Ai do
     ai.mark_opposite_corner(board).should == '9'
   end
   
+  it "should return false if no opposite corners can be marked" do
+    board = ['X', '2', 'O', '4', '5', '6', 'X', '8', 'O']
+    ai = Ai.new
+    ai.mark_opposite_corner(board).should == false  
+  end
+  
 end
