@@ -74,4 +74,16 @@ describe Ai do
     ai.mark_opposite_corner(board).should == false  
   end
   
+  it "should mark a side square" do
+    board = ['X', '2', 'O', '4', '5', '6', 'X', 'O', 'O']
+    ai = Ai.new
+    ai.mark_side_square(board).should == '2'  
+  end
+  
+  it "should return false if no side square can be marked" do
+    board = ['X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X']
+    ai = Ai.new
+    ai.mark_side_square(board).should == false
+  end
+  
 end

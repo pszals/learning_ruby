@@ -80,4 +80,15 @@ class Ai
     end
     return open_corner
   end
+  
+  def mark_side_square(board)
+    open_side = false
+    sides = [8, 6, 4, 2]
+    sides.each do |side|
+      if @board.square_empty?(board, side)
+        open_side = side.to_s
+      end
+    end
+    return open_side
+  end
 end
