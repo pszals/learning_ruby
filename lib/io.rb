@@ -8,22 +8,22 @@ class Io
 
   def print_row_one
  	  # Consider refactoring to use each_slice
-    state = @board.get_state_of_board
-    row_one = state[0..2].join(' ')
+    board = @board.get_state_of_board
+    row_one = board[0..2].join(' ')
     row_one += "\n"    
     row_one
   end
   
   def print_row_two
-    state = @board.get_state_of_board
-    row_two = state[3..5].join(' ')
+    board = @board.get_state_of_board
+    row_two = board[3..5].join(' ')
     row_two += "\n"    
     row_two
   end
 
   def print_row_three
-    state = @board.get_state_of_board
-    row_three = state[6..8].join(' ')   
+    board = @board.get_state_of_board
+    row_three = board[6..8].join(' ')   
     row_three
   end
   
@@ -48,8 +48,8 @@ class Io
     return square
   end  
 
-  def print_winner(winning_marker)
+  def puts_winner(winning_marker)
     winner = winning_marker
-    "Player #{winner} wins"
+    puts "Player #{winner} wins"
   end
 end

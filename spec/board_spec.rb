@@ -53,7 +53,7 @@ describe Board do
  it "should return false if square 1 is marked" do
     board = Board.new
     runner = Runner.new
-    runner.take_turn(1, 'X')
+    runner.place_marker(1, 'X')
     board_with_marked_square_one = runner.get_board.get_state_of_board
     board.square_empty?(board_with_marked_square_one, 1).should == false
   end  

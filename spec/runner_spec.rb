@@ -16,16 +16,16 @@ describe Runner do
     [1, 'X']
   
   ].each do |square, marker|
-    it "should take turn by setting #{square} to #{marker}" do
+    it "should place marker by setting #{square} to #{marker}" do
       runner = Runner.new
-      runner.take_turn(square, marker)
+      runner.place_marker(square, marker)
       runner.get_board.get_state_of_square(square).should == marker
     end
   end
 
-  it "should take turn by setting square 5 to 'X'" do
+  it "should place marker by setting square 5 to 'X'" do
     runner = Runner.new 
-    runner.take_turn(5, 'X')
+    runner.place_marker(5, 'X')
     runner.get_board.get_state_of_board.should == ['1', '2', '3', '4', 'X', '6', '7', '8', '9'] 
   end
     
@@ -108,30 +108,31 @@ describe Runner do
     board = ['X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X']
     runner.check_diagonal_up(board).should == true
   end
+
+  it "should return marker type of winner of top row game" do
+    runner = Runner.new
+    board = ['X', 'X', 'X', 'O', 'O', '6', '7', '8', '9']
+    runner.winner_name(board).should == 'X'
+  end
   
   it "should return marker type of winner on board" do
     runner = Runner.new
     board = ['1', '2', '3', '4', '5', '6', 'X', 'X', 'X']
     runner.winner_on_board?(board).should == 'X'
   end
-    
+        
   it "should return false if there is no winner on board" do
     runner = Runner.new
     board = ['1', '2', '3', '4', '5', '6', 'O', 'X', 'X']
     runner.winner_on_board?(board).should == false
   end
+
   #it "should return false (not true) if there are three blanks in a row" do
   #  runner = Runner.new
   #  board = ['', '', '', 'O', 'O', 'X', 'O', 'X', 'O']
   #  runner.winner_on_board?(board).should == false
   #end
   
-  it "should pass winner of top row game" do
-    runner = Runner.new
-    board = ['X', 'X', 'X', 'O', 'O', '6', '7', '8', '9']
-    runner.winner_name(board).should == 'X'
-  end
-    
   it "should randomly decide if X or O goes first if board is empty" do
     runner = Runner.new
     board = ['1', '2', '3', '4', '5', '6', '7', '8', '9']
@@ -148,6 +149,13 @@ describe Runner do
     runner = Runner.new
     board = ['X', 'O', 'X', '4', '5', '6', '7', '8', '9']
     runner.whos_turn?(board).should == 'O'
+  end
+  
+  it "should have a method play that calls the print_board method" do
+    io = Io.new
+    runner = Runner.new
+    state = ['1', '2', '3', '4', '5', '6', '7', '8', '9']
+    runner.play.should == io.print_whole_board(state)
   end
 
 end

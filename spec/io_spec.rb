@@ -57,20 +57,12 @@ describe Io do
 #  end
 
   it "should print the winning marker type of the game" do
-    board = ['X', 'X', 'X', 'O', 'O', '6', '7', '8', '9']
-    io = Io.new(board)
-    runner = Runner.new
-    winning_marker = runner.winner_name(board)
-    io.print_winner(winning_marker).should == 'Player X wins'
-  end
-
-  it "should print the winning marker type of the game" do
     board = ['O', 'O', 'O', 'X', 'X', '6', '7', '8', '9']
     io = Io.new(board)
     runner = Runner.new
     winning_marker = runner.winner_name(board)
-    io.print_winner(winning_marker)
-    STDOUT.should_recieve(:print).with("Player X wins")
+    io.puts_winner(winning_marker)
+    STDOUT.should_receive(:puts).with("Player O wins")
   end
 
 end

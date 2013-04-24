@@ -44,9 +44,28 @@ describe Ai do
     ai.mark_center(board).should == '5'
   end
 
-  it "should pass or something if center is already marked" do
+  it "should return false if center square is already marked" do
     board = ['1', '2', '3', '4', 'X', 'O', 'X', 'O', 'X']
     ai = Ai.new
-    ai.mark_center(board).should == nil    
+    ai.mark_center(board).should == false 
   end
+  
+  it "should mark first empty corner encountered" do
+    board = ['O', '2', '3', '4', 'X', 'O', 'X', 'O', 'X']
+    ai = Ai.new
+    ai.mark_corner(board).should == '3'
+  end
+  
+  it "should return false if no corners are empty" do
+    board = ['O', '2', 'X', '4', 'X', 'O', 'X', 'O', 'X']
+    ai = Ai.new
+    ai.mark_corner(board).should == false
+  end
+  
+  it "should mark opposite corner of square oppoent has marked" do
+    board = ['X', '2', '3', '4', '5', '6', '7', '8', '9']
+    ai = Ai.new
+    ai.mark_opposite_corner(board).should == '9'
+  end
+  
 end
