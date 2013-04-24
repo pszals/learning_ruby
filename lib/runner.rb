@@ -119,6 +119,7 @@ class Runner
   end  
   
   def winner_on_board?(board)
+    winning_marker = false
     combos = [
               [0, 1, 2],
               [3, 4, 5],
@@ -128,15 +129,16 @@ class Runner
               [2, 5, 8],
               [0, 4, 8],
               [6, 4, 2]
-            ]
+             ]
     combos.each do |combo|
       marker = board[combo[0]]
       winner = []
       winner << board[combo[0]] and winner << board[combo[1]] and winner << board[combo[2]]
       if winner.all? { |square| square == marker }
-        return marker
-      end                         
+        winning_marker = marker
+      end
     end
+    return winning_marker
   end
   
   def winner_name(board)

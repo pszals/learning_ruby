@@ -69,7 +69,8 @@ describe Io do
     io = Io.new(board)
     runner = Runner.new
     winning_marker = runner.winner_name(board)
-    io.print_winner(winning_marker).should == 'Player O wins'
+    io.print_winner(winning_marker)
+    STDOUT.should_recieve(:print).with("Player X wins")
   end
 
 end

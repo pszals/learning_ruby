@@ -114,7 +114,12 @@ describe Runner do
     board = ['1', '2', '3', '4', '5', '6', 'X', 'X', 'X']
     runner.winner_on_board?(board).should == 'X'
   end
-  
+    
+  it "should return false if there is no winner on board" do
+    runner = Runner.new
+    board = ['1', '2', '3', '4', '5', '6', 'O', 'X', 'X']
+    runner.winner_on_board?(board).should == false
+  end
   #it "should return false (not true) if there are three blanks in a row" do
   #  runner = Runner.new
   #  board = ['', '', '', 'O', 'O', 'X', 'O', 'X', 'O']
