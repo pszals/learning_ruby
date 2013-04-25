@@ -73,9 +73,9 @@ class Ai
   def mark_opposite_corner(board)
     open_corner = false
     corner_pairs = [[1, 9],[3, 7], [7, 3], [9, 1]]
-    corner_pairs.each do |pair|
-      if not @board.square_empty?(board, pair[0]) and @board.square_empty?(board, pair[1])
-        open_corner = pair[1].to_s
+    corner_pairs.each do |square, opposite|
+      if not @board.square_empty?(board, square) and @board.square_empty?(board, opposite)
+        open_corner = opposite.to_s
       end  
     end
     return open_corner
