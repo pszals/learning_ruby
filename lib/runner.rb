@@ -70,7 +70,7 @@ class Runner
     count
   end
   
-  def whos_turn?(board)
+  def whose_turn?(board)
     number_of_empty_squares = 0
     empty_board = @board.reset_board
     board.map { |square| number_of_empty_squares += 1 if square == empty_board[square.to_i - 1]}

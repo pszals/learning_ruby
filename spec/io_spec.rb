@@ -37,7 +37,7 @@ describe Io do
     board = ['X', 'O', '3', '4', '5', '6', '7', '8', '9']
     io = Io.new(board)
     runner = Runner.new
-    marker_type = runner.whos_turn?(board)
+    marker_type = runner.whose_turn?(board)
 #    STDOUT.should_receive(:puts).with("It is X's turn")
     io.print_turn(marker_type).should == "It is X's turn"
   end
@@ -45,7 +45,7 @@ describe Io do
   it "should return 'X'" do
     board = ['X', 'O', '3', '4', '5', '6', '7', '8', '9']
     runner = Runner.new
-    marker_type = runner.whos_turn?(board)
+    marker_type = runner.whose_turn?(board)
     marker_type.should == 'X'
   end
   

@@ -136,19 +136,19 @@ describe Runner do
   it "should randomly decide if X or O goes first if board is empty" do
     runner = Runner.new
     board = ['1', '2', '3', '4', '5', '6', '7', '8', '9']
-    runner.whos_turn?(board).should == 'X'
+    runner.whose_turn?(board).should == 'X'
   end
   
   it "should return 'X' if it is X's turn" do
     runner = Runner.new
     board = ['X', 'O', '3', '4', '5', '6', '7', '8', '9']
-    runner.whos_turn?(board).should == 'X'
+    runner.whose_turn?(board).should == 'X'
   end
   
   it "should return 'O' if it is O's turn" do
     runner = Runner.new
     board = ['X', 'O', 'X', '4', '5', '6', '7', '8', '9']
-    runner.whos_turn?(board).should == 'O'
+    runner.whose_turn?(board).should == 'O'
   end
   
   it "should have a method play that calls the print_board method" do
