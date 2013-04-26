@@ -66,4 +66,41 @@ describe Board do
     board.square_empty?(current_state_of_board, empty_square).should == true
   end
   
+  it "should return true if there is an open square on the board" do
+    board = Board.new
+    mock_board = board.reset_board
+    board.board_open?(mock_board).should == true
+  end
+
+  it "should return false if there are no open squares on the board" do
+    board = Board.new
+    mock_board = ['X', 'O', 'O', 'X', 'X', 'O', 'X', 'X', 'O']
+    board.board_open?(mock_board).should == false  
+  end
+
+  it "should return false if board is tied" do
+    board = Board.new
+    mock_board = ['X', 'O', 'X', 'O', 'O', 'X', 'X', 'X', 'O']
+    board.board_open?(mock_board).should == false
+  end
+
+  it "should return marker type of winner on board" do
+    board = Board.new
+    mock_board = ['1', '2', '3', '4', '5', '6', 'X', 'X', 'X']
+    board.winner_on_board?(mock_board).should == 'X'
+  end
+        
+  it "should return false if there is no winner on board" do
+    board = Board.new
+    mock_board = ['1', '2', '3', '4', '5', '6', 'O', 'X', 'X']
+    board.winner_on_board?(mock_board).should == false
+  end
+  
+  it "should return the number of markers present on board" do
+    board = Board.new
+    mock_board = ['1', '2', '3', '4', '5', '6', 'O', 'X', 'X']
+    board.number_of_markers(mock_board).should == 3
+  end
+    
+ 
 end

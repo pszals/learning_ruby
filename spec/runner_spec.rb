@@ -29,25 +29,6 @@ describe Runner do
     runner.get_board.get_state_of_board.should == ['1', '2', '3', '4', 'X', '6', '7', '8', '9'] 
   end
     
-  it "should return true if there is an open square on the board" do
-    runner = Runner.new
-    board = Board.new
-    board = board.reset_board
-    runner.board_open?(board).should == true
-  end
-
-  it "should return false if board is tied" do
-    runner = Runner.new
-    board = ['X', 'O', 'X', 'O', 'O', 'X', 'X', 'X', 'O']
-    runner.board_open?(board).should == false
-  end
-    
-  it "should return false if there are no open squares on the board" do
-    runner = Runner.new
-    board = ['X', 'O', 'O', 'X', 'X', 'O', 'X', 'X', 'O']
-    runner.board_open?(board).should == false  
-  end
-  
   it "should return true if top row is all X’s" do
     runner = Runner.new
     board = Board.new
@@ -108,25 +89,13 @@ describe Runner do
     board = ['X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X']
     runner.check_diagonal_up(board).should == true
   end
-
+  
   it "should return marker type of winner of top row game" do
     runner = Runner.new
     board = ['X', 'X', 'X', 'O', 'O', '6', '7', '8', '9']
-    runner.winner_name(board).should == 'X'
+    runner.get_winner(board).should == 'X'
   end
   
-  it "should return marker type of winner on board" do
-    runner = Runner.new
-    board = ['1', '2', '3', '4', '5', '6', 'X', 'X', 'X']
-    runner.winner_on_board?(board).should == 'X'
-  end
-        
-  it "should return false if there is no winner on board" do
-    runner = Runner.new
-    board = ['1', '2', '3', '4', '5', '6', 'O', 'X', 'X']
-    runner.winner_on_board?(board).should == false
-  end
-
   #it "should return false (not true) if there are three blanks in a row" do
   #  runner = Runner.new
   #  board = ['', '', '', 'O', 'O', 'X', 'O', 'X', 'O']
@@ -156,6 +125,12 @@ describe Runner do
     runner = Runner.new
     state = ['1', '2', '3', '4', '5', '6', '7', '8', '9']
     runner.play.should == io.print_whole_board(state)
+  end
+  
+  it "should return true if 1 is selected" do
+    runner = Runner.new
+    input = 1
+    runner.restart?(input).should == true
   end
 
 end

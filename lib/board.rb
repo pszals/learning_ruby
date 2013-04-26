@@ -22,13 +22,56 @@ class Board
 	  @board[square - 1] = marker
 	end
 	
-  def square_empty?(current_board, square)
+  def square_empty?(current_board, square) # current_board should be @board
     if current_board[square - 1] == reset_board[square - 1]
       true
     else
       false
     end
   end
-	
-	
+
+  def board_open?(board)
+    number_of_empty_squares = 0
+    empty_board = reset_board
+    board.map { |square| number_of_empty_squares += 1 if square == empty_board[square.to_i - 1]}
+    if number_of_empty_squares >= 1
+      true
+    else
+      false
+    end
+  end	
+
+  def winner_on_board?(board)
+    winning_marker = false
+    combos = [
+              [0, 1, 2],
+              [3, 4, 5],
+              [6, 7, 8],
+              [0, 3, 6],
+              [1, 4, 7],
+              [2, 5, 8],
+              [0, 4, 8],
+              [6, 4, 2]
+             ]
+    combos.each do |combo|
+      marker = board[combo[0]]
+      winner = []
+      winner << board[combo[0]] and winner << board[combo[1]] and winner << board[combo[2]]
+      if winner.all? { |square| square == marker }
+        winning_marker = marker
+      end
+    end
+    return winning_marker
+  end
+
+  def number_of_markers(board)
+    count = 0
+    board.each do |square| 
+      if square == 'X' || square == 'O'
+      count += 1
+      end
+    end
+    count
+  end
+
 end

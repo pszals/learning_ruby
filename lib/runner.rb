@@ -25,49 +25,9 @@ class Runner
   def place_marker(square, marker)
     @board.set_square(square, marker)
   end
-    
-  def board_open?(board)
-    number_of_empty_squares = 0
-    empty_board = @board.reset_board
-    board.map { |square| number_of_empty_squares += 1 if square == empty_board[square.to_i - 1]}
-    if number_of_empty_squares >= 1
-      true
-    else
-      false
-    end
-  end
-  
-  def winner_on_board?(board)
-    winning_marker = false
-    combos = [
-              [0, 1, 2],
-              [3, 4, 5],
-              [6, 7, 8],
-              [0, 3, 6],
-              [1, 4, 7],
-              [2, 5, 8],
-              [0, 4, 8],
-              [6, 4, 2]
-             ]
-    combos.each do |combo|
-      marker = board[combo[0]]
-      winner = []
-      winner << board[combo[0]] and winner << board[combo[1]] and winner << board[combo[2]]
-      if winner.all? { |square| square == marker }
-        winning_marker = marker
-      end
-    end
-    return winning_marker
-  end
-  
-  def winner_name(board)
-    winner_on_board?(board)
-  end
-  
-  def number_of_markers(board)
-    count = 0
-    board.map {|square| count += 1 if square[board] == 'X' || sqauare[board] == 'O'}
-    count
+      
+  def get_winner(board)
+    @board.winner_on_board?(board)
   end
   
   def whose_turn?(board)
@@ -77,19 +37,23 @@ class Runner
     if number_of_empty_squares == 9
       rand = rand(10)
       if rand>5 
-        return 'X'
+        return get_player_x.get_marker
       else 
-        return 'O' 
+        return get_player_o.get_marker 
       end
     elsif number_of_empty_squares%2 == 0
-      return 'O'
+      return get_player_o.get_marker
     else
-      return 'X'
+      return get_player_x.get_marker
     end
   end
   
   def play
     @board.get_state_of_board(board)
+  end
+  
+  def restart?(input)
+    input == 1 ? true : false  
   end
   
   def check_top_row(board)
@@ -172,7 +136,7 @@ class Runner
     else
       false
     end
-  end  
+  end
 end
   
   

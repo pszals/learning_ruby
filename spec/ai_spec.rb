@@ -26,10 +26,10 @@ describe Ai do
     ai.complete_any_row(board).should == '8'  
   end
   
-  it "should pass or something if there are two of same but one of other in row" do
+  it "should return false if there are two of same but one of other in row" do
     board = ['1', '2', '3', '4', '5', 'O', 'X', 'O', 'X']
     ai = Ai.new
-    ai.complete_any_row(board).should == nil
+    ai.complete_any_row(board).should == false
   end
   
   it "should block opponents three in a row" do
