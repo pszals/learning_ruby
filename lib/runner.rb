@@ -30,18 +30,17 @@ class Runner
     @board.winner_on_board?(board)
   end
   
-  def whose_turn?(board)
-    number_of_empty_squares = 0
+  def number_of_empty_squares(board)
+    empty_squares = 0
     empty_board = @board.reset_board
-    board.map { |square| number_of_empty_squares += 1 if square == empty_board[square.to_i - 1]}
-    if number_of_empty_squares == 9
-      rand = rand(10)
-      if rand>5 
-        return get_player_x.get_marker
-      else 
-        return get_player_o.get_marker 
-      end
-    elsif number_of_empty_squares%2 == 0
+    board.map do |square| 
+      empty_squares += 1 if square == empty_board[square.to_i - 1]
+    end
+    empty_squares  
+  end
+  
+  def whose_turn?(empty_squares)
+    if empty_squares%2 == 0
       return get_player_o.get_marker
     else
       return get_player_x.get_marker
@@ -49,11 +48,15 @@ class Runner
   end
   
   def play
-    @board.get_state_of_board(board)
+    @board.print_board(get_board)
   end
   
   def restart?(input)
-    input == 1 ? true : false  
+    input == 1 ? restart : exit  
+  end
+  
+  def restart
+  
   end
   
   def check_top_row(board)

@@ -2,6 +2,29 @@ class Board
 	
 	def initialize
 	  @board = reset_board
+	  @width = 3
+	end
+	
+	def any_size_board(width)
+	  integer_board = (1..width**2).to_a
+	  string_board = integer_board.map {|square| square.to_s}
+	  string_board
+	end
+	
+	def any_size_string_board(board)
+	  output_board = ""
+	  while board.last != nil
+  	  row = board.slice!(0, @width)
+	    output_board += row.join(' ')
+	    output_board += "\n"
+    end
+    output_board
+	end
+	
+	def top_row_any_size_string_board(board)
+	  row_one = board[0..(@width-1)].join(' ')
+    row_one += "\n"    
+    row_one
 	end
 	
 	def reset_board

@@ -101,6 +101,20 @@ describe Board do
     mock_board = ['1', '2', '3', '4', '5', '6', 'O', 'X', 'X']
     board.number_of_markers(mock_board).should == 3
   end
-    
+  
+  it "should create a square board of any size" do
+    board = Board.new
+    board.any_size_board(4).should == ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16']
+  end
+  
+  it "should return square board of any size" do
+    board = Board.new
+    board.any_size_string_board(board.any_size_board(3)).should == "1 2 3\n4 5 6\n7 8 9\n"
+  end
+  
+  it "should return top row of square board of any size + linefeed" do
+    board = Board.new
+    board.top_row_any_size_string_board(board.any_size_board(3)).should == "1 2 3\n"
+  end  
  
 end

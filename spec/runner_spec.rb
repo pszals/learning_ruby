@@ -101,36 +101,46 @@ describe Runner do
   #  board = ['', '', '', 'O', 'O', 'X', 'O', 'X', 'O']
   #  runner.winner_on_board?(board).should == false
   #end
-  
-  it "should randomly decide if X or O goes first if board is empty" do
+    
+  it "should return 'X' if it is X's turn" do
     runner = Runner.new
-    board = ['1', '2', '3', '4', '5', '6', '7', '8', '9']
-    runner.whose_turn?(board).should == 'X'
+    empty_squares = 9
+    runner.whose_turn?(empty_squares).should == 'X'
+  end
+  
+  it "should return 6 as the number of empty squares" do
+    runner = Runner.new
+    board = ['X', 'O', 'X', '4', '5', '6', '7', '8', '9']
+    runner.number_of_empty_squares(board).should == 6
   end
   
   it "should return 'X' if it is X's turn" do
-    runner = Runner.new
     board = ['X', 'O', '3', '4', '5', '6', '7', '8', '9']
-    runner.whose_turn?(board).should == 'X'
+    runner = Runner.new
+    empty_squares = 7
+    marker_type = runner.whose_turn?(empty_squares)
+    marker_type.should == 'X'
+  end
+
+  
+#  it "should have a method play that calls the print_board method" do
+#    io = Io.new(double)
+#    runner = Runner.new
+#    state = ['1', '2', '3', '4', '5', '6', '7', '8', '9']
+#    runner.should_receive(:play).with(:print_board)
+#    runner.play
+#  end
+
+  it "should call restart if selection is 1" do
+    runner = Runner.new
+    runner.should_receive(:restart)
+    runner.restart?(1)
   end
   
-  it "should return 'O' if it is O's turn" do
+  it "should exit if restart? selection is not 1" do
     runner = Runner.new
-    board = ['X', 'O', 'X', '4', '5', '6', '7', '8', '9']
-    runner.whose_turn?(board).should == 'O'
-  end
-  
-  it "should have a method play that calls the print_board method" do
-    io = Io.new
-    runner = Runner.new
-    state = ['1', '2', '3', '4', '5', '6', '7', '8', '9']
-    runner.play.should == io.print_whole_board(state)
-  end
-  
-  it "should return true if 1 is selected" do
-    runner = Runner.new
-    input = 1
-    runner.restart?(input).should == true
+    runner.should_receive(:exit)
+    runner.restart?(2)
   end
 
 end

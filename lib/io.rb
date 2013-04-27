@@ -26,30 +26,42 @@ class Io
     row_three = board[6..8].join(' ')   
     row_three
   end
-  
-  def print_whole_board
-    print_row_one + print_row_two + print_row_three
-  end
-  
-  def square_to_mark(user_input)
-    # puts "Pick an empty square to mark"
-    # square = gets
-    # square
-    user_input
-  end
-  
-  def print_turn(marker_type)
-    marker = marker_type 
-    "It is #{marker}'s turn"    
-  end
-  
-  def get_square(square)
-    square = gets.chomp
-    return square
-  end  
 
+  def get_square
+    get_input
+  end  
+  
+  def get_input
+    gets
+  end
+  
+  def puts_turn(marker_type)
+    marker = marker_type 
+    put_to_console("It is #{marker}'s turn")
+  end
+  
   def puts_winner(winning_marker)
     winner = winning_marker
-    puts "Player #{winner} wins"
+    put_to_console("Player #{winner} wins")
+  end
+  
+  def marker_error
+    put_to_console('That is either not a square on the board or that square is filled')
+  end
+  
+  def put_to_console(output)
+    puts output
+  end
+  
+  def ask_for_first_player?
+    put_to_console("Enter 'X' or 'O'")
+  end
+  
+  def get_first_player
+    get_input
+  end
+  
+  def ask_to_restart?
+    put_to_console("Enter 1 to restart or any key to exit")
   end
 end
