@@ -16,10 +16,10 @@ class Board
 	  while board.last != nil
   	  row = board.slice!(0, @width)
 	    output_board += row.join(' ')
-	    output_board += "\n"
+      output_board += "\n"
     end
     output_board
-	end
+  end
 	
 	def top_row_any_size_string_board(board)
 	  row_one = board[0..(@width-1)].join(' ')
