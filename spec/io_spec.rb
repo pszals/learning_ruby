@@ -3,31 +3,7 @@ require 'board'
 require 'runner'
 
 describe Io do
-  it "should print the first row of current state of the board" do
-    board = Board.new
-    io = Io.new(board)
-    io.print_row_one.should == "1 2 3\n"
-  end
-  
-  it "should print the second row of current state of the board" do
-    board = Board.new
-    io = Io.new(board)
-    io.print_row_two.should == "4 5 6\n"  
-  end
 
-  it "should print the third row of current state of the board" do
-    board = Board.new
-    io = Io.new(board)
-    io.print_row_three.should == "7 8 9"
-  end
-  
-#  it "should print the whole board" do
-#    board = Board.new
-#    io = Io.new(double)
-#    io.should_receive(:put_to_console).with("1 2 3\n4 5 6\n7 8 9")
-#    io.puts_whole_board
-#  end
-  
   it "should print 'It's X's turn" do
     io = Io.new(double)
     io.should_receive(:put_to_console).with("It is X's turn")

@@ -39,12 +39,8 @@ class Runner
     empty_squares  
   end
   
-  def whose_turn?(empty_squares)
-    if empty_squares%2 == 0
-      return get_player_o.get_marker
-    else
-      return get_player_x.get_marker
-    end
+  def whose_turn?(number_of_empty_squares)
+    number_of_empty_squares%2 == 0 ? get_player_o.get_marker : get_player_x.get_marker
   end
   
   def play

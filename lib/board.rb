@@ -14,8 +14,8 @@ class Board
 	def any_size_string_board(board)
 	  output_board = ""
 	  while board.last != nil
-  	  row = board.slice!(0, @width)
-	    output_board += row.join(' ')
+      row = board.slice!(0, @width)
+      output_board += row.join(' ')
       output_board += "\n"
     end
     output_board
@@ -45,23 +45,15 @@ class Board
 	  @board[square - 1] = marker
 	end
 	
-  def square_empty?(current_board, square) # current_board should be @board
-    if current_board[square - 1] == reset_board[square - 1]
-      true
-    else
-      false
-    end
+  def square_empty?(board, square) # board should be @board
+    board[square - 1] == reset_board[square - 1]? true : false
   end
 
   def board_open?(board)
     number_of_empty_squares = 0
     empty_board = reset_board
     board.map { |square| number_of_empty_squares += 1 if square == empty_board[square.to_i - 1]}
-    if number_of_empty_squares >= 1
-      true
-    else
-      false
-    end
+    number_of_empty_squares >= 1? true : false
   end	
 
   def winner_on_board?(board)

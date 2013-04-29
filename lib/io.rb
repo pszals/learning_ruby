@@ -6,27 +6,6 @@ class Io
     @board = board
   end
 
-  def print_row_one
- 	  # Consider refactoring to use each_slice
-    board = @board.get_state_of_board
-    row_one = board[0..2].join(' ')
-    row_one += "\n"    
-    row_one
-  end
-  
-  def print_row_two
-    board = @board.get_state_of_board
-    row_two = board[3..5].join(' ')
-    row_two += "\n"    
-    row_two
-  end
-
-  def print_row_three
-    board = @board.get_state_of_board
-    row_three = board[6..8].join(' ')   
-    row_three
-  end
-
   def get_square
     get_input
   end  
