@@ -27,6 +27,10 @@ class Board
     row_one
 	end
 	
+	def set_width_of_board(width) 
+	  @width = width
+	end
+	
 	def reset_board
 	  integer_board = (1..9).to_a
 	  string_board = integer_board.map {|square| square.to_s}

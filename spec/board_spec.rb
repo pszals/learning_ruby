@@ -31,8 +31,7 @@ describe Board do
     end
 	end
 
-# Should this class be moved to the Player class?
-	board = Board.new
+  board = Board.new
   [
     [1, "X"],
     [2, "O"],
@@ -116,5 +115,11 @@ describe Board do
     board = Board.new
     board.top_row_any_size_string_board(board.any_size_board(3)).should == "1 2 3\n"
   end  
+  
+  it "should set the width of the board" do
+    board = Board.new
+    width = 3
+    board.set_width_of_board(width).should == 3
+  end
  
 end

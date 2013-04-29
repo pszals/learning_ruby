@@ -46,4 +46,10 @@ describe Io do
     io.ask_to_restart?
   end
   
+  it "asks for width of board" do
+    io = Io.new(double)
+    io.should_receive(:put_to_console).with("Enter 3 for a 3x3 board or 4 for a 4x4 board")
+    io.ask_for_width_of_board
+  end
+  
 end
