@@ -1,6 +1,4 @@
 require 'io'
-require 'board'
-require 'runner'
 
 describe Io do
 
@@ -13,12 +11,18 @@ describe Io do
   it "should get the square number to be marked from user" do
     io = Io.new(double)
     io.should_receive(:get_input)
-    io.get_square
+    io.get_square_to_mark
+  end
+  
+  it "should ask for the square number to be marked" do
+    io = Io.new(double)
+    io.should_receive(:put_to_console).with('Pick an empty square to mark')
+    io.ask_for_square_to_mark?
   end
 
   it "prints error message if square is marked or improper input" do
     io = Io.new(double)
-    io.should_receive(:put_to_console).with('That is either not a square on the board or that square is filled')
+    io.should_receive(:put_to_console).with("That square is already taken or not on the board")
     io.marker_error
   end
   
@@ -51,5 +55,15 @@ describe Io do
     io.should_receive(:put_to_console).with("Enter 3 for a 3x3 board or 4 for a 4x4 board")
     io.ask_for_width_of_board
   end
+  
+  it "should expose behavior of accessing marker type, but hide the data itself" do
+    
+  end
+  
+  it "should get the width of the board" do
+    io = Io.new(double)
+    io.should_receive(:get_input)
+    io.get_size_of_board
+  end  
   
 end

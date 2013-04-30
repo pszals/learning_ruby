@@ -1,7 +1,7 @@
 class Board
 	
 	def initialize
-	  @board = reset_board
+	  @board = any_size_board(set_width_of_board(3))
 	  @width = 3
 	end
 	
@@ -23,6 +23,10 @@ class Board
 	
 	def set_width_of_board(width) 
 	  @width = width
+	end
+	
+	def reset_any_size_board
+	  @board = any_size_board(set_width_of_board(3))
 	end
 	
 	def reset_board

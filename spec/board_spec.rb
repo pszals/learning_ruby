@@ -116,5 +116,9 @@ describe Board do
     width = 3
     board.set_width_of_board(width).should == 3
   end
- 
+
+  it "should make a good clean new board" do
+      board = Board.new
+      board.reset_any_size_board.should == ['1', '2', '3', '4', '5', '6', '7', '8', '9']
+  end
 end

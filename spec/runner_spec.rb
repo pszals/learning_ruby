@@ -63,6 +63,7 @@ describe Runner do
 
   it "should call restart if selection is 1" do
     runner = Runner.new
+    board = Board.new
     runner.should_receive(:restart)
     runner.restart?(1)
   end
@@ -72,5 +73,5 @@ describe Runner do
     runner.should_receive(:exit)
     runner.restart?(2)
   end
-
+  
 end
