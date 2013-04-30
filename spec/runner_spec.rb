@@ -12,9 +12,7 @@ describe Runner do
   end
 
   [
-    # will become list of squares because markers are built into switching players
-    [1, 'X']
-  
+    [1, 'X']  
   ].each do |square, marker|
     it "should place marker by setting #{square} to #{marker}" do
       runner = Runner.new
@@ -28,80 +26,13 @@ describe Runner do
     runner.place_marker(5, 'X')
     runner.get_board.get_state_of_board.should == ['1', '2', '3', '4', 'X', '6', '7', '8', '9'] 
   end
-    
-  it "should return true if top row is all X’s" do
+      
+  it "should return false if there is no winner on board" do
     runner = Runner.new
-    board = Board.new
-    board = ['X', 'X', 'X', 'X', 'X', 'O', 'X', 'X', 'O']
-    runner.check_top_row(board).should == true
-  end
-  
-  it "should return false if top row is not homogeneous" do
-    runner = Runner.new
-    board = ['O', 'O', 'X', 'X', 'X', 'O', 'X', 'X', 'O']
-    runner.check_top_row(board).should == false
-  end
-  
-  it "should return true if second row is all X's or all O's" do
-    runner = Runner.new
-    board = ['X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'O']
-    runner.check_second_row(board).should == true
+    board = ['O', 'O', 'X', 'X', 'X', 'O', 'O', 'X', 'O']
+    runner.get_winner(board).should == false
   end
 
-  it "should return false if second row is not homogeneous" do
-    runner = Runner.new
-    board = ['O', 'O', 'X', 'X', 'X', 'O', 'X', 'X', 'O']
-    runner.check_second_row(board).should == false
-  end
-  
-  it "should return true if third row is all X's or all O's" do
-    runner = Runner.new
-    board = ['X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X']
-    runner.check_third_row(board).should == true
-  end
-
-  it "should return true if first column is all X's or all O's" do
-    runner = Runner.new
-    board = ['X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X']
-    runner.check_first_column(board).should == true
-  end
-  
-  it "should return true if second column is all X's or all O's" do
-    runner = Runner.new
-    board = ['X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X']
-    runner.check_second_column(board).should == true
-  end
-
-  it "should return true if third column is all X's or all O's" do
-    runner = Runner.new
-    board = ['X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X']
-    runner.check_third_column(board).should == true
-  end
-
-  it "should return true if diagonal down is all X's or all O's" do
-    runner = Runner.new
-    board = ['X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X']
-    runner.check_diagonal_down(board).should == true
-  end
-
-  it "should return true if diagonal up is all X's or all O's" do
-    runner = Runner.new
-    board = ['X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X']
-    runner.check_diagonal_up(board).should == true
-  end
-  
-  it "should return marker type of winner of top row game" do
-    runner = Runner.new
-    board = ['X', 'X', 'X', 'O', 'O', '6', '7', '8', '9']
-    runner.get_winner(board).should == 'X'
-  end
-  
-  #it "should return false (not true) if there are three blanks in a row" do
-  #  runner = Runner.new
-  #  board = ['', '', '', 'O', 'O', 'X', 'O', 'X', 'O']
-  #  runner.winner_on_board?(board).should == false
-  #end
-    
   it "should return 'X' if it is X's turn" do
     runner = Runner.new
     empty_squares = 9
@@ -118,8 +49,7 @@ describe Runner do
     board = ['X', 'O', '3', '4', '5', '6', '7', '8', '9']
     runner = Runner.new
     empty_squares = 7
-    marker_type = runner.whose_turn?(empty_squares)
-    marker_type.should == 'X'
+    runner.whose_turn?(empty_squares).should == 'X'
   end
 
   

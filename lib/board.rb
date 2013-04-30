@@ -21,12 +21,6 @@ class Board
     output_board
   end
 	
-	def top_row_any_size_string_board(board)
-	  row_one = board[0..(@width-1)].join(' ')
-    row_one += "\n"    
-    row_one
-	end
-	
 	def set_width_of_board(width) 
 	  @width = width
 	end

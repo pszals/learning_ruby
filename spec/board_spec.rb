@@ -110,12 +110,7 @@ describe Board do
     board = Board.new
     board.any_size_string_board(board.any_size_board(3)).should == "1 2 3\n4 5 6\n7 8 9\n"
   end
-  
-  it "should return top row of square board of any size + linefeed" do
-    board = Board.new
-    board.top_row_any_size_string_board(board.any_size_board(3)).should == "1 2 3\n"
-  end  
-  
+    
   it "should set the width of the board" do
     board = Board.new
     width = 3
