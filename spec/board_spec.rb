@@ -106,9 +106,9 @@ describe Board do
     board.any_size_board(4).should == ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16']
   end
   
-  it "should return square board of any size" do
+  it "should return square board to be printed of any size" do
     board = Board.new
-    board.any_size_string_board(board.any_size_board(3)).should == "1 2 3\n4 5 6\n7 8 9\n"
+    board.output_board(board.any_size_board(3)).should == "1 2 3\n4 5 6\n7 8 9\n"
   end
     
   it "should set the width of the board" do

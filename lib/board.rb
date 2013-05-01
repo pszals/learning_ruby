@@ -11,7 +11,7 @@ class Board
 	  string_board
 	end
 	
-	def any_size_string_board(board)
+	def output_board(board)
 	  output_board = ""
 	  while board.last != nil
       row = board.slice!(0, @width)

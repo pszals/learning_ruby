@@ -10,6 +10,12 @@ describe Runner do
     runner.get_player_o.get_marker.should ==  'O'    
     runner.get_board.get_state_of_board.should == ['1', '2', '3', '4', '5', '6', '7', '8', '9'] 
   end
+  
+  it "should initialize game with IO class" do
+    runner = Runner.new
+    runner.get_io.should_receive(:get_input)
+    runner.get_io.get_input
+  end
 
   [
     [1, 'X']  
@@ -45,14 +51,6 @@ describe Runner do
     runner.number_of_empty_squares(board).should == 6
   end
   
-  it "should return 'X' if it is X's turn" do
-    board = ['X', 'O', '3', '4', '5', '6', '7', '8', '9']
-    runner = Runner.new
-    empty_squares = 7
-    runner.whose_turn?(empty_squares).should == 'X'
-  end
-
-  
 #  it "should have a method play that calls the print_board method" do
 #    io = Io.new(double)
 #    runner = Runner.new
@@ -64,7 +62,7 @@ describe Runner do
   it "should call restart if selection is 1" do
     runner = Runner.new
     board = Board.new
-    runner.should_receive(:restart)
+    runner.should_receive(:setup)
     runner.restart?(1)
   end
   
@@ -74,4 +72,24 @@ describe Runner do
     runner.restart?(2)
   end
   
+  it "should ask for width of board from user" do
+    runner = Runner.new
+    runner.get_io.should_receive(:ask_for_width_of_board)
+    runner.setup
+  end
+  
+  it "should tell the user whose turn it is, ask for and mark square" do
+    runner = Runner.new
+    runner.get_io.should_receive(:puts_turn)
+    runner.get_io.should_receive(:ask_for_square_to_mark?)
+    runner.get_io.should_receive(:get_square_to_mark)
+    runner.play_game
+  end
+  
+  it "should put marker error if square entered is invalid" do
+    runner = Runner.new
+    runner.get_io.should_receive(:marker_error).with("That square is already taken or not on the board")
+    runner.play_game
+  end  
+
 end

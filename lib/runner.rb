@@ -8,6 +8,11 @@ class Runner
     @player_x = Player.new('X')
     @player_o = Player.new('O')
     @board = Board.new
+    @io = Io.new(@board.get_state_of_board)
+  end
+  
+  def get_io
+    @io
   end
   
   def get_player_x
@@ -39,8 +44,8 @@ class Runner
     empty_squares  
   end
   
-  def whose_turn?(number_of_empty_squares)
-    number_of_empty_squares%2 == 0 ? get_player_o.get_marker : get_player_x.get_marker
+  def whose_turn?(empty_squares)
+    empty_squares%2 == 0 ? get_player_o.get_marker : get_player_x.get_marker
   end
   
   def play
@@ -48,12 +53,24 @@ class Runner
   end
   
   def restart?(input)
-    input == 1 ? restart : exit  
+    input == 1 ? setup : exit  
   end
   
-  def restart
-  
+  def play_game
+    board = @board.get_state_of_board
+    empty_squares = number_of_empty_squares(board)
+    marker = whose_turn?(empty_squares)
+    @io.puts_turn(marker)
+    @io.ask_for_square_to_mark?
+    
+    square = @io.get_square_to_mark
+
   end
+  
+  def setup
+    @io.ask_for_width_of_board
+  end
+  
 end
   
   

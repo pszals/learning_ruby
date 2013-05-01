@@ -1,5 +1,3 @@
-require 'board'
-
 class Io
 
   def initialize(board)
@@ -22,10 +20,6 @@ class Io
     get_input
   end
 
-  def get_input
-    gets
-  end
-
   def puts_turn(marker_type)
     marker = marker_type 
     put_to_console("It is #{marker}'s turn")
@@ -45,6 +39,10 @@ class Io
   
   def get_square_to_mark
     get_input
+  end
+
+  def get_input
+    gets
   end
 
   def puts_winner(winning_marker)
