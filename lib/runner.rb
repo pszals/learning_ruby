@@ -48,19 +48,17 @@ class Runner
     empty_squares%2 == 0 ? get_player_o.get_marker : get_player_x.get_marker
   end
   
-  def play
-    @board.print_board(get_board)
-  end
-  
   def restart?(input)
     input == 1 ? setup : exit  
   end
   
   def play_game
     board = @board.get_state_of_board
+
     empty_squares = number_of_empty_squares(board)
     marker = whose_turn?(empty_squares)
     @io.puts_turn(marker)
+
     @io.ask_for_square_to_mark?
     
     square = @io.get_square_to_mark
