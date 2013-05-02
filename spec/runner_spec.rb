@@ -8,17 +8,17 @@ describe Runner do
     board = Board.new
     io = Io.new
     runner = Runner.new(board, io)
-    runner.get_player_x.get_marker.should ==  'X'
-    runner.get_player_o.get_marker.should ==  'O'    
-    runner.get_board_class.get_state_of_board.should == ['1', '2', '3', '4', '5', '6', '7', '8', '9'] 
+    runner.player_x.get_marker.should ==  'X'
+    runner.player_o.get_marker.should ==  'O'    
+    runner.board.get_state_of_board.should == ['1', '2', '3', '4', '5', '6', '7', '8', '9'] 
   end
   
   it "should initialize game with IO class" do
     board = Board.new
     io = Io.new
     runner = Runner.new(board, io)
-    runner.get_io.should_receive(:get_input)
-    runner.get_io.get_input
+    runner.io.should_receive(:get_input)
+    runner.io.get_input
   end
 
   [
@@ -29,7 +29,7 @@ describe Runner do
       io = Io.new
       runner = Runner.new(board, io)
       runner.place_marker(square, marker)
-      runner.get_board_class.get_state_of_square(square).should == marker
+      runner.board.get_state_of_square(square).should == marker
     end
   end
 
@@ -38,7 +38,7 @@ describe Runner do
     io = Io.new
     runner = Runner.new(board, io)
     runner.place_marker(5, 'X')
-    runner.get_board_class.get_state_of_board.should == ['1', '2', '3', '4', 'X', '6', '7', '8', '9'] 
+    runner.board.get_state_of_board.should == ['1', '2', '3', '4', 'X', '6', '7', '8', '9'] 
   end
       
   it "should return false if there is no winner on board" do
@@ -93,7 +93,7 @@ describe Runner do
     board = Board.new
     io = Io.new
     runner = Runner.new(board, io)
-    runner.get_io.should_receive(:ask_for_width_of_board)
+    runner.io.should_receive(:ask_for_width_of_board)
     runner.setup
   end
   
@@ -102,8 +102,8 @@ describe Runner do
     io = Io.new
     runner = Runner.new(board_class, io)
     board = board_class.get_state_of_board
-    runner.get_io.should_receive(:puts_turn)
-    runner.get_io.should_receive(:ask_for_square_to_mark?)
+    runner.io.should_receive(:puts_turn)
+    runner.io.should_receive(:ask_for_square_to_mark?)
 
     runner.play_game(board, 1)
   end
@@ -115,8 +115,8 @@ describe Runner do
     board = board_class.get_state_of_board
     runner.place_marker(1, 'X') # Is this best way to alter the TTT board?
     runner.place_marker(1, 'X')
-    runner.get_io.should_receive(:marker_error) # How do I prevent previous test from failing?
-    runner.get_io.should_receive(:ask_for_square_to_mark?).at_least(2).times
+    runner.io.should_receive(:marker_error) # How do I prevent previous test from failing?
+    runner.io.should_receive(:ask_for_square_to_mark?).at_least(2).times
     runner.play_game(board, 1)
   end  
 

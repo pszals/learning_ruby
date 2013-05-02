@@ -4,29 +4,18 @@ require 'io'
 
 class Runner
   
+  attr_reader :io
+  attr_reader :board
+  attr_reader :player_x
+  attr_reader :player_o
+
   def initialize(board, io)
     @player_x = Player.new('X')
     @player_o = Player.new('O')
     @board = board
     @io = io
   end
-  
-  def get_io
-    @io
-  end
-  
-  def get_player_x
-    @player_x    
-  end
-  
-  def get_player_o
-    @player_o
-  end
-  
-  def get_board_class
-    @board
-  end
-  
+    
   def place_marker(square, marker)
     @board.set_square(square, marker)
   end
@@ -45,7 +34,7 @@ class Runner
   end
   
   def whose_turn?(empty_squares)
-    empty_squares%2 == 0 ? get_player_o.get_marker : get_player_x.get_marker
+    empty_squares%2 == 0 ? player_o.get_marker : player_x.get_marker
   end
   
   def restart?(input)
