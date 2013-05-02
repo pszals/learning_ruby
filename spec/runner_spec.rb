@@ -98,23 +98,26 @@ describe Runner do
   end
   
   it "should tell the user whose turn it is, ask for and mark square" do
-    board = Board.new
+    board_class = Board.new
     io = Io.new
-    runner = Runner.new(board, io)
+    runner = Runner.new(board_class, io)
+    board = board_class.get_state_of_board
     runner.get_io.should_receive(:puts_turn)
     runner.get_io.should_receive(:ask_for_square_to_mark?)
-    runner.get_io.should_receive(:get_square_to_mark)
-    runner.play_game
+
+    runner.play_game(board, 1)
   end
   
-  it "should put marker error if square entered is invalid" do
-    board = Board.new
+  it "should put marker error, ask for, and get square if square entered is invalid" do
+    board_class = Board.new
     io = Io.new
-    runner = Runner.new(board, io)
+    runner = Runner.new(board_class, io)
+    board = board_class.get_state_of_board
+    runner.place_marker(1, 'X') # Is this best way to alter the TTT board?
     runner.place_marker(1, 'X')
-    runner.place_marker(1, 'X')
-    runner.get_io.should_receive(:marker_error)
-    runner.play_game
+    runner.get_io.should_receive(:marker_error) # How do I prevent previous test from failing?
+    runner.get_io.should_receive(:ask_for_square_to_mark?).at_least(2).times
+    runner.play_game(board, 1)
   end  
 
 end

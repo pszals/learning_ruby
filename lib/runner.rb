@@ -52,16 +52,17 @@ class Runner
     input == 1 ? setup : exit  
   end
   
-  def play_game
-    board = @board.get_state_of_board
+  def play_game(board, input)
     empty_squares = number_of_empty_squares(board)
     marker = whose_turn?(empty_squares)
     @io.puts_turn(marker)
     @io.ask_for_square_to_mark?
     
-    square = @io.get_square_to_mark
+    square = input # input = @io.get_square_to_mark
     if @board.square_empty?(board, square) == false
       @io.marker_error
+      @io.ask_for_square_to_mark?
+      # square = @io.get_square_to_mark
     end
   
   end
