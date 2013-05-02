@@ -23,7 +23,7 @@ class Runner
     @player_o
   end
   
-  def get_board
+  def get_board_class
     @board
   end
   

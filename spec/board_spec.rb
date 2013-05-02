@@ -54,7 +54,7 @@ describe Board do
     io = Io.new
     runner = Runner.new(board, io)
     runner.place_marker(1, 'X')
-    board_with_marked_square_one = runner.get_board.get_state_of_board
+    board_with_marked_square_one = runner.get_board_class.get_state_of_board
     board.square_empty?(board_with_marked_square_one, 1).should == false
   end  
 

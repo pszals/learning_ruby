@@ -10,7 +10,7 @@ describe Runner do
     runner = Runner.new(board, io)
     runner.get_player_x.get_marker.should ==  'X'
     runner.get_player_o.get_marker.should ==  'O'    
-    runner.get_board.get_state_of_board.should == ['1', '2', '3', '4', '5', '6', '7', '8', '9'] 
+    runner.get_board_class.get_state_of_board.should == ['1', '2', '3', '4', '5', '6', '7', '8', '9'] 
   end
   
   it "should initialize game with IO class" do
@@ -29,7 +29,7 @@ describe Runner do
       io = Io.new
       runner = Runner.new(board, io)
       runner.place_marker(square, marker)
-      runner.get_board.get_state_of_square(square).should == marker
+      runner.get_board_class.get_state_of_square(square).should == marker
     end
   end
 
@@ -38,7 +38,7 @@ describe Runner do
     io = Io.new
     runner = Runner.new(board, io)
     runner.place_marker(5, 'X')
-    runner.get_board.get_state_of_board.should == ['1', '2', '3', '4', 'X', '6', '7', '8', '9'] 
+    runner.get_board_class.get_state_of_board.should == ['1', '2', '3', '4', 'X', '6', '7', '8', '9'] 
   end
       
   it "should return false if there is no winner on board" do
@@ -104,10 +104,17 @@ describe Runner do
     runner.get_io.should_receive(:puts_turn)
     runner.get_io.should_receive(:ask_for_square_to_mark?)
     runner.get_io.should_receive(:get_square_to_mark)
+    runner.play_game
+  end
+  
+  it "should put marker error if square entered is invalid" do
+    board = Board.new
+    io = Io.new
+    runner = Runner.new(board, io)
     runner.place_marker(1, 'X')
     runner.place_marker(1, 'X')
     runner.get_io.should_receive(:marker_error)
     runner.play_game
-  end
+  end  
 
 end
