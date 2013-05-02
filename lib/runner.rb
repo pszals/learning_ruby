@@ -4,11 +4,11 @@ require 'io'
 
 class Runner
   
-  def initialize
+  def initialize(board, io)
     @player_x = Player.new('X')
     @player_o = Player.new('O')
-    @board = Board.new
-    @io = Io.new(@board.get_state_of_board)
+    @board = board
+    @io = io
   end
   
   def get_io
@@ -54,15 +54,16 @@ class Runner
   
   def play_game
     board = @board.get_state_of_board
-
     empty_squares = number_of_empty_squares(board)
     marker = whose_turn?(empty_squares)
     @io.puts_turn(marker)
-
     @io.ask_for_square_to_mark?
     
     square = @io.get_square_to_mark
-
+    if @board.square_empty?(board, square) == false
+      @io.marker_error
+    end
+  
   end
   
   def setup

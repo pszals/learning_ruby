@@ -1,8 +1,4 @@
 class Io
-
-  def initialize(board)
-    @board = board
-  end
     
   def ask_for_width_of_board
     put_to_console("Enter 3 for a 3x3 board or 4 for a 4x4 board")
