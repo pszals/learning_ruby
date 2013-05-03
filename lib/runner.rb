@@ -4,10 +4,7 @@ require 'io'
 
 class Runner
   
-  attr_reader :io
-  attr_reader :board
-  attr_reader :player_x
-  attr_reader :player_o
+  attr_reader :io, :board, :player_x, :player_o
 
   def initialize(board, io)
     @player_x = Player.new('X')
