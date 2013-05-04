@@ -104,7 +104,7 @@ describe Runner do
     board = board_class.get_state_of_board
     runner.io.should_receive(:puts_turn)
     runner.io.should_receive(:ask_for_square_to_mark?)
-    runner.take_turn(board, 1)
+    runner.take_turn(board)
   end
   
   it "should put marker error, ask for, and get square if square entered is invalid" do
@@ -116,7 +116,7 @@ describe Runner do
     runner.place_marker(1, 'X')
     runner.io.should_receive(:marker_error)
     runner.io.should_receive(:ask_for_square_to_mark?).exactly(2).times
-    runner.take_turn(board, 1)
+    runner.take_turn(board)
   end  
 
   it "places marker on board if inputed square is empty" do
@@ -125,5 +125,54 @@ describe Runner do
     runner = Runner.new(board_class, io)
     board = board_class.get_state_of_board
     runner.place_marker(1, 'X')    
+  end
+  
+  it "plays the game" do
+    board_class = Board.new
+    io = mock.as_null_object
+    runner = Runner.new(board_class, io)
+    board = board_class.get_state_of_board
+    runner.play_game(board)
+  end
+  
+  it "checks for a winner on board" do
+    board_class = Board.new
+    io = mock.as_null_object
+    runner = Runner.new(board_class, io)
+    board = board_class.get_state_of_board
+    board_class.should_receive(:winner_on_board?)
+    runner.should_receive(:restart?)    
+    runner.play_game(board)
+  end
+  
+  it "takes turn if there is no winner on board" do
+    board_class = Board.new
+    io = mock.as_null_object
+    runner = Runner.new(board_class, io)
+    board = board_class.get_state_of_board
+    runner.should_receive(:take_turn)
+    runner.play_game(board)  
+  end
+  
+  it "checks that the board is open" do
+    board_class = Board.new
+    io = mock.as_null_object
+    runner = Runner.new(board_class, io)
+    board = board_class.get_state_of_board
+    board_class.should_receive(:board_open?)
+    runner.should_receive(:restart?)    
+    runner.play_game(board)      
+  end
+  
+  it "puts out that there is a tie, asks to restart and gets choice" do
+    board_class = Board.new
+    io = mock.as_null_object
+    runner = Runner.new(board_class, io)
+    board = ['X', 'O', 'X', 'O', 'O', 'X', 'X', 'X', 'O']
+    runner.io.should_receive(:puts_tie)
+    runner.io.should_receive(:ask_to_restart?)
+    runner.io.should_receive(:get_input)
+    runner.should_receive(:restart?)
+    runner.play_game(board)  
   end
 end

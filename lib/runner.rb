@@ -38,27 +38,40 @@ class Runner
     input == 1 ? setup : exit  
   end
   
-  def take_turn(board, input)
+  def take_turn(board)
     empty_squares = number_of_empty_squares(board)
     marker = whose_turn?(empty_squares)
     @io.puts_turn(marker)
     @io.ask_for_square_to_mark?
     
-    square = input
+    square = @io.get_square_to_mark
     if @board.square_empty?(board, square) == false
       @io.marker_error
       @io.ask_for_square_to_mark?
-#      take_turn(board, input)
-#    elsif
-#      @board.square_empty?(board, square) == true
-#      place_marker(input
+#      take_turn(board) <-- How do I prevent "stack level too deep" from occurring?
+    elsif
+      @board.square_empty?(board, square) == true
+      place_marker(square, marker)
     end
   end
   
   def setup
     @io.ask_for_width_of_board
   end
-  
+
+  def play_game(board)
+    winner = @board.winner_on_board?(board)
+    open_board = @board.board_open?(board)
+    if winner == false and open_board == true
+      take_turn(board)
+    else
+      @io.puts_tie
+      @io.ask_to_restart?
+           
+      choice = @io.get_input
+      restart?(choice)
+    end
+  end  
 end
   
   
