@@ -46,6 +46,10 @@ class Io
     put_to_console("Player #{winner} wins")
   end
 
+  def puts_tie
+    put_to_console("Tie Game")
+  end
+
   def ask_to_restart?
     put_to_console("Enter 1 to restart or any key to exit")
   end

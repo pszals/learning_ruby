@@ -97,27 +97,33 @@ describe Runner do
     runner.setup
   end
   
-  it "should tell the user whose turn it is, ask for and mark square" do
+  it "should tell the user whose turn it is and asks for square" do
     board_class = Board.new
-    io = Io.new
+    io = mock.as_null_object
     runner = Runner.new(board_class, io)
     board = board_class.get_state_of_board
     runner.io.should_receive(:puts_turn)
     runner.io.should_receive(:ask_for_square_to_mark?)
-
-    runner.play_game(board, 1)
+    runner.take_turn(board, 1)
   end
   
   it "should put marker error, ask for, and get square if square entered is invalid" do
     board_class = Board.new
-    io = Io.new
+    io = mock.as_null_object
     runner = Runner.new(board_class, io)
     board = board_class.get_state_of_board
-    runner.place_marker(1, 'X') # Is this best way to alter the TTT board?
     runner.place_marker(1, 'X')
-    runner.io.should_receive(:marker_error) # How do I prevent previous test from failing?
-    runner.io.should_receive(:ask_for_square_to_mark?).at_least(2).times
-    runner.play_game(board, 1)
+    runner.place_marker(1, 'X')
+    runner.io.should_receive(:marker_error)
+    runner.io.should_receive(:ask_for_square_to_mark?).exactly(2).times
+    runner.take_turn(board, 1)
   end  
 
+  it "places marker on board if inputed square is empty" do
+    board_class = Board.new
+    io = mock.as_null_object
+    runner = Runner.new(board_class, io)
+    board = board_class.get_state_of_board
+    runner.place_marker(1, 'X')    
+  end
 end

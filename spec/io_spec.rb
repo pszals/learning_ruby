@@ -32,6 +32,12 @@ describe Io do
     io.puts_winner("X")
   end
   
+  it "prints out that the game is tied" do
+    io = Io.new
+    io.should_receive(:put_to_console).with("Tie Game")
+    io.puts_tie
+  end
+  
   it "asks for first to play" do
     io = Io.new    
     io.should_receive(:put_to_console).with("Enter 'X' or 'O'")
