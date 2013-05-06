@@ -89,11 +89,12 @@ describe Runner do
     runner.restart?(2)
   end
   
-  it "should ask for width of board from user" do
+  it "should ask for and get width of board from user" do
     board = Board.new
     io = Io.new
     runner = Runner.new(board, io)
     runner.io.should_receive(:ask_for_width_of_board)
+    runner.io.should_receive(:get_size_of_board)
     runner.setup
   end
   
@@ -104,6 +105,7 @@ describe Runner do
     board = board_class.board
     runner.io.should_receive(:puts_turn)
     runner.io.should_receive(:ask_for_square_to_mark?)
+    runner.should_receive(:play_game)
     runner.take_turn(board)
   end
   
@@ -116,16 +118,20 @@ describe Runner do
     runner.place_marker(1, 'X')
     runner.io.should_receive(:marker_error)
     runner.io.should_receive(:ask_for_square_to_mark?).exactly(2).times
-    runner.io.should_receive(:get_square_to_mark).exactly(2).times
+    runner.io.should_receive(:get_square_to_mark).exactly(1).times
+    runner.should_receive(:play_game) 
     runner.take_turn(board)
   end  
 
-  it "places marker on board if inputed square is empty" do
+  it "places marker on board, then checks board (play_game) if inputed square is empty" do
     board_class = Board.new
     io = mock.as_null_object
     runner = Runner.new(board_class, io)
     board = board_class.board
-    runner.place_marker(1, 'X')    
+    runner.place_marker(1, 'X')
+    runner.should_receive(:place_marker)
+    runner.should_receive(:play_game)
+    runner.take_turn(board)    
   end
   
   it "plays the game" do
@@ -133,6 +139,7 @@ describe Runner do
     io = mock.as_null_object
     runner = Runner.new(board_class, io)
     board = board_class.board
+    runner.should_receive(:play_game)
     runner.play_game(board)
   end
   

@@ -45,25 +45,19 @@ class Runner
     @io.ask_for_square_to_mark?
     
     square = @io.get_square_to_mark
-    if @board.square_empty?(board, square) == false # How do I change and test this as a while loop?
+    if @board.square_empty?(board, square) == false
       @io.marker_error
       @io.ask_for_square_to_mark?
-      square = @io.get_square_to_mark
+#      take_turn(board)
     end
-    if
-      @board.square_empty?(board, square) == true
-      place_marker(square, marker)
-    end
-  end
-  
-  def setup
-    @io.ask_for_width_of_board
+    place_marker(square, marker)
+    play_game(@board.board)
   end
 
-  def play_game(board)
+  def play_game(board) # Should maybe rename function to "check_board"?
     winner = @board.winner_on_board?(board)
     open_board = @board.board_open?(board)
-    if winner == false and open_board == true # How do I change and test this as a while loop?
+    if winner == false and open_board == true
       take_turn(board)
     elsif winner != false
       @io.puts_winner(winner)
@@ -73,7 +67,10 @@ class Runner
       choice = @io.get_input
       restart?(choice)
     end
+  end
+  
+  def setup
+    @io.ask_for_width_of_board
+    size = @io.get_size_of_board
   end  
 end
-  
-  
