@@ -21,11 +21,6 @@ class Runner
     @board.winner_on_board?(board)
   end
   
-  def output_board
-    board = @board.board
-    @io.put_to_console(@board.output_board(board))
-  end
-  
   def number_of_empty_squares(board)
     empty_squares = 0
     empty_board = @board.reset_board
@@ -47,8 +42,8 @@ class Runner
     empty_squares = number_of_empty_squares(board)
     marker = whose_turn?(empty_squares)
     @io.puts_turn(marker)
-    @io.ask_for_square_to_mark?
-    output_board
+    @io.ask_for_square_to_mark? 
+    @io.print_board(@board.output_board(board))
             
     square = @io.get_square_to_mark.to_i
     if @board.square_empty?(board, square) == false
@@ -67,7 +62,7 @@ class Runner
     if winner == false and open_board == true
       take_turn(board)
     elsif winner != false
-      @io.puts_winner(winner)
+      @io.puts_winner(winner) # <--- Add code for restarting here
     else
       @io.puts_tie
       @io.ask_to_restart?

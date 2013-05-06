@@ -96,9 +96,8 @@ describe Runner do
     board = board_class.board
     runner.io.should_receive(:puts_turn)
     runner.io.should_receive(:ask_for_square_to_mark?)
-    board_class.should_receive(:output_board)
-    runner.io.should_receive(:put_to_console)
-    runner.should_receive(:play_game)
+    runner.io.should_receive(:print_board)
+    runner.should_receive(:play_game).at_least(2).times
     runner.take_turn(board)
   end
   
@@ -182,13 +181,5 @@ describe Runner do
     runner = Runner.new(board, io)
     runner.should_receive(:play_game)
     runner.setup
-  end
-  
-  it "should print the board" do
-    board = Board.new
-    io = Io.new
-    runner = Runner.new(board, io)
-    runner.io.should_receive(:put_to_console)
-    runner.output_board
   end
 end

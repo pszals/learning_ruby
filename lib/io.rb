@@ -53,5 +53,10 @@ class Io
   def ask_to_restart?
     put_to_console("Enter 1 to restart or any key to exit")
   end
+  
+  def print_board(board)
+    string_board = board
+    put_to_console("Current board: \n#{board}")
+  end
 
 end

@@ -72,4 +72,11 @@ describe Io do
     io.get_size_of_board
   end  
   
+  it "should print the board" do
+    io = Io.new
+    board = "board"
+    io.should_receive(:put_to_console)
+    io.print_board(board)
+  end
+  
 end
