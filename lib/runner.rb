@@ -21,6 +21,11 @@ class Runner
     @board.winner_on_board?(board)
   end
   
+  def output_board
+    board = @board.board
+    @io.put_to_console(@board.output_board(board))
+  end
+  
   def number_of_empty_squares(board)
     empty_squares = 0
     empty_board = @board.reset_board
@@ -43,8 +48,9 @@ class Runner
     marker = whose_turn?(empty_squares)
     @io.puts_turn(marker)
     @io.ask_for_square_to_mark?
-    
-    square = @io.get_square_to_mark
+    output_board
+            
+    square = @io.get_square_to_mark.to_i
     if @board.square_empty?(board, square) == false
       @io.marker_error
       @io.ask_for_square_to_mark?
@@ -57,6 +63,7 @@ class Runner
   def play_game(board) # Should maybe rename function to "check_board"?
     winner = @board.winner_on_board?(board)
     open_board = @board.board_open?(board)
+
     if winner == false and open_board == true
       take_turn(board)
     elsif winner != false
@@ -70,9 +77,16 @@ class Runner
   end
   
   def setup
-    @io.ask_for_width_of_board
-    size = @io.get_size_of_board
-    board = @board.board
+    board_class = Board.new
+    io = Io.new
+    board = board_class.board
+    runner = Runner.new(board, io)
     play_game(board)
   end  
 end
+
+#board = Board.new
+#io = Io.new
+#runner = Runner.new(board, io)
+#game_board = board.board
+#runner.play_game(game_board)

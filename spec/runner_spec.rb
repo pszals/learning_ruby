@@ -89,13 +89,15 @@ describe Runner do
     runner.restart?(2)
   end
   
-  it "should tell the user whose turn it is and asks for square" do
+  it "should tell the user whose turn it is, print board and asks for square" do
     board_class = Board.new
     io = mock.as_null_object
     runner = Runner.new(board_class, io)
     board = board_class.board
     runner.io.should_receive(:puts_turn)
     runner.io.should_receive(:ask_for_square_to_mark?)
+    board_class.should_receive(:output_board)
+    runner.io.should_receive(:put_to_console)
     runner.should_receive(:play_game)
     runner.take_turn(board)
   end
@@ -178,9 +180,15 @@ describe Runner do
     board = Board.new
     io = Io.new
     runner = Runner.new(board, io)
-    runner.io.should_receive(:ask_for_width_of_board)
-    runner.io.should_receive(:get_size_of_board)
     runner.should_receive(:play_game)
     runner.setup
+  end
+  
+  it "should print the board" do
+    board = Board.new
+    io = Io.new
+    runner = Runner.new(board, io)
+    runner.io.should_receive(:put_to_console)
+    runner.output_board
   end
 end
