@@ -45,11 +45,12 @@ class Runner
     @io.ask_for_square_to_mark?
     
     square = @io.get_square_to_mark
-    if @board.square_empty?(board, square) == false
+    if @board.square_empty?(board, square) == false # How do I change and test this as a while loop?
       @io.marker_error
       @io.ask_for_square_to_mark?
-#      take_turn(board) <-- How do I prevent "stack level too deep" from occurring?
-    elsif
+      square = @io.get_square_to_mark
+    end
+    if
       @board.square_empty?(board, square) == true
       place_marker(square, marker)
     end
@@ -62,13 +63,13 @@ class Runner
   def play_game(board)
     winner = @board.winner_on_board?(board)
     open_board = @board.board_open?(board)
-    if winner == false and open_board == true
-#     square = @io.get_square_to_mark, add square arg to take_turn(board, square)     
+    if winner == false and open_board == true # How do I change and test this as a while loop?
       take_turn(board)
+    elsif winner != false
+      @io.puts_winner(winner)
     else
       @io.puts_tie
       @io.ask_to_restart?
-           
       choice = @io.get_input
       restart?(choice)
     end

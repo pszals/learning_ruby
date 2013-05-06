@@ -116,6 +116,7 @@ describe Runner do
     runner.place_marker(1, 'X')
     runner.io.should_receive(:marker_error)
     runner.io.should_receive(:ask_for_square_to_mark?).exactly(2).times
+    runner.io.should_receive(:get_square_to_mark).exactly(2).times
     runner.take_turn(board)
   end  
 
@@ -141,7 +142,6 @@ describe Runner do
     runner = Runner.new(board_class, io)
     board = board_class.board
     board_class.should_receive(:winner_on_board?)
-    runner.should_receive(:restart?)    
     runner.play_game(board)
   end
   
@@ -153,7 +153,7 @@ describe Runner do
     runner.should_receive(:take_turn)
     runner.play_game(board)  
   end
-  
+    
   it "checks that the board is open" do
     board_class = Board.new
     io = mock.as_null_object
@@ -174,5 +174,14 @@ describe Runner do
     runner.io.should_receive(:get_input)
     runner.should_receive(:restart?)
     runner.play_game(board)  
+  end
+  
+  it "puts out the winner" do
+    board_class = Board.new
+    io = mock.as_null_object
+    runner = Runner.new(board_class, io)
+    board = ['X', 'O', 'X', 'O', 'O', 'X', 'X', 'X', 'X']
+    runner.io.should_receive(:puts_winner)    
+    runner.play_game(board)
   end
 end
