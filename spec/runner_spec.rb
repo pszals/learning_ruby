@@ -182,6 +182,7 @@ describe Runner do
     io = mock.as_null_object
     runner = Runner.new(board_class, io)
     board = ['X', 'O', 'X', 'O', 'O', 'X', 'X', 'X', 'X']
+    runner.io.should_receive(:ask_to_restart?)
     runner.io.should_receive(:get_input)
     runner.should_receive(:exit)
     runner.check_board(board)

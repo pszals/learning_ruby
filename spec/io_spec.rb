@@ -4,7 +4,7 @@ describe Io do
 
   it "should print 'It's X's turn" do
     io = Io.new
-    io.should_receive(:put_to_console).with("It is X's turn")
+    io.should_receive(:put_to_console)
     io.puts_turn("X")
   end
   
@@ -16,31 +16,31 @@ describe Io do
   
   it "should ask for the square number to be marked" do
     io = Io.new
-    io.should_receive(:put_to_console).with('Pick an empty square to mark')
+    io.should_receive(:put_to_console)
     io.ask_for_square_to_mark?
   end
 
   it "prints error message if square is marked or improper input" do
     io = Io.new
-    io.should_receive(:put_to_console).with("That square is already taken or not on the board")
+    io.should_receive(:put_to_console)
     io.marker_error
   end
   
   it "prints the winning piece" do
     io = Io.new
-    io.should_receive(:put_to_console).with("Player X wins")
+    io.should_receive(:put_to_console)
     io.puts_winner("X")
   end
   
   it "prints out that the game is tied" do
     io = Io.new
-    io.should_receive(:put_to_console).with("Tie Game")
+    io.should_receive(:put_to_console)
     io.puts_tie
   end
   
   it "asks for first to play" do
     io = Io.new    
-    io.should_receive(:put_to_console).with("Enter 'X' or 'O'")
+    io.should_receive(:put_to_console)
     io.ask_for_first_player?
   end
   
@@ -52,13 +52,13 @@ describe Io do
   
   it "asks for 1 to restart or any key to exit" do
     io = Io.new
-    io.should_receive(:put_to_console).with("Enter 1 to restart or any key to exit")
+    io.should_receive(:put_to_console)
     io.ask_to_restart?
   end
   
   it "asks for width of board" do
     io = Io.new
-    io.should_receive(:put_to_console).with("Enter 3 for a 3x3 board or 4 for a 4x4 board")
+    io.should_receive(:put_to_console)
     io.ask_for_width_of_board
   end
   

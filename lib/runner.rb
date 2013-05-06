@@ -43,7 +43,7 @@ class Runner
     marker = whose_turn?(empty_squares)
     @io.puts_turn(marker)
     @io.ask_for_square_to_mark? 
-    @io.print_board(@board.output_board(board))
+    @io.print_board(@board.output_board(board)) #<<-- This line causes lots of problems
             
     square = @io.get_square_to_mark.to_i
     if @board.square_empty?(board, square) == false
@@ -63,6 +63,7 @@ class Runner
       take_turn(board)
     elsif winner != false
       @io.puts_winner(winner)
+      @io.ask_to_restart?
       choice = @io.get_input
       restart?(choice)
     else
