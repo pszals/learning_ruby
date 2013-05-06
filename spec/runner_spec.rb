@@ -118,8 +118,8 @@ describe Runner do
     runner.place_marker(1, 'X')
     runner.io.should_receive(:marker_error)
     runner.io.should_receive(:ask_for_square_to_mark?).exactly(2).times
-    runner.io.should_receive(:get_square_to_mark).exactly(1).times
-    runner.should_receive(:play_game) 
+    runner.io.should_receive(:get_square_to_mark)
+    runner.should_receive(:play_game).at_least(1).times
     runner.take_turn(board)
   end  
 
@@ -130,7 +130,7 @@ describe Runner do
     board = board_class.board
     runner.place_marker(1, 'X')
     runner.should_receive(:place_marker)
-    runner.should_receive(:play_game)
+    runner.should_receive(:play_game).at_least(1).times
     runner.take_turn(board)    
   end
   

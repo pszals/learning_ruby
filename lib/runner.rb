@@ -48,7 +48,7 @@ class Runner
     if @board.square_empty?(board, square) == false
       @io.marker_error
       @io.ask_for_square_to_mark?
-#      take_turn(board)
+      play_game(board)
     end
     place_marker(square, marker)
     play_game(@board.board)
