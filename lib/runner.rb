@@ -49,20 +49,22 @@ class Runner
     if @board.square_empty?(board, square) == false
       @io.marker_error
       @io.ask_for_square_to_mark?
-      play_game(board)
+      check_board(board)
     end
     place_marker(square, marker)
-    play_game(@board.board)
+    check_board(@board.board)
   end
 
-  def play_game(board) # Should maybe rename function to "check_board"?
+  def check_board(board)
     winner = @board.winner_on_board?(board)
     open_board = @board.board_open?(board)
 
     if winner == false and open_board == true
       take_turn(board)
     elsif winner != false
-      @io.puts_winner(winner) # <--- Add code for restarting here
+      @io.puts_winner(winner)
+      choice = @io.get_input
+      restart?(choice)
     else
       @io.puts_tie
       @io.ask_to_restart?
@@ -76,7 +78,7 @@ class Runner
     io = Io.new
     board = board_class.board
     runner = Runner.new(board, io)
-    play_game(board)
+    check_board(board)
   end  
 end
 
@@ -84,4 +86,4 @@ end
 #io = Io.new
 #runner = Runner.new(board, io)
 #game_board = board.board
-#runner.play_game(game_board)
+#runner.check_board(game_board)
