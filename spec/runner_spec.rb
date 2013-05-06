@@ -8,9 +8,9 @@ describe Runner do
     board = Board.new
     io = Io.new
     runner = Runner.new(board, io)
-    runner.player_x.get_marker.should ==  'X'
-    runner.player_o.get_marker.should ==  'O'    
-    runner.board.get_state_of_board.should == ['1', '2', '3', '4', '5', '6', '7', '8', '9'] 
+    runner.player_x.marker.should ==  'X'
+    runner.player_o.marker.should ==  'O'    
+    runner.board.board.should == ['1', '2', '3', '4', '5', '6', '7', '8', '9'] 
   end
   
   it "should initialize game with IO class" do
@@ -38,7 +38,7 @@ describe Runner do
     io = Io.new
     runner = Runner.new(board, io)
     runner.place_marker(5, 'X')
-    runner.board.get_state_of_board.should == ['1', '2', '3', '4', 'X', '6', '7', '8', '9'] 
+    runner.board.board.should == ['1', '2', '3', '4', 'X', '6', '7', '8', '9'] 
   end
       
   it "should return false if there is no winner on board" do
@@ -101,7 +101,7 @@ describe Runner do
     board_class = Board.new
     io = mock.as_null_object
     runner = Runner.new(board_class, io)
-    board = board_class.get_state_of_board
+    board = board_class.board
     runner.io.should_receive(:puts_turn)
     runner.io.should_receive(:ask_for_square_to_mark?)
     runner.take_turn(board)
@@ -111,7 +111,7 @@ describe Runner do
     board_class = Board.new
     io = mock.as_null_object
     runner = Runner.new(board_class, io)
-    board = board_class.get_state_of_board
+    board = board_class.board
     runner.place_marker(1, 'X')
     runner.place_marker(1, 'X')
     runner.io.should_receive(:marker_error)
@@ -123,7 +123,7 @@ describe Runner do
     board_class = Board.new
     io = mock.as_null_object
     runner = Runner.new(board_class, io)
-    board = board_class.get_state_of_board
+    board = board_class.board
     runner.place_marker(1, 'X')    
   end
   
@@ -131,7 +131,7 @@ describe Runner do
     board_class = Board.new
     io = mock.as_null_object
     runner = Runner.new(board_class, io)
-    board = board_class.get_state_of_board
+    board = board_class.board
     runner.play_game(board)
   end
   
@@ -139,7 +139,7 @@ describe Runner do
     board_class = Board.new
     io = mock.as_null_object
     runner = Runner.new(board_class, io)
-    board = board_class.get_state_of_board
+    board = board_class.board
     board_class.should_receive(:winner_on_board?)
     runner.should_receive(:restart?)    
     runner.play_game(board)
@@ -149,7 +149,7 @@ describe Runner do
     board_class = Board.new
     io = mock.as_null_object
     runner = Runner.new(board_class, io)
-    board = board_class.get_state_of_board
+    board = board_class.board
     runner.should_receive(:take_turn)
     runner.play_game(board)  
   end
@@ -158,7 +158,7 @@ describe Runner do
     board_class = Board.new
     io = mock.as_null_object
     runner = Runner.new(board_class, io)
-    board = board_class.get_state_of_board
+    board = board_class.board
     board_class.should_receive(:board_open?)
     runner.should_receive(:restart?)    
     runner.play_game(board)      

@@ -1,8 +1,10 @@
 class Board
+
+  attr_accessor :board_width, :board
 	
 	def initialize
-	  @board = any_size_board(set_width_of_board(3))
-	  @width = 3
+	  @board_width = 3
+	  @board = any_size_board(@board_width)
 	end
 	
 	def any_size_board(width)
@@ -14,29 +16,21 @@ class Board
 	def output_board(board)
 	  output_board = ""
 	  while board.last != nil
-      row = board.slice!(0, @width)
+      row = board.slice!(0, @board_width)
       output_board += row.join(' ')
       output_board += "\n"
     end
     output_board
   end
-	
-	def set_width_of_board(width) 
-	  @width = width
-	end
-	
+		
 	def reset_any_size_board
-	  @board = any_size_board(set_width_of_board(3))
+	  @board = any_size_board(@board_width)
 	end
 	
 	def reset_board
 	  integer_board = (1..9).to_a
 	  string_board = integer_board.map {|square| square.to_s}
 	  string_board
-	end
-	
-	def get_state_of_board
-    @board
 	end
 	
 	def get_state_of_square(square)

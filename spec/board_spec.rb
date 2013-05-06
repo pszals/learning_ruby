@@ -8,8 +8,8 @@ describe Board do
   end
 	
 	it "should return an array of 9 board places" do
-		board = Board.new
-		board.get_state_of_board.should == ['1', '2', '3', '4', '5', '6', '7', '8', '9']
+		board_class = Board.new
+		board_class.board.should == ['1', '2', '3', '4', '5', '6', '7', '8', '9']
 	end
 	
 	
@@ -50,12 +50,12 @@ describe Board do
 	end
 	
  it "should return false if square 1 is marked" do
-    board = Board.new
+    board_class = Board.new
     io = Io.new
     runner = Runner.new(board, io)
     runner.place_marker(1, 'X')
-    board_with_marked_square_one = runner.board.get_state_of_board
-    board.square_empty?(board_with_marked_square_one, 1).should == false
+    board_with_marked_square_one = runner.board.board
+    board_class.square_empty?(board_with_marked_square_one, 1).should == false
   end  
 
   it "should return true if square 1 is empty" do
@@ -63,7 +63,7 @@ describe Board do
     board = Board.new
     io = Io.new
     runner = Runner.new(board, io)
-    current_state_of_board = board.get_state_of_board
+    current_state_of_board = board.board
     board.square_empty?(current_state_of_board, empty_square).should == true
   end
   
@@ -116,7 +116,7 @@ describe Board do
   it "should set the width of the board" do
     board = Board.new
     width = 3
-    board.set_width_of_board(width).should == 3
+    board.board_width.should == 3
   end
 
   it "should make a good clean new board" do

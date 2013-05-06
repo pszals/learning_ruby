@@ -1,11 +1,9 @@
 class Player
   
-  def initialize(selection)
-    @selection = selection
-  end
+  attr_reader :marker
   
-  def get_marker
-    @selection
+  def initialize(selection)
+    @marker = selection
   end
   
 end

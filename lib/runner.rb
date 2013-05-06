@@ -31,7 +31,7 @@ class Runner
   end
   
   def whose_turn?(empty_squares)
-    empty_squares%2 == 0 ? player_o.get_marker : player_x.get_marker
+    empty_squares%2 == 0 ? player_o.marker : player_x.marker
   end
   
   def restart?(input)
@@ -63,6 +63,7 @@ class Runner
     winner = @board.winner_on_board?(board)
     open_board = @board.board_open?(board)
     if winner == false and open_board == true
+#     square = @io.get_square_to_mark, add square arg to take_turn(board, square)     
       take_turn(board)
     else
       @io.puts_tie
