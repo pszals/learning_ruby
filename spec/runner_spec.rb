@@ -89,15 +89,6 @@ describe Runner do
     runner.restart?(2)
   end
   
-  it "should ask for and get width of board from user" do
-    board = Board.new
-    io = Io.new
-    runner = Runner.new(board, io)
-    runner.io.should_receive(:ask_for_width_of_board)
-    runner.io.should_receive(:get_size_of_board)
-    runner.setup
-  end
-  
   it "should tell the user whose turn it is and asks for square" do
     board_class = Board.new
     io = mock.as_null_object
@@ -133,16 +124,7 @@ describe Runner do
     runner.should_receive(:play_game).at_least(1).times
     runner.take_turn(board)    
   end
-  
-  it "plays the game" do
-    board_class = Board.new
-    io = mock.as_null_object
-    runner = Runner.new(board_class, io)
-    board = board_class.board
-    runner.should_receive(:play_game)
-    runner.play_game(board)
-  end
-  
+    
   it "checks for a winner on board" do
     board_class = Board.new
     io = mock.as_null_object
@@ -190,5 +172,15 @@ describe Runner do
     board = ['X', 'O', 'X', 'O', 'O', 'X', 'X', 'X', 'X']
     runner.io.should_receive(:puts_winner)    
     runner.play_game(board)
+  end
+
+  it "should start game on board with width given by user" do
+    board = Board.new
+    io = Io.new
+    runner = Runner.new(board, io)
+    runner.io.should_receive(:ask_for_width_of_board)
+    runner.io.should_receive(:get_size_of_board)
+    runner.should_receive(:play_game)
+    runner.setup
   end
 end

@@ -72,5 +72,7 @@ class Runner
   def setup
     @io.ask_for_width_of_board
     size = @io.get_size_of_board
+    board = @board.board
+    play_game(board)
   end  
 end
