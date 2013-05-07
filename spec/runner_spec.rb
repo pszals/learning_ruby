@@ -10,7 +10,7 @@ describe Runner do
     runner = Runner.new(board, io)
     runner.player_x.marker.should ==  'X'
     runner.player_o.marker.should ==  'O'    
-    runner.board.board.should == ['1', '2', '3', '4', '5', '6', '7', '8', '9'] 
+    runner.board.game_state.should == ['1', '2', '3', '4', '5', '6', '7', '8', '9'] 
   end
   
   it "should initialize game with IO class" do
@@ -38,15 +38,15 @@ describe Runner do
     io = Io.new
     runner = Runner.new(board, io)
     runner.place_marker(5, 'X')
-    runner.board.board.should == ['1', '2', '3', '4', 'X', '6', '7', '8', '9'] 
+    runner.board.game_state.should == ['1', '2', '3', '4', 'X', '6', '7', '8', '9'] 
   end
       
   it "should return false if there is no winner on board" do
     board = Board.new
     io = Io.new
     runner = Runner.new(board, io)
-    board = ['O', 'O', 'X', 'X', 'X', 'O', 'O', 'X', 'O']
-    runner.get_winner(board).should == false
+    board.game_state = ['O', 'O', 'X', 'X', 'X', 'O', 'O', 'X', 'O']
+    runner.get_winner.should == false
   end
 
   it "should return 'X' if it is X's turn" do
@@ -193,6 +193,7 @@ describe Runner do
     io = Io.new
     runner = Runner.new(board, io)
     runner.should_receive(:check_board)
+#    runner.should_receive(:reset_any_size_board)
     runner.setup
   end
 end

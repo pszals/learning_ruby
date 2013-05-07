@@ -2,13 +2,15 @@ require 'board'
 
 class Ai
   
-  def initialize
-    @board = Board.new
+  attr_reader :board
+  
+  def initialize(board)
+    @board = board
   end
   
-  def complete_top_row(board)
-    if board[0] == board[1] || board[0] == board[2] || board[1] == board[2]
-      if board[0] != 'O' && board[1] != 'O' && board[2] != 'O'
+  def complete_top_row
+    if @board.game_state[0] == @board.game_state[1] || @board.game_state[0] == @board.game_state[2] || @board.game_state[1] == @board.game_state[2]
+      if @board.game_state[0] != 'O' && @board.game_state[1] != 'O' && @board.game_state[2] != 'O'
         true
       else
         false
@@ -18,9 +20,9 @@ class Ai
     end
   end
 
-    def complete_second_row(board)
-    if board[3] == board[4] || board[3] == board[5] || board[4] == board[5]
-      if board[3] != 'O' && board[4] != 'O' && board[5] != 'O'
+    def complete_second_row
+    if @board[3] == @board[4] || @board[3] == @board[5] || @board[4] == @board[5]
+      if @board[3] != 'O' && @board[4] != 'O' && @board[5] != 'O'
         true
       else
         false
@@ -30,7 +32,7 @@ class Ai
     end
   end
   
-  def complete_any_row(board)
+  def complete_any_row
     combos = [
               [0, 1, 2],
               [3, 4, 5],
@@ -43,9 +45,9 @@ class Ai
             ]
     combos.each do |combo|
       row = []
-      row << board[combo[0]] and row << board[combo[1]] and row << board[combo[2]]
+      row << @board.game_state[combo[0]] and row << @board.game_state[combo[1]] and row << @board.game_state[combo[2]]
       if row[0] == row[1] || row[0] == row[2] || row[1] == row[2]
-        to_fill = row.detect { |square| @board.square_empty?(board, square.to_i)}
+        to_fill = row.detect { |square| @board.square_empty?(square.to_i)}
         if to_fill == nil
           to_fill = false
         end

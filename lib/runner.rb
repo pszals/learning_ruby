@@ -17,8 +17,8 @@ class Runner
     @board.set_square(square, marker)
   end
       
-  def get_winner(board)
-    @board.winner_on_board?(board)
+  def get_winner
+    @board.winner_on_board?
   end
   
   def number_of_empty_squares(board)
@@ -43,7 +43,7 @@ class Runner
     marker = whose_turn?(empty_squares)
     @io.puts_turn(marker)
     @io.ask_for_square_to_mark? 
-    @io.print_board(@board.output_board(board)) #<<-- This line causes lots of problems
+    @io.print_board(@board.output_board) #<<-- This line causes lots of problems
             
     square = @io.get_square_to_mark.to_i
     if @board.square_empty?(board, square) == false

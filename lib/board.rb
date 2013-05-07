@@ -1,10 +1,10 @@
 class Board
 
-  attr_accessor :board_width, :board
+  attr_accessor :board_width, :game_state
 	
 	def initialize
 	  @board_width = 3
-	  @board = any_size_board(@board_width)
+	  @game_state = any_size_board(@board_width)
 	end
 	
 	def any_size_board(width)
@@ -13,10 +13,10 @@ class Board
 	  string_board
 	end
 	
-	def output_board(board)
+	def output_board
 	  output_board = ""
-	  while board.last != nil
-      row = board.slice!(0, @board_width)
+	  while @game_state.last != nil
+      row = @game_state.slice!(0, @board_width)
       output_board += row.join(' ')
       output_board += "\n"
     end
@@ -34,25 +34,25 @@ class Board
 	end
 	
 	def get_state_of_square(square)
-    @board[square - 1]
+    @game_state[square - 1]
 	end
 	
 	def set_square(square, marker)
-	  @board[square - 1] = marker
+	  @game_state[square - 1] = marker
 	end
 	
-  def square_empty?(board, square) # board should be @board
-    board[square - 1] == reset_board[square - 1]? true : false
+  def square_empty?(square)
+    @game_state[square - 1] == reset_board[square - 1]? true : false
   end
 
-  def board_open?(board)
+  def board_open?
     number_of_empty_squares = 0
     empty_board = reset_board
-    board.map { |square| number_of_empty_squares += 1 if square == empty_board[square.to_i - 1]}
+    @game_state.map { |square| number_of_empty_squares += 1 if square == empty_board[square.to_i - 1]}
     number_of_empty_squares >= 1? true : false
   end	
 
-  def winner_on_board?(board)
+  def winner_on_board?
     winning_marker = false
     combos = [
               [0, 1, 2],
@@ -65,9 +65,9 @@ class Board
               [6, 4, 2]
              ]
     combos.each do |combo|
-      marker = board[combo[0]]
+      marker = @game_state[combo[0]]
       winner = []
-      winner << board[combo[0]] and winner << board[combo[1]] and winner << board[combo[2]]
+      winner << @game_state[combo[0]] and winner << @game_state[combo[1]] and winner << @game_state[combo[2]]
       if winner.all? { |square| square == marker }
         winning_marker = marker
       end
