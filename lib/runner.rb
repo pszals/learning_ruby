@@ -49,7 +49,7 @@ class Runner
     if @board.square_empty?(square) == false
       @io.marker_error
       @io.ask_for_square_to_mark?
-      check_board
+#      take_turn
     end
     place_marker(square, marker)
     check_board
@@ -86,4 +86,4 @@ end
 #board = Board.new
 #io = Io.new
 #runner = Runner.new(board, io)
-#runner.check_board
+#runner.setup

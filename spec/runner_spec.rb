@@ -96,7 +96,7 @@ describe Runner do
     runner.io.should_receive(:puts_turn)
     runner.io.should_receive(:ask_for_square_to_mark?)
     runner.io.should_receive(:print_board)
-    runner.should_receive(:check_board).at_least(2).times
+    runner.should_receive(:check_board)
     runner.take_turn
   end
   
@@ -165,9 +165,11 @@ describe Runner do
     board = Board.new
     io = mock.as_null_object
     runner = Runner.new(board, io)
-    board = ['X', 'O', 'X', 'O', 'X', 'O', 'O', 'O', 'X']
+    board.game_state = ['X', 'O', 'X', 
+            'O', 'X', 'O', 
+            'O', 'O', 'X']
     runner.io.should_receive(:puts_winner)
-    runner.should_receive(:exit)#.at_least(2).times
+    runner.should_receive(:exit)#.at_least(2).times #<-- Removing comment will make test pass
     runner.check_board
   end
 
@@ -187,7 +189,7 @@ describe Runner do
     io = Io.new
     runner = Runner.new(board, io)
     runner.should_receive(:check_board)
-#    runner.should_receive(:reset_any_size_board)
+#    runner.should_receive(:reset_any_size_board) #<-- Removing comment will make test fail
     runner.setup
   end
 end
