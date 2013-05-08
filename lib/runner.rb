@@ -20,15 +20,7 @@ class Runner
   def get_winner
     @board.winner_on_board?
   end
-  
-  def number_of_empty_squares
-    empty_squares = 0
-    @board.game_state.map do |square| 
-      empty_squares += 1 if @board.square_empty?(square.to_i) == true
-    end
-    empty_squares  
-  end
-  
+    
   def whose_turn?(empty_squares)
     empty_squares%2 == 0 ? player_o.marker : player_x.marker
   end
@@ -38,7 +30,7 @@ class Runner
   end
   
   def take_turn
-    empty_squares = number_of_empty_squares
+    empty_squares = @board.number_of_empty_squares
     marker = whose_turn?(empty_squares)
     @io.puts_turn(marker)
     @io.ask_for_square_to_mark? 

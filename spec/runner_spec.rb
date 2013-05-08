@@ -56,15 +56,7 @@ describe Runner do
     empty_squares = 9
     runner.whose_turn?(empty_squares).should == 'X'
   end
-  
-  it "should return 6 as the number of empty squares" do
-    board = Board.new
-    io = Io.new
-    runner = Runner.new(board, io)
-    board.game_state = ['X', 'O', 'X', '4', '5', '6', '7', '8', '9']
-    runner.number_of_empty_squares.should == 6
-  end
-  
+    
 #  it "should have a method play that calls the print_board method" do
 #    io = Io.new(double)
 #    runner = Runner.new

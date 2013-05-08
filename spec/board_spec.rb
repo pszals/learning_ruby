@@ -30,6 +30,13 @@ describe Board do
 	    board.get_state_of_square(square).should == state
     end
 	end
+	
+  it "should return 6 as the number of empty squares" do
+    board = Board.new
+    board.game_state = ['X', 'O', 'X', '4', '5', '6', '7', '8', '9']
+    board.number_of_empty_squares.should == 6
+  end
+	
 
   board = Board.new
   [

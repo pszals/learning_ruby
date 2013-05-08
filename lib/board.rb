@@ -39,6 +39,14 @@ class Board
   def square_empty?(square)
     @game_state[square - 1] == square.to_s ? true : false
   end
+  
+  def number_of_empty_squares
+    empty_squares = 0
+    @game_state.map do |square| 
+      empty_squares += 1 if square_empty?(square.to_i) == true
+    end
+    empty_squares  
+  end
 
   def board_open?
     number_of_empty_squares = 0
