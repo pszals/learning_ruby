@@ -182,7 +182,7 @@ describe Runner do
     runner.check_board
   end
 
-  it "should start game on board with width given by user" do
+  it "should start game on empty board with width given by user" do
     board = Board.new
     io = Io.new
     runner = Runner.new(board, io)

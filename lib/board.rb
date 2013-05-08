@@ -27,12 +27,6 @@ class Board
 	  @board = any_size_board(@board_width)
 	end
 	
-	def reset_board
-	  integer_board = (1..9).to_a
-	  string_board = integer_board.map {|square| square.to_s}
-	  string_board
-	end
-	
 	def get_state_of_square(square)
     @game_state[square - 1]
 	end
@@ -42,12 +36,12 @@ class Board
 	end
 	
   def square_empty?(square)
-    @game_state[square - 1] == reset_board[square - 1]? true : false
+    @game_state[square - 1] == square.to_s ? true : false
   end
 
   def board_open?
     number_of_empty_squares = 0
-    empty_board = reset_board
+    empty_board = reset_any_size_board
     @game_state.map { |square| number_of_empty_squares += 1 if square == empty_board[square.to_i - 1]}
     number_of_empty_squares >= 1? true : false
   end	

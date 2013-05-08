@@ -4,7 +4,7 @@ describe Board do
 
   it "should (re)set board to initial state" do
     board = Board.new
-    board.reset_board.should == ['1', '2', '3', '4', '5', '6', '7', '8', '9']
+    board.reset_any_size_board.should == ['1', '2', '3', '4', '5', '6', '7', '8', '9']
   end
 	
 	it "should return an array of 9 board places" do
@@ -63,7 +63,7 @@ describe Board do
   
   it "should return true if there is an open square on the board" do
     board = Board.new
-    board.reset_board
+    board.reset_any_size_board
     board.board_open?.should == true
   end
 

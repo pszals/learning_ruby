@@ -23,7 +23,7 @@ class Runner
   
   def number_of_empty_squares
     empty_squares = 0
-    empty_board = @board.reset_board
+    empty_board = @board.reset_any_size_board
     @board.game_state.map do |square| 
       empty_squares += 1 if square == empty_board[square.to_i - 1]
     end
@@ -78,6 +78,7 @@ class Runner
     board = Board.new
     io = Io.new
     runner = Runner.new(board, io)
+    board.reset_any_size_board
     check_board
   end  
 end
