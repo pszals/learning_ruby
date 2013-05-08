@@ -14,17 +14,18 @@ class Board
 	end
 	
 	def output_board
-	  output_board = ""
-	  while @game_state.last != nil
-      row = @game_state.slice!(0, @board_width)
-      output_board += row.join(' ')
-      output_board += "\n"
+	  output = ""
+	  gs = @game_state.dup
+	  while gs.last != nil
+      row = gs.slice!(0, @board_width)
+      output += row.join(' ')
+      output += "\n"
     end
-    output_board
+    output
   end
 		
 	def reset_any_size_board
-	  @board = any_size_board(@board_width)
+	  @game_state = any_size_board(@board_width)
 	end
 	
 	def get_state_of_square(square)
@@ -41,8 +42,9 @@ class Board
 
   def board_open?
     number_of_empty_squares = 0
-    empty_board = reset_any_size_board
-    @game_state.map { |square| number_of_empty_squares += 1 if square == empty_board[square.to_i - 1]}
+    @game_state.map do |square| 
+      number_of_empty_squares += 1 if square_empty?(square.to_i) == true  
+    end
     number_of_empty_squares >= 1? true : false
   end	
 
@@ -61,7 +63,9 @@ class Board
     combos.each do |combo|
       marker = @game_state[combo[0]]
       winner = []
-      winner << @game_state[combo[0]] and winner << @game_state[combo[1]] and winner << @game_state[combo[2]]
+      winner << @game_state[combo[0]]
+      winner << @game_state[combo[1]]
+      winner << @game_state[combo[2]]
       if winner.all? { |square| square == marker }
         winning_marker = marker
       end

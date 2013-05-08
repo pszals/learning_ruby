@@ -23,9 +23,8 @@ class Runner
   
   def number_of_empty_squares
     empty_squares = 0
-    empty_board = @board.reset_any_size_board
     @board.game_state.map do |square| 
-      empty_squares += 1 if square == empty_board[square.to_i - 1]
+      empty_squares += 1 if @board.square_empty?(square.to_i) == true
     end
     empty_squares  
   end
@@ -43,13 +42,12 @@ class Runner
     marker = whose_turn?(empty_squares)
     @io.puts_turn(marker)
     @io.ask_for_square_to_mark? 
-    @io.print_board(@board.output_board) #<<-- This line causes lots of problems
+    @io.print_board(@board.output_board)
             
     square = @io.get_square_to_mark.to_i
     if @board.square_empty?(square) == false
       @io.marker_error
-      @io.ask_for_square_to_mark?
-#      take_turn
+      check_board
     end
     place_marker(square, marker)
     check_board
@@ -75,11 +73,8 @@ class Runner
   end
   
   def setup
-    board = Board.new
-    io = Io.new
-    runner = Runner.new(board, io)
     board.reset_any_size_board
-    check_board
+    take_turn
   end  
 end
 
