@@ -93,8 +93,8 @@ describe Board do
   
   it "should return the number of markers present on board" do
     board = Board.new
-    mock_board = ['1', '2', '3', '4', '5', '6', 'O', 'X', 'X']
-    board.number_of_markers(mock_board).should == 3
+    board.game_state = ['1', '2', '3', '4', '5', '6', 'O', 'X', 'X']
+    board.number_of_markers.should == 3
   end
   
   it "should create a square board of any size" do

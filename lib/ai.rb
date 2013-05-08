@@ -21,8 +21,8 @@ class Ai
   end
 
     def complete_second_row
-    if @board[3] == @board[4] || @board[3] == @board[5] || @board[4] == @board[5]
-      if @board[3] != 'O' && @board[4] != 'O' && @board[5] != 'O'
+    if @board.game_state[3] == @board.game_state[4] || @board.game_state[3] == @board.game_state[5] || @board.game_state[4] == @board.game_state[5]
+      if @board.game_state[3] != 'O' && @board.game_state[4] != 'O' && @board.game_state[5] != 'O'
         true
       else
         false
@@ -56,41 +56,41 @@ class Ai
     end  
   end
   
-  def mark_center(board)
+  def mark_center
     center_square = false
-    if @board.square_empty?(board, 5)
+    if @board.square_empty?(5)
       center_square = '5'
     end
     center_square
   end
   
-  def mark_corner(board)
+  def mark_corner
     open_corner = false
     corners = [1, 3, 7, 9]
     corners.each do |corner|
-      if @board.square_empty?(board, corner)
+      if @board.square_empty?(corner)
         open_corner = corner.to_s
       end
     end
     return open_corner
   end
 
-  def mark_opposite_corner(board)
+  def mark_opposite_corner
     open_corner = false
     corner_pairs = [[1, 9],[3, 7], [7, 3], [9, 1]]
     corner_pairs.each do |square, opposite|
-      if not @board.square_empty?(board, square) and @board.square_empty?(board, opposite)
+      if not @board.square_empty?(square) and @board.square_empty?(opposite)
         open_corner = opposite.to_s
       end  
     end
     return open_corner
   end
   
-  def mark_side_square(board)
+  def mark_side_square
     open_side = false
     sides = [8, 6, 4, 2]
     sides.each do |side|
-      if @board.square_empty?(board, side)
+      if @board.square_empty?(side)
         open_side = side.to_s
       end
     end

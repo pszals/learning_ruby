@@ -75,9 +75,9 @@ class Board
     return winning_marker
   end
 
-  def number_of_markers(board)
+  def number_of_markers
     count = 0
-    board.each do |square| 
+    @game_state.each do |square| 
       if square == 'X' || square == 'O'
       count += 1
       end

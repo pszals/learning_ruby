@@ -61,8 +61,8 @@ describe Runner do
     board = Board.new
     io = Io.new
     runner = Runner.new(board, io)
-    board = ['X', 'O', 'X', '4', '5', '6', '7', '8', '9']
-    runner.number_of_empty_squares(board).should == 6
+    board.game_state = ['X', 'O', 'X', '4', '5', '6', '7', '8', '9']
+    runner.number_of_empty_squares.should == 6
   end
   
 #  it "should have a method play that calls the print_board method" do
@@ -90,102 +90,96 @@ describe Runner do
   end
   
   it "should tell the user whose turn it is, print board and asks for square" do
-    board_class = Board.new
+    board = Board.new
     io = mock.as_null_object
-    runner = Runner.new(board_class, io)
-    board = board_class.board
+    runner = Runner.new(board, io)
     runner.io.should_receive(:puts_turn)
     runner.io.should_receive(:ask_for_square_to_mark?)
     runner.io.should_receive(:print_board)
     runner.should_receive(:check_board).at_least(2).times
-    runner.take_turn(board)
+    runner.take_turn
   end
   
   it "should put marker error, ask for, and get square if square entered is invalid" do
-    board_class = Board.new
+    board = Board.new
     io = mock.as_null_object
-    runner = Runner.new(board_class, io)
-    board = board_class.board
+    runner = Runner.new(board, io)
     runner.place_marker(1, 'X')
     runner.place_marker(1, 'X')
     runner.io.should_receive(:marker_error)
     runner.io.should_receive(:ask_for_square_to_mark?).exactly(2).times
     runner.io.should_receive(:get_square_to_mark)
     runner.should_receive(:check_board).at_least(1).times
-    runner.take_turn(board)
+    runner.take_turn
   end  
 
   it "places marker on board, then checks board (check_board) if inputed square is empty" do
-    board_class = Board.new
+    board = Board.new
     io = mock.as_null_object
-    runner = Runner.new(board_class, io)
-    board = board_class.board
+    runner = Runner.new(board, io)
     runner.place_marker(1, 'X')
     runner.should_receive(:place_marker)
     runner.should_receive(:check_board).at_least(1).times
-    runner.take_turn(board)    
+    runner.take_turn  
   end
     
   it "checks for a winner on board" do
-    board_class = Board.new
+    board = Board.new
     io = mock.as_null_object
-    runner = Runner.new(board_class, io)
-    board = board_class.board
-    board_class.should_receive(:winner_on_board?)
+    runner = Runner.new(board, io)
+    board.should_receive(:winner_on_board?)
     runner.should_receive(:exit)
-    runner.check_board(board)
+    runner.check_board
   end
   
   it "takes turn if there is no winner on board" do
-    board_class = Board.new
+    board = Board.new
     io = mock.as_null_object
-    runner = Runner.new(board_class, io)
-    board = board_class.board
+    runner = Runner.new(board, io)
     runner.should_receive(:take_turn)
-    runner.check_board(board)  
+    runner.check_board
   end
     
   it "checks that the board is open" do
-    board_class = Board.new
+    board = Board.new
     io = mock.as_null_object
-    runner = Runner.new(board_class, io)
-    board = board_class.board
-    board_class.should_receive(:board_open?)
+    runner = Runner.new(board, io)
+    board.should_receive(:board_open?)
     runner.should_receive(:restart?)    
-    runner.check_board(board)      
+    runner.check_board      
   end
   
   it "puts out that there is a tie, asks to restart and gets choice" do
-    board_class = Board.new
+    board = Board.new
     io = mock.as_null_object
-    runner = Runner.new(board_class, io)
-    board = ['X', 'O', 'X', 'O', 'O', 'X', 'X', 'X', 'O']
+    runner = Runner.new(board, io)
+    board.game_state = ['X', 'O', 'X', 'O', 'O', 'X', 'X', 'X', 'O']
     runner.io.should_receive(:puts_tie)
     runner.io.should_receive(:ask_to_restart?)
     runner.io.should_receive(:get_input)
     runner.should_receive(:restart?)
-    runner.check_board(board)  
+    runner.check_board  
   end
   
   it "puts out the winner" do
-    board_class = Board.new
+    board = Board.new
     io = mock.as_null_object
-    runner = Runner.new(board_class, io)
-    board = ['X', 'O', 'X', 'O', 'O', 'X', 'X', 'X', 'X']
+    runner = Runner.new(board, io)
+    board = ['X', 'O', 'X', 'O', 'X', 'O', 'O', 'O', 'X']
     runner.io.should_receive(:puts_winner)
-    runner.should_receive(:exit)
-    runner.check_board(board)
+    runner.should_receive(:exit)#.at_least(2).times
+    runner.check_board
   end
 
   it "asks to restart and gets input to restart" do
-    board_class = Board.new
+    board = Board.new
     io = mock.as_null_object
-    runner = Runner.new(board_class, io)
-    board = ['X', 'O', 'X', 'O', 'O', 'X', 'X', 'X', 'X']
+    runner = Runner.new(board, io)
+    board.game_state = ['X', 'O', 'X', 'O', 'O', 'X', 'X', 'X', 'X']
     runner.io.should_receive(:ask_to_restart?)
     runner.io.should_receive(:get_input)
     runner.should_receive(:exit)
-    runner.check_board(board)
+    runner.check_board
   end
 
   it "should start game on board with width given by user" do

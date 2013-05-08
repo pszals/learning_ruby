@@ -55,7 +55,6 @@ class Io
   end
   
   def print_board(board)
-    string_board = board
     put_to_console("Current board: \n#{board}")
   end
 

@@ -21,10 +21,10 @@ class Runner
     @board.winner_on_board?
   end
   
-  def number_of_empty_squares(board)
+  def number_of_empty_squares
     empty_squares = 0
     empty_board = @board.reset_board
-    board.map do |square| 
+    @board.game_state.map do |square| 
       empty_squares += 1 if square == empty_board[square.to_i - 1]
     end
     empty_squares  
@@ -38,29 +38,29 @@ class Runner
     input == 1 ? setup : exit  
   end
   
-  def take_turn(board)
-    empty_squares = number_of_empty_squares(board)
+  def take_turn
+    empty_squares = number_of_empty_squares
     marker = whose_turn?(empty_squares)
     @io.puts_turn(marker)
     @io.ask_for_square_to_mark? 
     @io.print_board(@board.output_board) #<<-- This line causes lots of problems
             
     square = @io.get_square_to_mark.to_i
-    if @board.square_empty?(board, square) == false
+    if @board.square_empty?(square) == false
       @io.marker_error
       @io.ask_for_square_to_mark?
-      check_board(board)
+      check_board
     end
     place_marker(square, marker)
-    check_board(@board.board)
+    check_board
   end
 
-  def check_board(board)
-    winner = @board.winner_on_board?(board)
-    open_board = @board.board_open?(board)
+  def check_board
+    winner = @board.winner_on_board?
+    open_board = @board.board_open?
 
     if winner == false and open_board == true
-      take_turn(board)
+      take_turn
     elsif winner != false
       @io.puts_winner(winner)
       @io.ask_to_restart?
@@ -75,16 +75,14 @@ class Runner
   end
   
   def setup
-    board_class = Board.new
+    board = Board.new
     io = Io.new
-    board = board_class.board
     runner = Runner.new(board, io)
-    check_board(board)
+    check_board
   end  
 end
 
 #board = Board.new
 #io = Io.new
 #runner = Runner.new(board, io)
-#game_board = board.board
-#runner.check_board(game_board)
+#runner.check_board
