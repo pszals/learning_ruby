@@ -45,7 +45,9 @@ describe Runner do
     board = Board.new
     io = Io.new
     runner = Runner.new(board, io)
-    board.game_state = ['O', 'O', 'X', 'X', 'X', 'O', 'O', 'X', 'O']
+    board.game_state = ['O', 'O', 'X', 
+                        'X', 'X', 'O', 
+                        'O', 'X', 'O']
     runner.get_winner.should == false
   end
 
@@ -56,14 +58,6 @@ describe Runner do
     empty_squares = 9
     runner.whose_turn?(empty_squares).should == 'X'
   end
-    
-#  it "should have a method play that calls the print_board method" do
-#    io = Io.new(double)
-#    runner = Runner.new
-#    state = ['1', '2', '3', '4', '5', '6', '7', '8', '9']
-#    runner.should_receive(:play).with(:print_board)
-#    runner.play
-#  end
 
   it "should call restart if selection is 1" do
     board = Board.new
@@ -145,7 +139,9 @@ describe Runner do
     board = Board.new
     io = mock.as_null_object
     runner = Runner.new(board, io)
-    board.game_state = ['X', 'O', 'X', 'O', 'O', 'X', 'X', 'X', 'O']
+    board.game_state = ['X', 'O', 'X', 
+                        'O', 'O', 'X', 
+                        'X', 'X', 'O']
     runner.io.should_receive(:puts_tie)
     runner.io.should_receive(:ask_to_restart?)
     runner.io.should_receive(:print_board)    
@@ -171,7 +167,9 @@ describe Runner do
     board = Board.new
     io = mock.as_null_object
     runner = Runner.new(board, io)
-    board.game_state = ['X', 'O', 'X', 'O', 'O', 'X', 'X', 'X', 'X']
+    board.game_state = ['X', 'O', 'X', 
+                        'O', 'O', 'X', 
+                        'X', 'X', 'X']
     runner.io.should_receive(:ask_to_restart?)
     runner.io.should_receive(:get_input)
     runner.should_receive(:exit)

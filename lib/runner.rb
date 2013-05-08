@@ -33,8 +33,8 @@ class Runner
     empty_squares = @board.number_of_empty_squares
     marker = whose_turn?(empty_squares)
     @io.puts_turn(marker)
-    @io.ask_for_square_to_mark? 
     @io.print_board(@board.output_board)
+    @io.ask_for_square_to_mark?
             
     square = @io.get_square_to_mark.to_i
     if @board.square_empty?(square) == false
@@ -52,14 +52,14 @@ class Runner
     if winner == false and open_board == true
       take_turn
     elsif winner != false
-      @io.puts_winner(winner)
       @io.print_board(@board.output_board)
+      @io.puts_winner(winner)
       @io.ask_to_restart?
       choice = @io.get_input
       restart?(choice)
     else
-      @io.puts_tie
       @io.print_board(@board.output_board)
+      @io.puts_tie
       @io.ask_to_restart?
       choice = @io.get_input
       restart?(choice)

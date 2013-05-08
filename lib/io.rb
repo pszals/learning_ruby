@@ -22,7 +22,7 @@ class Io
   end
 
   def ask_for_square_to_mark?
-    put_to_console('Pick an empty square to mark.')
+    put_to_console('Pick an empty square to mark: ')
   end
     
   def marker_error
@@ -55,7 +55,7 @@ class Io
   end
   
   def print_board(board)
-    put_to_console("Current board: \n#{board}")
+    put_to_console(board)
   end
 
 end
