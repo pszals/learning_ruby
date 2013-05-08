@@ -156,6 +156,7 @@ describe Runner do
     board.game_state = ['X', 'O', 'X', 'O', 'O', 'X', 'X', 'X', 'O']
     runner.io.should_receive(:puts_tie)
     runner.io.should_receive(:ask_to_restart?)
+    runner.io.should_receive(:print_board)    
     runner.io.should_receive(:get_input)
     runner.should_receive(:restart?)
     runner.check_board  
@@ -169,6 +170,7 @@ describe Runner do
                         'O', 'X', 'O', 
                         'O', 'O', 'X']
     runner.io.should_receive(:puts_winner)
+    runner.io.should_receive(:print_board)
     runner.should_receive(:exit)
     runner.check_board
   end

@@ -61,11 +61,13 @@ class Runner
       take_turn
     elsif winner != false
       @io.puts_winner(winner)
+      @io.print_board(@board.output_board)
       @io.ask_to_restart?
       choice = @io.get_input
       restart?(choice)
     else
       @io.puts_tie
+      @io.print_board(@board.output_board)
       @io.ask_to_restart?
       choice = @io.get_input
       restart?(choice)
