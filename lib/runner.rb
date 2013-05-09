@@ -73,7 +73,10 @@ class Runner
 
   def configure_opponent
     @io.ask_for_opponent
-    opponent_type = @io.get_opponent  
+    opponent_type = @io.get_opponent
+    if opponent_type == 2  # Remove and TDD this
+      @ai.opponent == true # This too
+    end 
   end
 
 end

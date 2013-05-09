@@ -2,10 +2,15 @@ require 'board'
 
 class Ai
   
-  attr_reader :board
+  attr_reader :board, :opponent
   
   def initialize(board)
     @board = board
+    @opponent = false
+  end
+  
+  def make_move
+    complete_any_row
   end
   
   def complete_any_row
@@ -34,6 +39,12 @@ class Ai
     end  
   end
   
+  def make_fork
+    if @board.game_state[0] == @board.game_state[8] and @board.square_empty?(7) == @board.square_empty?(3)
+      '3'
+    end      
+  end
+
   def mark_center
     center_square = false
     if @board.square_empty?(5)
