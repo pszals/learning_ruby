@@ -79,4 +79,16 @@ describe Io do
     io.print_board(board)
   end
   
+  it "asks if user wants to play against a computer" do
+    io = Io.new
+    io.should_receive(:put_to_console)
+    io.ask_for_opponent
+  end
+  
+  it "gets opponent type" do
+    io = Io.new
+    io.should_receive(:get_input)
+    io.get_opponent
+  end
+  
 end

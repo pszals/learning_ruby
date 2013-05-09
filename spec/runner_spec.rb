@@ -176,11 +176,20 @@ describe Runner do
     runner.check_board
   end
 
-  it "should start game on empty board with width given by user" do
+  it "should start game on empty board" do
     board = Board.new
     io = Io.new
     runner = Runner.new(board, io)
     runner.should_receive(:take_turn)
     runner.setup
+  end
+  
+  it "asks and receives opponent type" do
+    board = Board.new
+    io = Io.new
+    runner = Runner.new(board, io)
+    runner.io.should_receive(:ask_for_opponent)
+    runner.io.should_receive(:get_input)
+    runner.configure_opponent
   end
 end

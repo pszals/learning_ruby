@@ -70,6 +70,12 @@ class Runner
     board.reset_any_size_board
     take_turn
   end  
+
+  def configure_opponent
+    @io.ask_for_opponent
+    opponent_type = @io.get_opponent  
+  end
+
 end
 
 #board = Board.new

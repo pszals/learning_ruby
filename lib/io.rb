@@ -15,6 +15,14 @@ class Io
   def get_first_player
     get_input
   end
+  
+  def ask_for_opponent
+    put_to_console("Enter 1 for computer opponent or 2 for two-player game")
+  end
+  
+  def get_opponent
+    get_input
+  end
 
   def puts_turn(marker_type)
     marker = marker_type 
