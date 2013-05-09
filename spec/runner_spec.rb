@@ -8,8 +8,8 @@ describe Runner do
     board = Board.new
     io = Io.new
     runner = Runner.new(board, io)
-    runner.player_x.marker.should ==  'X'
-    runner.player_o.marker.should ==  'O'    
+    runner.player_1.marker.should ==  'X'
+    runner.player_2.marker.should ==  'O'    
     runner.board.game_state.should == ['1', '2', '3', '4', '5', '6', '7', '8', '9'] 
   end
   

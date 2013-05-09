@@ -4,11 +4,11 @@ require 'io'
 
 class Runner
   
-  attr_reader :io, :board, :player_x, :player_o
+  attr_reader :io, :board, :player_1, :player_2
 
   def initialize(board, io)
-    @player_x = Player.new('X')
-    @player_o = Player.new('O')
+    @player_1 = Player.new('X')
+    @player_2 = Player.new('O')
     @board = board
     @io = io
   end
@@ -22,7 +22,7 @@ class Runner
   end
     
   def whose_turn?(empty_squares)
-    empty_squares%2 == 0 ? player_o.marker : player_x.marker
+    empty_squares%2 == 0 ? player_2.marker : player_1.marker
   end
   
   def restart?(input)

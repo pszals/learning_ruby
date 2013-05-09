@@ -8,30 +8,6 @@ class Ai
     @board = board
   end
   
-  def complete_top_row
-    if @board.game_state[0] == @board.game_state[1] || @board.game_state[0] == @board.game_state[2] || @board.game_state[1] == @board.game_state[2]
-      if @board.game_state[0] != 'O' && @board.game_state[1] != 'O' && @board.game_state[2] != 'O'
-        true
-      else
-        false
-      end
-    else
-      false
-    end
-  end
-
-    def complete_second_row
-    if @board.game_state[3] == @board.game_state[4] || @board.game_state[3] == @board.game_state[5] || @board.game_state[4] == @board.game_state[5]
-      if @board.game_state[3] != 'O' && @board.game_state[4] != 'O' && @board.game_state[5] != 'O'
-        true
-      else
-        false
-      end
-    else
-      false
-    end
-  end
-  
   def complete_any_row
     combos = [
               [0, 1, 2],
@@ -45,7 +21,9 @@ class Ai
             ]
     combos.each do |combo|
       row = []
-      row << @board.game_state[combo[0]] and row << @board.game_state[combo[1]] and row << @board.game_state[combo[2]]
+      row << @board.game_state[combo[0]] 
+      row << @board.game_state[combo[1]]
+      row << @board.game_state[combo[2]]
       if row[0] == row[1] || row[0] == row[2] || row[1] == row[2]
         to_fill = row.detect { |square| @board.square_empty?(square.to_i)}
         if to_fill == nil

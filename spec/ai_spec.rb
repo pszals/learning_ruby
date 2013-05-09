@@ -6,21 +6,21 @@ describe Ai do
     board = Board.new
     board.game_state = ['X', 'X', '3', '4', '5', '6', '7', '8', '9']
     ai = Ai.new(board)
-    ai.complete_top_row.should == true
+    ai.complete_any_row.should == '3'
   end
   
   it "should return false if two top row markers are the same but one square is marked other" do
     board = Board.new
-    game_state = ['X', 'X', 'O', '4', '5', '6', '7', '8', '9']
+    board.game_state = ['X', 'X', 'O', '4', '5', '6', '7', '8', '9']
     ai = Ai.new(board)
-    ai.complete_top_row.should == false
+    ai.complete_any_row.should == false
   end
 
   it "should return true when two markers of the second row are the same" do
     board = Board.new
     board.game_state = ['1', '2', '3', 'X', '5', 'X', 'O', '8', '9']
     ai = Ai.new(board)
-    ai.complete_second_row.should == true
+    ai.complete_any_row.should == '5'
   end
 
   it "should return position of empty square when two in row are the same but one is empty" do
