@@ -5,7 +5,7 @@ require 'ai'
 
 class Runner
   
-  attr_reader :io, :board, :player_1, :player_2, :ai # :player
+  attr_reader :io, :board, :player_1, :player_2, :ai #, :player
 
   def initialize(board, io)
     @player_1 = Player.new('X')
@@ -17,7 +17,7 @@ class Runner
   end
               
   def whose_turn?(empty_squares)
-    empty_squares%2 == 0 ? player_2.marker : player_1.marker # Change to player_2.take_turn : player_1.take_turn
+    empty_squares%2 == 0 ? player_2.marker : player_1.marker # Change to player_2.take_turn : player_1.take_turn, and move to Player class
   end
   
   def restart?(input)
