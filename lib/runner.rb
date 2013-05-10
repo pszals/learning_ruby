@@ -24,16 +24,16 @@ class Runner
   end
     
   def whose_turn?(empty_squares)
-    empty_squares%2 == 0 ? player_2.marker : player_1.marker
+    empty_squares%2 == 0 ? player_2.marker : player_1.marker # Change to player_1.take_turn
   end
   
   def restart?(input)
     input == 1 ? setup : exit  
   end
   
-  def take_turn
+  def take_turn # Move to Player class
     empty_squares = @board.number_of_empty_squares
-    marker = whose_turn?(empty_squares)
+    marker = whose_turn?(empty_squares) # marker = self.marker
     @io.puts_turn(marker)
     @io.print_board(@board.output_board)
     @io.ask_for_square_to_mark?
