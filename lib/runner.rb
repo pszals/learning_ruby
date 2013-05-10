@@ -5,7 +5,7 @@ require 'ai'
 
 class Runner
   
-  attr_reader :io, :board, :player_1, :player_2, :ai
+  attr_reader :io, :board, :player_1, :player_2, :ai # :player
 
   def initialize(board, io)
     @player_1 = Player.new('X')
@@ -13,18 +13,15 @@ class Runner
     @board = board
     @io = io
     @ai = ai
+#   @player = player    
   end
-    
-  def place_marker(square, marker)
-    @board.set_square(square, marker)
-  end
-      
-  def get_winner
+          
+  def get_winner # Don't need this either! Just use @board.winner_on_board?
     @board.winner_on_board?
   end
     
   def whose_turn?(empty_squares)
-    empty_squares%2 == 0 ? player_2.marker : player_1.marker # Change to player_1.take_turn
+    empty_squares%2 == 0 ? player_2.marker : player_1.marker # Change to player_2.take_turn : player_1.take_turn
   end
   
   def restart?(input)
@@ -43,7 +40,7 @@ class Runner
       @io.marker_error
       find_winner
     end
-    place_marker(square, marker)
+    @board.set_square(square, marker)
     find_winner
   end
 
@@ -52,7 +49,7 @@ class Runner
     open_board = @board.board_open?
 
     if winner == false and open_board == true
-      take_turn
+      take_turn # Change to whose_turn?
     elsif winner != false
       @io.print_board(@board.output_board)
       @io.puts_winner(winner)

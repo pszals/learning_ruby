@@ -6,4 +6,7 @@ class Player
     @marker = selection
   end
   
+#  def take_turn
+#  end
+  
 end

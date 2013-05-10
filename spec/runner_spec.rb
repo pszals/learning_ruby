@@ -28,7 +28,7 @@ describe Runner do
       board = Board.new
       io = Io.new
       runner = Runner.new(board, io)
-      runner.place_marker(square, marker)
+      board.set_square(square, marker)
       runner.board.get_state_of_square(square).should == marker
     end
   end
@@ -37,7 +37,7 @@ describe Runner do
     board = Board.new
     io = Io.new
     runner = Runner.new(board, io)
-    runner.place_marker(5, 'X')
+    board.set_square(5, 'X')
     runner.board.game_state.should == ['1', '2', '3', '4', 'X', '6', '7', '8', '9'] 
   end
       
@@ -90,8 +90,8 @@ describe Runner do
     board = Board.new
     io = mock.as_null_object
     runner = Runner.new(board, io)
-    runner.place_marker(1, 'X')
-    runner.place_marker(1, 'X')
+    board.set_square(1, 'X')
+    board.set_square(1, 'X')
     runner.io.should_receive(:marker_error)
     runner.io.should_receive(:ask_for_square_to_mark?)
     runner.io.should_receive(:get_square_to_mark)
@@ -103,8 +103,8 @@ describe Runner do
     board = Board.new
     io = mock.as_null_object
     runner = Runner.new(board, io)
-    runner.place_marker(1, 'X')
-    runner.should_receive(:place_marker)
+    board.set_square(1, 'X')
+    board.should_receive(:set_square)
     runner.should_receive(:find_winner).at_least(1).times
     runner.take_turn  
   end
