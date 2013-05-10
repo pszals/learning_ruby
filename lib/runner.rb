@@ -41,13 +41,13 @@ class Runner
     square = @io.get_square_to_mark.to_i
     if @board.square_empty?(square) == false
       @io.marker_error
-      check_board
+      find_winner
     end
     place_marker(square, marker)
-    check_board
+    find_winner
   end
 
-  def check_board
+  def find_winner
     winner = @board.winner_on_board?
     open_board = @board.board_open?
 
