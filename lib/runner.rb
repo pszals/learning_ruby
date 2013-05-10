@@ -15,11 +15,7 @@ class Runner
     @ai = ai
 #   @player = player    
   end
-          
-  def get_winner # Don't need this either! Just use @board.winner_on_board?
-    @board.winner_on_board?
-  end
-    
+              
   def whose_turn?(empty_squares)
     empty_squares%2 == 0 ? player_2.marker : player_1.marker # Change to player_2.take_turn : player_1.take_turn
   end

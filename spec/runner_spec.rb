@@ -41,16 +41,6 @@ describe Runner do
     runner.board.game_state.should == ['1', '2', '3', '4', 'X', '6', '7', '8', '9'] 
   end
       
-  it "should return false if there is no winner on board" do
-    board = Board.new
-    io = Io.new
-    runner = Runner.new(board, io)
-    board.game_state = ['O', 'O', 'X', 
-                        'X', 'X', 'O', 
-                        'O', 'X', 'O']
-    runner.get_winner.should == false
-  end
-
   it "should return 'X' if it is X's turn" do
     board = Board.new
     io = Io.new
