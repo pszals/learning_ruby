@@ -181,6 +181,7 @@ describe Runner do
     io = Io.new
     runner = Runner.new(board, io)
     runner.should_receive(:take_turn)
+    runner.should_receive(:configure_opponent)
     runner.setup
   end
   

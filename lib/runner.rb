@@ -1,16 +1,18 @@
 require 'player'
 require 'board'
 require 'io'
+require 'ai'
 
 class Runner
   
-  attr_reader :io, :board, :player_1, :player_2
+  attr_reader :io, :board, :player_1, :player_2, :ai
 
   def initialize(board, io)
     @player_1 = Player.new('X')
     @player_2 = Player.new('O')
     @board = board
     @io = io
+    @ai = ai
   end
     
   def place_marker(square, marker)
@@ -68,6 +70,7 @@ class Runner
   
   def setup
     board.reset_any_size_board
+    configure_opponent
     take_turn
   end  
 
