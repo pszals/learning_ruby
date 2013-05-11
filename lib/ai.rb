@@ -1,4 +1,4 @@
-require 'board'
+require './board'
 
 class Ai
   
@@ -10,7 +10,7 @@ class Ai
   end
   
   def make_move
-    complete_any_row
+    complete_any_row # Returning nil bc there is no row to complete
   end
   
   def complete_any_row

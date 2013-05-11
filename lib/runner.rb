@@ -1,7 +1,7 @@
-require 'player'
-require 'board'
-require 'io'
-require 'ai'
+require './player'
+require './board'
+require './io'
+require './ai'
 
 class Runner
   
@@ -12,16 +12,12 @@ class Runner
     @player_2 = Player.new('O')
     @board = board
     @io = io
-    @ai = ai
+    @ai = Ai.new(board)
 #   @player = player    
   end
               
   def whose_turn?(empty_squares)
     empty_squares%2 == 0 ? player_2.marker : player_1.marker # Change to player_2.take_turn : player_1.take_turn, and move to Player class
-  end
-  
-  def restart?(input)
-    input == 1 ? setup : exit  
   end
   
   def take_turn # Move to Player class
@@ -30,8 +26,13 @@ class Runner
     @io.puts_turn(marker)
     @io.print_board(@board.output_board)
     @io.ask_for_square_to_mark?
-            
-    square = @io.get_square_to_mark.to_i
+    
+    #if marker == 'O' and @ai.opponent == true
+    #  square = @ai.make_move.to_i
+    #elsif marker == 'X'
+      square = @io.get_square_to_mark
+    #end
+    
     if @board.square_empty?(square) == false
       @io.marker_error
       find_winner
@@ -60,7 +61,11 @@ class Runner
       restart?(choice)
     end
   end
-  
+
+  def restart?(input)
+    input == 1 ? setup : exit  
+  end
+    
   def setup
     board.reset_any_size_board
     configure_opponent
@@ -77,7 +82,7 @@ class Runner
 
 end
 
-#board = Board.new
-#io = Io.new
-#runner = Runner.new(board, io)
-#runner.setup
+board = Board.new
+io = Io.new
+runner = Runner.new(board, io)
+runner.setup
