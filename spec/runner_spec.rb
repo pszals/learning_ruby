@@ -170,7 +170,7 @@ describe Runner do
     board = Board.new
     io = Io.new
     runner = Runner.new(board, io)
-    runner.should_receive(:take_turn)
+    runner.should_receive(:take_turn)#.and_return("5", 7, 8)
     runner.should_receive(:configure_opponent)
     runner.setup
   end

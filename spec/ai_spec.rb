@@ -139,11 +139,15 @@ describe Ai do
   
   it "makes a move" do
     board = Board.new
-    board.game_state = ['X', 'X', 'O', 
-                        '4', 'O', '6', 
+    board.game_state = ['O', 'X', 'O', 
+                        'O', 'X', '6', 
                         'X', 'O', 'X']
     ai = Ai.new(board)
     ai.should_receive(:complete_any_row)
+    ai.should_receive(:mark_center)
+    ai.should_receive(:mark_opposite_corner)
+    ai.should_receive(:mark_corner)
+    ai.should_receive(:mark_side)
     ai.make_move
   end
   

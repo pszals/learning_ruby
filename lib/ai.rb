@@ -1,4 +1,4 @@
-require './board'
+require 'board'
 
 class Ai
   
@@ -10,7 +10,17 @@ class Ai
   end
   
   def make_move
-    complete_any_row # Returning nil bc there is no row to complete
+    if complete_any_row != nil # Should be false, not sure why nil, but works for now
+      complete_any_row
+    elsif mark_center != nil
+      mark_center
+    elsif mark_opposite_corner != nil
+      mark_opposite_corner
+    elsif mark_corner != nil
+      mark_corner
+    elsif mark_side != nil
+      mark_side
+    end
   end
   
   def complete_any_row
@@ -53,17 +63,6 @@ class Ai
     center_square
   end
   
-  def mark_corner
-    open_corner = false
-    corners = [1, 3, 7, 9]
-    corners.each do |corner|
-      if @board.square_empty?(corner)
-        open_corner = corner.to_s
-      end
-    end
-    return open_corner
-  end
-
   def mark_opposite_corner
     open_corner = false
     corner_pairs = [[1, 9],[3, 7], [7, 3], [9, 1]]
@@ -75,6 +74,17 @@ class Ai
     return open_corner
   end
   
+  def mark_corner
+    open_corner = false
+    corners = [1, 3, 7, 9]
+    corners.each do |corner|
+      if @board.square_empty?(corner)
+        open_corner = corner.to_s
+      end
+    end
+    return open_corner
+  end
+ 
   def mark_side_square
     open_side = false
     sides = [8, 6, 4, 2]

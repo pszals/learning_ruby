@@ -1,7 +1,7 @@
-require './player'
-require './board'
-require './io'
-require './ai'
+require 'player'
+require 'board'
+require 'io'
+require 'ai'
 
 class Runner
   
@@ -27,11 +27,13 @@ class Runner
     @io.print_board(@board.output_board)
     @io.ask_for_square_to_mark?
     
-    #if marker == 'O' and @ai.opponent == true
-    #  square = @ai.make_move.to_i
-    #elsif marker == 'X'
+    if marker == 'O' and @ai.opponent == true
+      square = @ai.make_move
+    elsif marker == 'X'
       square = @io.get_square_to_mark
-    #end
+    elsif marker == 'O'
+      square = @io.get_square_to_mark
+    end
     
     if @board.square_empty?(square) == false
       @io.marker_error
@@ -75,14 +77,14 @@ class Runner
   def configure_opponent
     @io.ask_for_opponent
     opponent_type = @io.get_opponent
-    if opponent_type == 2  # Remove and TDD this
-      @ai.opponent == true # This too
+    if opponent_type == 2  
+      @ai.opponent == true 
     end 
   end
 
 end
 
-board = Board.new
-io = Io.new
-runner = Runner.new(board, io)
-runner.setup
+#board = Board.new
+#io = Io.new
+#runner = Runner.new(board, io)
+#runner.setup
