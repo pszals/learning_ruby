@@ -37,20 +37,22 @@ class Board
   end
   
   def number_of_empty_squares
-    empty_squares = 0
-    @game_state.map do |square| 
-      empty_squares += 1 if square_empty?(square.to_i) == true
-    end
-    empty_squares  
+    @board_width**2 - number_of_markers
   end
 
   def board_open?
-    number_of_empty_squares = 0
-    @game_state.map do |square| 
-      number_of_empty_squares += 1 if square_empty?(square.to_i) == true  
-    end
     number_of_empty_squares >= 1? true : false
   end	
+
+  def number_of_markers
+    count = 0
+    @game_state.each do |square| 
+      if square == 'X' || square == 'O'
+      count += 1
+      end
+    end
+    count
+  end
 
   def winner_on_board?
     winning_marker = false
@@ -75,16 +77,6 @@ class Board
       end
     end
     return winning_marker
-  end
-
-  def number_of_markers
-    count = 0
-    @game_state.each do |square| 
-      if square == 'X' || square == 'O'
-      count += 1
-      end
-    end
-    count
   end
 
 end
