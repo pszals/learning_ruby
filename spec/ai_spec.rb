@@ -166,7 +166,7 @@ describe Ai do
                         'O', 'O', 'X', 
                         '7', '8', '9']
     ai = Ai.new(board)
-#    ai.complete_any_row.should == '8' # <-- Why is this not working??
+    ai.complete_any_row.should == '8' # <-- Why is this not working??
   end
   
   it "completes or blocks a row" do

@@ -24,6 +24,7 @@ class Ai
   end
   
   def complete_any_row
+    to_fill = false
     combos = [
               [0, 1, 2],
               [3, 4, 5],
@@ -41,12 +42,14 @@ class Ai
       row << @board.game_state[combo[2]]
       if row[0] == row[1] || row[0] == row[2] || row[1] == row[2]
         to_fill = row.detect { |square| @board.square_empty?(square.to_i)}
-        if to_fill == nil
+        if to_fill != nil
+          return to_fill
+        elsif to_fill == nil
           to_fill = false
         end
-        return to_fill
       end
-    end  
+    end
+    return to_fill  
   end
   
   def make_fork
