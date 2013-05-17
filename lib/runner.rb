@@ -21,7 +21,7 @@ class Runner
   end
   
   def take_turn # Move to Player class, perhaps?
-    empty_squares = @board.board_width**2 - @board.number_of_markers
+    empty_squares = @board.number_of_empty_squares
     marker = whose_turn?(empty_squares) # marker = self.marker
     @io.puts_turn(marker)
     @io.print_board(@board.output_board)
