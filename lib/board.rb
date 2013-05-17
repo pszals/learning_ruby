@@ -2,21 +2,21 @@ class Board
 
   attr_accessor :board_width, :game_state
 	
-	def initialize
-	  @board_width = 3
-	  @game_state = any_size_board(@board_width)
-	end
+  def initialize
+    @board_width = 3
+    @game_state = any_size_board(@board_width)
+  end
 	
-	def any_size_board(width)
-	  integer_board = (1..width**2).to_a
-	  string_board = integer_board.map {|square| square.to_s}
-	  string_board
-	end
+  def any_size_board(width)
+    integer_board = (1..width**2).to_a
+    string_board = integer_board.map {|square| square.to_s}
+    string_board
+  end
 	
-	def output_board
-	  output = ""
-	  gs = @game_state.dup
-	  while gs.last != nil
+  def output_board
+    output = ""
+    gs = @game_state.dup
+    while gs.last != nil
       row = gs.slice!(0, @board_width)
       output += row.join(' ')
       output += "\n"
