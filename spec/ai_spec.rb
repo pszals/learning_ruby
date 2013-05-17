@@ -8,7 +8,7 @@ describe Ai do
                         '4', '5', '6', 
                         '7', '8', '9']
     ai = Ai.new(board)
-    ai.complete_any_row.should == '3'
+    ai.complete_any_row.should == 3
   end
   
   it "should return false if two top row markers are the same but one square is marked other" do
@@ -26,7 +26,7 @@ describe Ai do
                         'X', '5', 'X', 
                         'O', '8', '9']
     ai = Ai.new(board)
-    ai.complete_any_row.should == '5'
+    ai.complete_any_row.should == 5
   end
 
   it "should return position of empty square when two in row are the same but one is empty" do
@@ -35,7 +35,7 @@ describe Ai do
                         '4', '5', 'O', 
                         'X', '8', 'X']
     ai = Ai.new(board)
-    ai.complete_any_row.should == '8'  
+    ai.complete_any_row.should == 8
   end
   
   it "should return false if there are two of same but one of other in row" do
@@ -53,7 +53,7 @@ describe Ai do
                         'O', '5', 'O', 
                         'X', 'O', 'X']
     ai = Ai.new(board)
-    ai.complete_any_row.should == '5'  
+    ai.complete_any_row.should == 5
   end
   
   it "should mark the center of the board if center is empty" do
@@ -62,7 +62,7 @@ describe Ai do
                         '4', '5', 'O', 
                         'X', 'O', 'X']
     ai = Ai.new(board)
-    ai.mark_center.should == '5'
+    ai.mark_center.should == 5
   end
 
   it "should return false if center square is already marked" do
@@ -80,7 +80,7 @@ describe Ai do
                         '4', 'X', 'O', 
                         'X', 'O', 'X']
     ai = Ai.new(board)
-    ai.mark_corner.should == '3'
+    ai.mark_corner.should == 3
   end
   
   it "should return false if no corners are empty" do
@@ -98,7 +98,7 @@ describe Ai do
                         '4', '5', '6', 
                         '7', '8', '9']
     ai = Ai.new(board)
-    ai.mark_opposite_corner.should == '9'
+    ai.mark_opposite_corner.should == 9
   end
   
   it "should return false if no opposite corners can be marked" do
@@ -116,7 +116,7 @@ describe Ai do
                         '4', '5', '6', 
                         'X', 'O', 'O']
     ai = Ai.new(board)
-    ai.mark_side_square.should == '2'  
+    ai.mark_side.should == 6  
   end
   
   it "should return false if no side square can be marked" do
@@ -125,7 +125,7 @@ describe Ai do
                         'X', 'X', 'X', 
                         'X', 'X', 'X']
     ai = Ai.new(board)
-    ai.mark_side_square.should == false
+    ai.mark_side.should == false
   end
   
   it "should create a fork" do
@@ -150,6 +150,16 @@ describe Ai do
     ai.should_receive(:mark_side)
     ai.make_move
   end
+
+  it "makes a move" do
+    board = Board.new
+    board.game_state = ['O', 'X', 'O', 
+                        'O', 'X', 'O', 
+                        'X', '8', 'X']
+    ai = Ai.new(board)
+    ai.make_move.should == 8
+  end
+
   
   it "makes a move by marking corner" do
     board = Board.new
@@ -157,7 +167,7 @@ describe Ai do
                         'O', 'O', '6', 
                         '7', '8', '9']
     ai = Ai.new(board)
-    ai.make_move.should == '3'
+    ai.make_move.should == 3
   end
 
   it "completes or blocks a row" do
@@ -166,7 +176,7 @@ describe Ai do
                         'O', 'O', 'X', 
                         '7', '8', '9']
     ai = Ai.new(board)
-    ai.complete_any_row.should == '8' 
+    ai.complete_any_row.should == 8
   end
   
   it "completes or blocks a row" do
@@ -175,6 +185,6 @@ describe Ai do
                         'X', 'O', '5', 
                         '7', '8', 'X']
     ai = Ai.new(board)
-    ai.complete_any_row.should == '8'  
+    ai.complete_any_row.should == 8
   end
 end
