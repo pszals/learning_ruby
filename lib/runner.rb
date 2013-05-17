@@ -17,10 +17,10 @@ class Runner
   end
               
   def whose_turn?(empty_squares)
-    empty_squares%2 == 0 ? player_2.marker : player_1.marker # Change to player_2.take_turn : player_1.take_turn, and move to Player class
+    empty_squares%2 == 0 ? player_2.marker : player_1.marker # Change to player_2.take_turn : player_1.take_turn, and move to Player class, perhaps?
   end
   
-  def take_turn # Move to Player class
+  def take_turn # Move to Player class, perhaps?
     empty_squares = @board.number_of_empty_squares
     marker = whose_turn?(empty_squares) # marker = self.marker
     @io.puts_turn(marker)
@@ -48,7 +48,7 @@ class Runner
     open_board = @board.board_open?
 
     if winner == false and open_board == true
-      take_turn # Change to whose_turn?
+      take_turn # Change to whose_turn? within the Player class, perhaps?
     elsif winner != false
       @io.print_board(@board.output_board)
       @io.puts_winner(winner)

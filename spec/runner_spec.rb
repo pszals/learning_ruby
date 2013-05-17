@@ -21,18 +21,6 @@ describe Runner do
     runner.io.get_input
   end
 
-  [
-    [1, 'X']  
-  ].each do |square, marker|
-    it "should place marker by setting #{square} to #{marker}" do
-      board = Board.new
-      io = Io.new
-      runner = Runner.new(board, io)
-      board.set_square(square, marker)
-      runner.board.get_state_of_square(square).should == marker
-    end
-  end
-
   it "should place marker by setting square 5 to 'X'" do
     board = Board.new
     io = Io.new
