@@ -5,8 +5,5 @@ class Player
   def initialize(selection)
     @marker = selection
   end
-  
-#  def take_turn
-#  end
-  
+
 end

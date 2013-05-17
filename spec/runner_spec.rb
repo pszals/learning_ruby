@@ -10,7 +10,7 @@ describe Runner do
     runner = Runner.new(board, io)
     runner.player_1.marker.should ==  'X'
     runner.player_2.marker.should ==  'O'    
-    runner.board.game_state.should == ['1', '2', '3', '4', '5', '6', '7', '8', '9'] 
+    runner.board.current_board.should == ['1', '2', '3', '4', '5', '6', '7', '8', '9'] 
   end
   
   it "should initialize game with IO class" do
@@ -26,7 +26,7 @@ describe Runner do
     io = Io.new
     runner = Runner.new(board, io)
     board.set_square(5, 'X')
-    runner.board.game_state.should == ['1', '2', '3', '4', 'X', '6', '7', '8', '9'] 
+    runner.board.current_board.should == ['1', '2', '3', '4', 'X', '6', '7', '8', '9'] 
   end
       
   it "should return 'X' if it is X's turn" do
@@ -117,7 +117,7 @@ describe Runner do
     board = Board.new
     io = mock.as_null_object
     runner = Runner.new(board, io)
-    board.game_state = ['X', 'O', 'X', 
+    board.current_board = ['X', 'O', 'X', 
                         'O', 'O', 'X', 
                         'X', 'X', 'O']
     runner.io.should_receive(:puts_tie)
@@ -132,7 +132,7 @@ describe Runner do
     board = Board.new
     io = mock.as_null_object
     runner = Runner.new(board, io)
-    board.game_state = ['X', 'O', 'X', 
+    board.current_board = ['X', 'O', 'X', 
                         'O', 'X', 'O', 
                         'O', 'O', 'X']
     runner.io.should_receive(:puts_winner)
@@ -145,7 +145,7 @@ describe Runner do
     board = Board.new
     io = mock.as_null_object
     runner = Runner.new(board, io)
-    board.game_state = ['X', 'O', 'X', 
+    board.current_board = ['X', 'O', 'X', 
                         'O', 'O', 'X', 
                         'X', 'X', 'X']
     runner.io.should_receive(:ask_to_restart?)

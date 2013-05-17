@@ -37,9 +37,9 @@ class Ai
             ]
     combos.each do |combo|
       row = []
-      row << @board.game_state[combo[0]] 
-      row << @board.game_state[combo[1]]
-      row << @board.game_state[combo[2]]
+      row << @board.current_board[combo[0]] 
+      row << @board.current_board[combo[1]]
+      row << @board.current_board[combo[2]]
       if row[0] == row[1] || row[0] == row[2] || row[1] == row[2]
         to_fill = row.detect { |square| @board.square_empty?(square.to_i)}
         if to_fill != nil
@@ -51,7 +51,7 @@ class Ai
   end
   
   def make_fork
-    if @board.game_state[0] == @board.game_state[8] and @board.square_empty?(7) == @board.square_empty?(3)
+    if @board.current_board[0] == @board.current_board[8] and @board.square_empty?(7) == @board.square_empty?(3)
       '3'
     end      
   end

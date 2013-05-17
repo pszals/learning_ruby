@@ -5,7 +5,7 @@ require 'ai'
 
 class Runner
   
-  attr_reader :io, :board, :player_1, :player_2, :ai #, :player
+  attr_reader :io, :board, :player_1, :player_2, :ai 
 
   def initialize(board, io)
     @player_1 = Player.new('X')
@@ -13,18 +13,17 @@ class Runner
     @board = board
     @io = io
     @ai = Ai.new(board)
-#   @player = player    
   end
               
   def whose_turn?(empty_squares)
-    empty_squares%2 == 0 ? player_2.marker : player_1.marker # Change to player_2.take_turn : player_1.take_turn, and move to Player class, perhaps?
+    empty_squares%2 == 0 ? player_2.marker : player_1.marker
   end
   
-  def take_turn # Move to Player class, perhaps?
+  def take_turn
     empty_squares = @board.number_of_empty_squares
-    marker = whose_turn?(empty_squares) # marker = self.marker
+    marker = whose_turn?(empty_squares)
     @io.puts_turn(marker)
-    @io.print_board(@board.output_board)
+    @io.print_board(@board.board_to_string)
     @io.ask_for_square_to_mark?
     
     if marker == 'O' and @ai.opponent == true
@@ -46,15 +45,15 @@ class Runner
     open_board = @board.board_open?
 
     if winner == false and open_board == true
-      take_turn # Change to whose_turn? within the Player class, perhaps?
+      take_turn
     elsif winner != false
-      @io.print_board(@board.output_board)
+      @io.print_board(@board.board_to_string)
       @io.puts_winner(winner)
       @io.ask_to_restart?
       choice = @io.get_input
       restart?(choice)
     else
-      @io.print_board(@board.output_board)
+      @io.print_board(@board.board_to_string)
       @io.puts_tie
       @io.ask_to_restart?
       choice = @io.get_input
@@ -67,7 +66,7 @@ class Runner
   end
     
   def setup
-    board.reset_any_size_board
+    board.reset_board
     configure_opponent
     take_turn
   end  
