@@ -24,13 +24,13 @@ class Board
     output
   end
 		
-	def reset_any_size_board
-	  @game_state = any_size_board(@board_width)
-	end
+  def reset_any_size_board
+    @game_state = any_size_board(@board_width)
+  end
 		
-	def set_square(square, marker)
-	  @game_state[square - 1] = marker
-	end
+  def set_square(square, marker)
+    @game_state[square - 1] = marker
+  end
 	
   def square_empty?(square)
     @game_state[square - 1] == square.to_s ? true : false
