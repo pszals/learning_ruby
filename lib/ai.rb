@@ -10,21 +10,20 @@ class Ai
   end
   
   def make_move
-    if complete_any_row != nil # Should be false, not sure why nil, but works for now
-      complete_any_row
-    elsif mark_center != nil
-      mark_center
-    elsif mark_opposite_corner != nil
-      mark_opposite_corner
-    elsif mark_corner != nil
-      mark_corner
-    elsif mark_side != nil
-      mark_side
+    if (ai_move = complete_any_row) != false # Should be false, not sure why nil, but works for now
+      ai_move
+    elsif (ai_move = mark_center) != false
+      ai_move
+    elsif (ai_move = mark_opposite_corner) != false
+      ai_move
+    elsif (ai_move = mark_corner) != false
+      ai_move
+    elsif (ai_move = mark_side) != false
+      ai_move
     end
   end
   
   def complete_any_row
-    to_fill = false
     combos = [
               [0, 1, 2],
               [3, 4, 5],
@@ -44,12 +43,10 @@ class Ai
         to_fill = row.detect { |square| @board.square_empty?(square.to_i)}
         if to_fill != nil
           return to_fill
-        elsif to_fill == nil
-          to_fill = false
         end
       end
     end
-    return to_fill  
+    return false
   end
   
   def make_fork
