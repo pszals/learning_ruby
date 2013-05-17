@@ -29,9 +29,7 @@ class Runner
     
     if marker == 'O' and @ai.opponent == true
       square = @ai.make_move
-    elsif marker == 'X'
-      square = @io.get_square_to_mark
-    elsif marker == 'O'
+    else
       square = @io.get_square_to_mark
     end
     
@@ -78,13 +76,13 @@ class Runner
     @io.ask_for_opponent
     opponent_type = @io.get_opponent
     if opponent_type == 2  
-      @ai.opponent == true 
+      @ai.opponent = true 
     end 
   end
 
 end
 
-#board = Board.new
-#io = Io.new
-#runner = Runner.new(board, io)
-#runner.setup
+board = Board.new
+io = Io.new
+runner = Runner.new(board, io)
+runner.setup

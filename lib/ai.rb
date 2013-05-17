@@ -2,7 +2,8 @@ require 'board'
 
 class Ai
   
-  attr_reader :board, :opponent
+  attr_reader :board
+  attr_accessor :opponent
   
   def initialize(board)
     @board = board
@@ -10,16 +11,16 @@ class Ai
   end
   
   def make_move
-    if (ai_move = complete_any_row) != false # Should be false, not sure why nil, but works for now
-      ai_move
-    elsif (ai_move = mark_center) != false
-      ai_move
-    elsif (ai_move = mark_opposite_corner) != false
-      ai_move
-    elsif (ai_move = mark_corner) != false
-      ai_move
-    elsif (ai_move = mark_side) != false
-      ai_move
+    if (ai_move = complete_any_row)
+      return ai_move
+    elsif (ai_move = mark_center)
+      return ai_move
+    elsif (ai_move = mark_opposite_corner)
+      return ai_move
+    elsif (ai_move = mark_corner)
+      return ai_move
+    else
+      mark_side
     end
   end
   
@@ -42,7 +43,7 @@ class Ai
       if row[0] == row[1] || row[0] == row[2] || row[1] == row[2]
         to_fill = row.detect { |square| @board.square_empty?(square.to_i)}
         if to_fill != nil
-          return to_fill
+          return to_fill.to_i
         end
       end
     end
@@ -58,41 +59,38 @@ class Ai
   def mark_center
     center_square = false
     if @board.square_empty?(5)
-      center_square = '5'
+      center_square = 5
     end
     center_square
   end
   
   def mark_opposite_corner
-    open_corner = false
     corner_pairs = [[1, 9],[3, 7], [7, 3], [9, 1]]
     corner_pairs.each do |square, opposite|
       if not @board.square_empty?(square) and @board.square_empty?(opposite)
-        open_corner = opposite.to_s
+        return opposite
       end  
     end
-    return open_corner
+    return false
   end
   
   def mark_corner
-    open_corner = false
     corners = [1, 3, 7, 9]
     corners.each do |corner|
       if @board.square_empty?(corner)
-        open_corner = corner.to_s
+        return corner
       end
     end
-    return open_corner
+    return false
   end
  
-  def mark_side_square
-    open_side = false
+  def mark_side
     sides = [8, 6, 4, 2]
     sides.each do |side|
       if @board.square_empty?(side)
-        open_side = side.to_s
+        return side
       end
     end
-    return open_side
+    return false
   end
 end
