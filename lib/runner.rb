@@ -76,13 +76,15 @@ class Runner
     @io.ask_for_opponent
     opponent_type = @io.get_opponent
     if opponent_type == 2  
-      @ai.opponent = true 
+      @ai.opponent = true
+    else
+      @ai.opponent = false 
     end 
   end
 
 end
 
-board = Board.new
-io = Io.new
-runner = Runner.new(board, io)
-runner.setup
+#board = Board.new
+#io = Io.new
+#runner = Runner.new(board, io)
+#runner.setup
