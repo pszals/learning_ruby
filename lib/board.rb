@@ -13,15 +13,10 @@ class Board
     string_board
   end
 	
-  def board_to_string
-    output = ""
-    board = @current_board.dup
-    while board.last != nil
-      row = board.slice!(0, @board_width)
-      output += row.join(' ')
-      output += "\n"
-    end
-    output
+  def display_board
+      @current_board.each_slice(@board_width).inject("") do |output, slice|
+        output << slice.join(' ') << "\n"
+      end
   end
 		
   def reset_board
@@ -36,12 +31,12 @@ class Board
     @current_board[square - 1] == square.to_s ? true : false
   end
   
-  def number_of_empty_squares
+  def empty_squares
     @board_width**2 - number_of_markers
   end
 
   def board_open?
-    number_of_empty_squares >= 1? true : false
+    empty_squares >= 1? true : false
   end	
 
   def number_of_markers

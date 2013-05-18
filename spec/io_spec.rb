@@ -17,7 +17,7 @@ describe Io do
   it "should ask for the square number to be marked" do
     io = Io.new
     io.should_receive(:put_to_console)
-    io.ask_for_square_to_mark?
+    io.ask_for_square_to_mark
   end
 
   it "prints error message if square is marked or improper input" do
@@ -53,7 +53,7 @@ describe Io do
   it "asks for 1 to restart or any key to exit" do
     io = Io.new
     io.should_receive(:put_to_console)
-    io.ask_to_restart?
+    io.ask_to_restart
   end
   
   it "asks for width of board" do

@@ -34,14 +34,14 @@ describe Runner do
     io = Io.new
     runner = Runner.new(board, io)
     empty_squares = 9
-    runner.whose_turn?(empty_squares).should == 'X'
+    runner.whose_turn?.should == 'X'
   end
 
   it "should call restart if selection is 1" do
     board = Board.new
     io = Io.new
     runner = Runner.new(board, io)
-    runner.should_receive(:setup)
+    runner.should_receive(:play_game)
     runner.restart?(1)
   end
   
@@ -58,10 +58,21 @@ describe Runner do
     io = mock.as_null_object
     runner = Runner.new(board, io)
     runner.io.should_receive(:puts_turn)
-    runner.io.should_receive(:ask_for_square_to_mark?)
+    runner.io.should_receive(:ask_for_square_to_mark)
     runner.io.should_receive(:print_board)
     runner.should_receive(:find_winner).at_least(1).times
     runner.take_turn
+  end
+  
+  it "declares the start of a turn" do
+    board = Board.new
+    io = mock.as_null_object
+    marker = 'X'
+    runner = Runner.new(board, io)
+    runner.io.should_receive(:puts_turn)
+    runner.io.should_receive(:ask_for_square_to_mark)
+    runner.io.should_receive(:print_board)
+    runner.declare_turn(marker)
   end
   
   it "should put marker error, ask for, and get square if square entered is invalid" do
@@ -71,7 +82,7 @@ describe Runner do
     board.set_square(1, 'X')
     board.set_square(1, 'X')
     runner.io.should_receive(:marker_error)
-    runner.io.should_receive(:ask_for_square_to_mark?)
+    runner.io.should_receive(:ask_for_square_to_mark)
     runner.io.should_receive(:get_square_to_mark)
     runner.should_receive(:find_winner).at_least(1).times
     runner.take_turn
@@ -85,6 +96,17 @@ describe Runner do
     board.should_receive(:set_square)
     runner.should_receive(:find_winner).at_least(1).times
     runner.take_turn  
+  end
+  
+  it "ends and restarts the game" do
+    board = Board.new
+    io = mock.as_null_object
+    runner = Runner.new(board, io)
+    runner.io.should_receive(:ask_to_restart)
+    runner.io.should_receive(:print_board)    
+    runner.io.should_receive(:get_input)
+    runner.should_receive(:restart?)
+    runner.game_over(true, io.puts_winner('X'))
   end
     
   it "checks for a winner on board" do
@@ -121,7 +143,7 @@ describe Runner do
                         'O', 'O', 'X', 
                         'X', 'X', 'O']
     runner.io.should_receive(:puts_tie)
-    runner.io.should_receive(:ask_to_restart?)
+    runner.io.should_receive(:ask_to_restart)
     runner.io.should_receive(:print_board)    
     runner.io.should_receive(:get_input)
     runner.should_receive(:restart?)
@@ -133,8 +155,8 @@ describe Runner do
     io = mock.as_null_object
     runner = Runner.new(board, io)
     board.current_board = ['X', 'O', 'X', 
-                        'O', 'X', 'O', 
-                        'O', 'O', 'X']
+                           'O', 'X', 'O', 
+                           'O', 'O', 'X']
     runner.io.should_receive(:puts_winner)
     runner.io.should_receive(:print_board)
     runner.should_receive(:exit)
@@ -146,9 +168,9 @@ describe Runner do
     io = mock.as_null_object
     runner = Runner.new(board, io)
     board.current_board = ['X', 'O', 'X', 
-                        'O', 'O', 'X', 
-                        'X', 'X', 'X']
-    runner.io.should_receive(:ask_to_restart?)
+                           'O', 'O', 'X', 
+                           'X', 'X', 'X']
+    runner.io.should_receive(:ask_to_restart)
     runner.io.should_receive(:get_input)
     runner.should_receive(:exit)
     runner.find_winner
@@ -160,7 +182,7 @@ describe Runner do
     runner = Runner.new(board, io)
     runner.should_receive(:take_turn)#.and_return("5", 7, 8)
     runner.should_receive(:configure_opponent)
-    runner.setup
+    runner.play_game
   end
   
   it "asks and receives opponent type" do

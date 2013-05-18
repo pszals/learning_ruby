@@ -53,7 +53,10 @@ class Ai
   def make_fork
     if @board.current_board[0] == @board.current_board[8] and @board.square_empty?(7) == @board.square_empty?(3)
       '3'
-    end      
+    end
+    
+#  Fork Opportunities  
+#  List them all!
   end
 
   def mark_center

@@ -24,12 +24,11 @@ class Io
     get_input
   end
 
-  def puts_turn(marker_type)
-    marker = marker_type 
+  def puts_turn(marker) 
     put_to_console("It is #{marker}'s turn.")
   end
 
-  def ask_for_square_to_mark?
+  def ask_for_square_to_mark
     put_to_console('Pick an empty square to mark: ')
   end
     
@@ -50,15 +49,14 @@ class Io
   end
 
   def puts_winner(winning_marker)
-    winner = winning_marker
-    put_to_console("Player #{winner} wins.")
+    put_to_console("Player #{winning_marker} wins!")
   end
 
   def puts_tie
     put_to_console("Tie Game!")
   end
 
-  def ask_to_restart?
+  def ask_to_restart
     put_to_console("Enter 1 to restart or any key to exit.")
   end
   

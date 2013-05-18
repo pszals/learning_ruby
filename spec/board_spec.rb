@@ -15,7 +15,7 @@ describe Board do
   it "should return 6 as the number of empty squares" do
     board = Board.new
     board.current_board = ['X', 'O', 'X', '4', '5', '6', '7', '8', '9']
-    board.number_of_empty_squares.should == 6
+    board.empty_squares.should == 6
   end
 	
  it "should return false if square 1 is marked" do
@@ -74,7 +74,7 @@ describe Board do
   
   it "should return square board to be printed of any size" do
     board = Board.new
-    board.board_to_string.should == "1 2 3\n4 5 6\n7 8 9\n"
+    board.display_board.should == "1 2 3\n4 5 6\n7 8 9\n"
   end
     
   it "should set the width of the board" do
