@@ -47,13 +47,13 @@ class Runner
     if winner == false and open_board == true
       take_turn
     elsif winner != false
-      game_over(winner, @io.puts_winner(winner))
+      game_over(@io.puts_winner(winner))
     else
-      game_over(winner, @io.puts_tie)
+      game_over(@io.puts_tie)
     end
   end
   
-  def game_over(winner, final_game_message)
+  def game_over(final_game_message)
       @io.print_board(@board.display_board)
       final_game_message
       @io.ask_to_restart

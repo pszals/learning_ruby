@@ -106,7 +106,7 @@ describe Runner do
     runner.io.should_receive(:print_board)    
     runner.io.should_receive(:get_input)
     runner.should_receive(:restart?)
-    runner.game_over(true, io.puts_winner('X'))
+    runner.game_over(io.puts_winner('X'))
   end
     
   it "checks for a winner on board" do
