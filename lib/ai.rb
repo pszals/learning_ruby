@@ -13,6 +13,8 @@ class Ai
   def make_move
     if (ai_move = complete_any_row)
       return ai_move
+    elsif (ai_move = make_or_block_fork)
+      return ai_move
     elsif (ai_move = mark_center)
       return ai_move
     elsif (ai_move = mark_opposite_corner)
@@ -50,12 +52,13 @@ class Ai
     return false
   end
   
-  def make_fork
+  def make_or_block_fork
     if @board.current_board[0] == @board.current_board[8] and @board.square_empty?(7) == @board.square_empty?(3)
       '3'
     end
     
-#  Fork Opportunities  
+#  Fork Opportunities
+# 
 #  List them all!
   end
 

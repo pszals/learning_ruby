@@ -15,7 +15,7 @@ class Runner
     @ai = Ai.new(board)
   end
               
-  def whose_turn?
+  def whose_turn
     @board.empty_squares%2 == 0 ? player_2.marker : player_1.marker
   end
   
@@ -26,7 +26,7 @@ class Runner
   end
   
   def take_turn
-    marker = whose_turn?
+    marker = whose_turn
     declare_turn(marker)
     if marker == 'O' and @ai.opponent == true
       square = @ai.make_move

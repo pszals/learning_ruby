@@ -34,7 +34,7 @@ describe Runner do
     io = Io.new
     runner = Runner.new(board, io)
     empty_squares = 9
-    runner.whose_turn?.should == 'X'
+    runner.whose_turn.should == 'X'
   end
 
   it "should call restart if selection is 1" do
