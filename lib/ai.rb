@@ -92,7 +92,7 @@ class Ai
   def mark_opposite_corner
     corner_pairs = [[1, 9],[3, 7], [7, 3], [9, 1]]
     corner_pairs.each do |square, opposite|
-      if not @board.square_empty?(square) and @board.square_empty?(opposite)
+      if !@board.square_empty?(square) and @board.square_empty?(opposite)
         return opposite
       end  
     end
