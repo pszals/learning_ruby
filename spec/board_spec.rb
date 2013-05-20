@@ -97,7 +97,9 @@ describe Board do
   
   it "should return square board to be printed of any size" do
     board = Board.new
-    board.display_board.should == "1 2 3\n4 5 6\n7 8 9\n"
+    board.display_board.should == "1 2 3\n"\
+                                  "4 5 6\n"\
+                                  "7 8 9\n"
   end
     
   it "should set the width of the board" do
