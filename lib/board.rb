@@ -14,9 +14,9 @@ class Board
   end
 	
   def display_board
-      @current_board.each_slice(@board_width).inject("") do |output, slice|
-        output << slice.join(' ') << "\n"
-      end
+    @current_board.each_slice(@board_width).inject("") do |output, slice|
+      output << slice.join(' ') << "\n"
+    end
   end
 		
   def reset_board

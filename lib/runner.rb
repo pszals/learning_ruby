@@ -60,11 +60,11 @@ class Runner
   end
   
   def game_over(final_game_message)
-      @io.print_board(@board.display_board)
-      final_game_message
-      @io.ask_to_restart
-      choice = @io.get_input
-      restart?(choice)  
+    @io.print_board(@board.display_board)
+    final_game_message
+    @io.ask_to_restart
+    choice = @io.get_input
+    restart?(choice)  
   end
   
   def restart?(input)
