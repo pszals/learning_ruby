@@ -89,7 +89,7 @@ class Runner
 
 end
 
-#board = Board.new
-#io = Io.new
-#runner = Runner.new(board, io)
-#runner.play_game
+board = Board.new
+io = Io.new
+runner = Runner.new(board, io)
+runner.play_game
