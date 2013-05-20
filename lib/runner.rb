@@ -74,7 +74,7 @@ class Runner
   def play_game
     @board.reset_board
     configure_opponent
-    take_turn
+    select_square
   end  
 
   def configure_opponent

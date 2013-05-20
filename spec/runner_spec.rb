@@ -173,7 +173,7 @@ describe Runner do
     board = Board.new
     io = Io.new
     runner = Runner.new(board, io)
-    runner.should_receive(:take_turn)
+    runner.should_receive(:select_square)
     runner.should_receive(:configure_opponent)
     runner.play_game
   end
