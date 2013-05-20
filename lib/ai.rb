@@ -54,6 +54,7 @@ class Ai
   
   def make_or_block_fork
     ai_move = false
+# Forks using corners
     if @board.current_board[0] == @board.current_board[8]
       if @board.square_empty?(2) and @board.square_empty?(6)
         ai_move = 2
@@ -65,6 +66,27 @@ class Ai
         ai_move = 2
       elsif @board.square_empty?(6) and @board.square_empty?(8)
         ai_move = 4
+      end
+# Forks using sides
+# bottom right
+    elsif @board.current_board[5] == @board.current_board[7]
+      if @board.square_empty?(3) and @board.square_empty?(7) and @board.square_empty?(9)
+        ai_move = 9
+      end
+# top right
+    elsif @board.current_board[1] == @board.current_board[5] and @board.square_empty?(3)
+      if @board.square_empty?(1) and @board.square_empty?(9)
+        ai_move = 3
+      end
+# top left
+    elsif @board.current_board[1] == @board.current_board[3]
+      if @board.square_empty?(3) and @board.square_empty?(7) and @board.square_empty?(1)
+        ai_move = 1
+      end
+# bottom left
+    elsif @board.current_board[3] == @board.current_board[7]
+      if @board.square_empty?(1) and @board.square_empty?(9) and @board.square_empty?(7)
+        ai_move = 7
       end
     end
     ai_move

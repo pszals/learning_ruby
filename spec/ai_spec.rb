@@ -56,7 +56,7 @@ describe Ai do
     ai.complete_any_row.should == 5
   end
 
-  it "blocks a fork" do
+  it "blocks a corner fork" do
     board = Board.new
     board.current_board = ['X', '2', '3', 
                            '4', 'O', '6', 
@@ -65,7 +65,7 @@ describe Ai do
     ai.make_or_block_fork.should == 2                        
   end
   
-  it "blocks a fork" do
+  it "blocks a corner fork" do
     board = Board.new
     board.current_board = ['1', '2', 'X', 
                            '4', 'O', '6', 
@@ -73,7 +73,43 @@ describe Ai do
     ai = Ai.new(board)
     ai.make_or_block_fork.should == 2                        
   end
+
+  it "blocks a side fork bottom right" do
+    board = Board.new
+    board.current_board = ['1', '2', '3', 
+                           '4', 'O', 'X', 
+                           '7', 'X', '9']
+    ai = Ai.new(board)
+    ai.make_or_block_fork.should == 9                      
+  end
+
+  it "blocks a side fork top right" do
+    board = Board.new
+    board.current_board = ['1', 'X', '3', 
+                           '4', 'O', 'X', 
+                           '7', '8', '9']
+    ai = Ai.new(board)
+    ai.make_or_block_fork.should == 3                      
+  end
+
+  it "blocks a side fork top left" do
+    board = Board.new
+    board.current_board = ['1', 'X', '3', 
+                           'X', 'O', '6', 
+                           '7', '8', '9']
+    ai = Ai.new(board)
+    ai.make_or_block_fork.should == 1                    
+  end
   
+  it "blocks a side fork bottom left" do
+    board = Board.new
+    board.current_board = ['1', '2', '3', 
+                           'X', 'O', '6', 
+                           '7', 'X', '9']
+    ai = Ai.new(board)
+    ai.make_or_block_fork.should == 7                     
+  end  
+
   it "marks the center of the board if center is empty" do
     board = Board.new
     board.current_board = ['1', '2', '3', 
