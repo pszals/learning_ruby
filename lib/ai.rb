@@ -70,8 +70,7 @@ class Ai
       [5,7,3,7,9],
       [1,5,3,1,3],
       [1,3,3,7,1],
-      [3,7,1,9,7],
-      
+      [3,7,1,9,7]
     ].each do |side_a, side_b, corner_a, corner_b, move|
       if @board.current_board[side_a] == @board.current_board[side_b]
         if @board.square_empty?(corner_a) and @board.square_empty?(corner_b) and @board.square_empty?(move)
