@@ -10,7 +10,9 @@ describe Runner do
     runner = Runner.new(board, io)
     runner.player_1.marker.should ==  'X'
     runner.player_2.marker.should ==  'O'    
-    runner.board.current_board.should == ['1', '2', '3', '4', '5', '6', '7', '8', '9'] 
+    runner.board.current_board.should == ['1', '2', '3', 
+                                          '4', '5', '6', 
+                                          '7', '8', '9'] 
   end
   
   it "initializes game with IO class" do
@@ -26,7 +28,9 @@ describe Runner do
     io = Io.new
     runner = Runner.new(board, io)
     board.set_square(5, 'X')
-    runner.board.current_board.should == ['1', '2', '3', '4', 'X', '6', '7', '8', '9'] 
+    runner.board.current_board.should == ['1', '2', '3', 
+                                          '4', 'X', '6', 
+                                          '7', '8', '9'] 
   end
       
   it "returns 'X' if it is X's turn" do
@@ -60,8 +64,8 @@ describe Runner do
     runner.io.should_receive(:puts_turn)
     runner.io.should_receive(:ask_for_square_to_mark)
     runner.io.should_receive(:print_board)
-    runner.should_receive(:find_winner).at_least(1).times
-    runner.take_turn
+    runner.should_receive(:place_marker)
+    runner.select_square
   end
   
   it "declares the start of a turn" do
@@ -79,24 +83,13 @@ describe Runner do
     board = Board.new
     io = mock.as_null_object
     runner = Runner.new(board, io)
-    board.set_square(1, 'X')
-    board.set_square(1, 'X')
+    board.current_board = ['X', 'O', '3', 
+                           '4', '5', '6', 
+                           '7', '8', '9'] 
     runner.io.should_receive(:marker_error)
-    runner.io.should_receive(:ask_for_square_to_mark)
-    runner.io.should_receive(:get_square_to_mark)
-    runner.should_receive(:find_winner).at_least(1).times
-    runner.take_turn
+    runner.should_receive(:select_square).exactly(2).times
+    runner.place_marker(1)
   end  
-
-  it "places marker on board, then checks board (find_winner) if inputed square is empty" do
-    board = Board.new
-    io = mock.as_null_object
-    runner = Runner.new(board, io)
-    board.set_square(1, 'X')
-    board.should_receive(:set_square)
-    runner.should_receive(:find_winner).at_least(1).times
-    runner.take_turn  
-  end
   
   it "ends and restarts the game" do
     board = Board.new
@@ -122,7 +115,7 @@ describe Runner do
     board = Board.new
     io = mock.as_null_object
     runner = Runner.new(board, io)
-    runner.should_receive(:take_turn)
+    runner.should_receive(:select_square)
     runner.find_winner
   end
     
@@ -140,8 +133,8 @@ describe Runner do
     io = mock.as_null_object
     runner = Runner.new(board, io)
     board.current_board = ['X', 'O', 'X', 
-                        'O', 'O', 'X', 
-                        'X', 'X', 'O']
+                           'O', 'O', 'X', 
+                           'X', 'X', 'O']
     runner.io.should_receive(:puts_tie)
     runner.io.should_receive(:ask_to_restart)
     runner.io.should_receive(:print_board)    
@@ -180,7 +173,7 @@ describe Runner do
     board = Board.new
     io = Io.new
     runner = Runner.new(board, io)
-    runner.should_receive(:take_turn)#.and_return("5", 7, 8)
+    runner.should_receive(:take_turn)
     runner.should_receive(:configure_opponent)
     runner.play_game
   end

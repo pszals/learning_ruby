@@ -25,7 +25,8 @@ class Runner
     @io.ask_for_square_to_mark    
   end
   
-  def take_turn
+  def select_square
+    square = nil
     marker = whose_turn
     declare_turn(marker)
     if marker == 'O' and @ai.opponent == true
@@ -33,9 +34,14 @@ class Runner
     else
       square = @io.get_square_to_mark
     end
-    if @board.square_empty?(square) == false
+    place_marker(square)
+  end
+
+  def place_marker(square)
+    marker = whose_turn    
+    if @board.square_empty?(square) == false 
       @io.marker_error
-      find_winner
+      select_square
     end
     @board.set_square(square, marker)
     find_winner
@@ -45,7 +51,7 @@ class Runner
     winner = @board.winner_on_board?
     open_board = @board.board_open?
     if winner == false and open_board == true
-      take_turn
+      select_square
     elsif winner != false
       game_over(@io.puts_winner(winner))
     else
@@ -83,7 +89,7 @@ class Runner
 
 end
 
-board = Board.new
-io = Io.new
-runner = Runner.new(board, io)
-runner.play_game
+#board = Board.new
+#io = Io.new
+#runner = Runner.new(board, io)
+#runner.play_game
