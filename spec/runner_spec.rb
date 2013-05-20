@@ -88,7 +88,7 @@ describe Runner do
                            '7', '8', '9'] 
     runner.io.should_receive(:marker_error)
     runner.should_receive(:select_square).exactly(2).times
-    runner.place_marker(1)
+    runner.place_marker(1, 'X')
   end  
   
   it "ends and restarts the game" do

@@ -34,11 +34,10 @@ class Runner
     else
       square = @io.get_square_to_mark
     end
-    place_marker(square)
+    place_marker(square, marker)
   end
 
-  def place_marker(square)
-    marker = whose_turn    
+  def place_marker(square, marker)
     if @board.square_empty?(square) == false 
       @io.marker_error
       select_square
