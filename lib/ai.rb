@@ -13,7 +13,7 @@ class Ai
   def make_move
     if (ai_move = complete_any_row)
       return ai_move
-    elsif (ai_move = make_or_block_fork)
+    elsif (ai_move = block_fork)
       return ai_move
     elsif (ai_move = mark_center)
       return ai_move
@@ -52,7 +52,7 @@ class Ai
     return false
   end
   
-  def make_or_block_fork
+  def block_fork
     ai_move = false
 
     [

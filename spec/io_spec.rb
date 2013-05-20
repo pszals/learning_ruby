@@ -41,7 +41,7 @@ describe Io do
   it "asks for first to play" do
     io = Io.new    
     io.should_receive(:put_to_console)
-    io.ask_for_first_player?
+    io.ask_for_first_player
   end
   
   it "gets player type of first player" do

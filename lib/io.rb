@@ -8,7 +8,7 @@ class Io
     get_input
   end
   
-  def ask_for_first_player?
+  def ask_for_first_player
     put_to_console("Enter 'X' or 'O.'")
   end
   
@@ -36,16 +36,8 @@ class Io
     put_to_console("That square is already taken or not on the board.")
   end
   
-  def put_to_console(output)
-    puts output
-  end
-  
   def get_square_to_mark
     get_input
-  end
-
-  def get_input
-    gets.chomp.to_i
   end
 
   def puts_winner(winning_marker)
@@ -64,4 +56,11 @@ class Io
     put_to_console(board)
   end
 
+  def put_to_console(output)
+    puts output
+  end  
+
+  def get_input
+    gets.chomp.to_i
+  end
 end

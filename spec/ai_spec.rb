@@ -62,7 +62,7 @@ describe Ai do
                            '4', 'O', '6', 
                            'O', '8', 'X']
     ai = Ai.new(board)
-    ai.make_or_block_fork.should == 2                        
+    ai.block_fork.should == 2                        
   end
   
   it "blocks a corner fork" do
@@ -71,7 +71,7 @@ describe Ai do
                            '4', 'O', '6', 
                            'X', '8', '9']
     ai = Ai.new(board)
-    ai.make_or_block_fork.should == 2                        
+    ai.block_fork.should == 2                        
   end
 
   it "blocks a side fork bottom right" do
@@ -80,7 +80,7 @@ describe Ai do
                            '4', 'O', 'X', 
                            '7', 'X', '9']
     ai = Ai.new(board)
-    ai.make_or_block_fork.should == 9                      
+    ai.block_fork.should == 9                      
   end
 
   it "blocks a side fork top right" do
@@ -89,7 +89,7 @@ describe Ai do
                            '4', 'O', 'X', 
                            '7', '8', '9']
     ai = Ai.new(board)
-    ai.make_or_block_fork.should == 3                      
+    ai.block_fork.should == 3                      
   end
 
   it "blocks a side fork top left" do
@@ -98,7 +98,7 @@ describe Ai do
                            'X', 'O', '6', 
                            '7', '8', '9']
     ai = Ai.new(board)
-    ai.make_or_block_fork.should == 1                    
+    ai.block_fork.should == 1                    
   end
   
   it "blocks a side fork bottom left" do
@@ -107,7 +107,7 @@ describe Ai do
                            'X', 'O', '6', 
                            '7', 'X', '9']
     ai = Ai.new(board)
-    ai.make_or_block_fork.should == 7                     
+    ai.block_fork.should == 7                     
   end  
 
   it "marks the center of the board if center is empty" do
