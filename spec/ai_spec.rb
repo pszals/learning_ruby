@@ -2,7 +2,7 @@ require 'ai'
 
 describe Ai do
 
-  it "should return true when two markers of the top row are the same" do
+  it "returns true when two markers of the top row are the same" do
     board = Board.new
     board.current_board = ['X', 'X', '3', 
                            '4', '5', '6', 
@@ -11,7 +11,7 @@ describe Ai do
     ai.complete_any_row.should == 3
   end
   
-  it "should return false if two top row markers are the same but one square is marked other" do
+  it "returns false if two top row markers are the same but one square is marked other" do
     board = Board.new
     board.current_board = ['X', 'X', 'O', 
                            '4', '5', '6', 
@@ -20,7 +20,7 @@ describe Ai do
     ai.complete_any_row.should == false
   end
 
-  it "should return position of empty square when two markers of the second row are the same" do
+  it "returns position of empty square when two markers of the second row are the same" do
     board = Board.new
     board.current_board = ['1', '2', '3', 
                            'X', '5', 'X', 
@@ -29,7 +29,7 @@ describe Ai do
     ai.complete_any_row.should == 5
   end
 
-  it "should return position of empty square when two in row are the same but one is empty" do
+  it "returns position of empty square when two in row are the same but one is empty" do
     board = Board.new
     board.current_board = ['1', '2', '3', 
                            '4', '5', 'O', 
@@ -38,7 +38,7 @@ describe Ai do
     ai.complete_any_row.should == 8
   end
   
-  it "should return false if there are two of same but one of other in row" do
+  it "returns false if there are two of same but one of other in row" do
     board = Board.new
     board.current_board = ['1', '2', '3', 
                            '4', '5', 'O', 
@@ -47,7 +47,7 @@ describe Ai do
     ai.complete_any_row.should == false
   end
   
-  it "should block opponent's three in a row" do
+  it "blocks opponent's three in a row" do
     board = Board.new
     board.current_board = ['1', '2', '3', 
                            'O', '5', 'O', 
@@ -55,8 +55,26 @@ describe Ai do
     ai = Ai.new(board)
     ai.complete_any_row.should == 5
   end
+
+  it "blocks a fork" do
+    board = Board.new
+    board.current_board = ['X', '2', '3', 
+                           '4', 'O', '6', 
+                           'O', '8', 'X']
+    ai = Ai.new(board)
+    ai.make_or_block_fork.should == 2                        
+  end
   
-  it "should mark the center of the board if center is empty" do
+  it "blocks a fork" do
+    board = Board.new
+    board.current_board = ['1', '2', 'X', 
+                           '4', 'O', '6', 
+                           'X', '8', '9']
+    ai = Ai.new(board)
+    ai.make_or_block_fork.should == 2                        
+  end
+  
+  it "marks the center of the board if center is empty" do
     board = Board.new
     board.current_board = ['1', '2', '3', 
                            '4', '5', 'O', 
@@ -65,7 +83,7 @@ describe Ai do
     ai.mark_center.should == 5
   end
 
-  it "should return false if center square is already marked" do
+  it "returns false if center square is already marked" do
     board = Board.new
     board.current_board = ['1', '2', '3', 
                            '4', 'X', 'O', 
@@ -74,7 +92,7 @@ describe Ai do
     ai.mark_center.should == false 
   end
   
-  it "should mark first empty corner encountered" do
+  it "marks first empty corner encountered" do
     board = Board.new
     board.current_board = ['O', '2', '3', 
                            '4', 'X', 'O', 
@@ -83,7 +101,7 @@ describe Ai do
     ai.mark_corner.should == 3
   end
   
-  it "should return false if no corners are empty" do
+  it "returns false if no corners are empty" do
     board = Board.new
     board.current_board = ['O', '2', 'X', 
                            '4', 'X', 'O', 
@@ -92,7 +110,7 @@ describe Ai do
     ai.mark_corner.should == false
   end
   
-  it "should mark opposite corner of square oppoent has marked" do
+  it "marks opposite corner of square oppoent has marked" do
     board = Board.new
     board.current_board = ['X', '2', '3', 
                            '4', '5', '6', 
@@ -101,7 +119,7 @@ describe Ai do
     ai.mark_opposite_corner.should == 9
   end
   
-  it "should return false if no opposite corners can be marked" do
+  it "returns false if no opposite corners can be marked" do
     board = Board.new
     board.current_board = ['X', '2', 'O', 
                            '4', '5', '6', 
@@ -110,7 +128,7 @@ describe Ai do
     ai.mark_opposite_corner.should == false  
   end
   
-  it "should mark a side square" do
+  it "marks a side square" do
     board = Board.new
     board.current_board = ['X', '2', 'O', 
                            '4', '5', '6', 
@@ -119,7 +137,7 @@ describe Ai do
     ai.mark_side.should == 6  
   end
   
-  it "should return false if no side square can be marked" do
+  it "returns false if no side square can be marked" do
     board = Board.new
     board.current_board = ['X', 'X', 'X', 
                            'X', 'X', 'X', 
@@ -127,16 +145,7 @@ describe Ai do
     ai = Ai.new(board)
     ai.mark_side.should == false
   end
-  
-  it "should create a fork" do
-    board = Board.new
-    board.current_board = ['X', '2', '3', 
-                           '4', 'O', '6', 
-                           '7', '8', 'X']
-    ai = Ai.new(board)
-    ai.make_or_block_fork.should == '3'                        
-  end
-  
+    
   it "makes a move" do
     board = Board.new
     board.current_board = ['O', 'X', 'O', 

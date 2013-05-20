@@ -53,13 +53,21 @@ class Ai
   end
   
   def make_or_block_fork
-    if @board.current_board[0] == @board.current_board[8] and @board.square_empty?(7) == @board.square_empty?(3)
-      '3'
+    ai_move = false
+    if @board.current_board[0] == @board.current_board[8]
+      if @board.square_empty?(2) and @board.square_empty?(6)
+        ai_move = 2
+      elsif @board.square_empty?(4) and @board.square_empty?(8)
+        ai_move = 4
+      end
+    elsif @board.current_board[2] == @board.current_board[6] 
+      if @board.square_empty?(2) and @board.square_empty?(4)
+        ai_move = 2
+      elsif @board.square_empty?(6) and @board.square_empty?(8)
+        ai_move = 4
+      end
     end
-    
-#  Fork Opportunities
-# 
-#  List them all!
+    ai_move
   end
 
   def mark_center
