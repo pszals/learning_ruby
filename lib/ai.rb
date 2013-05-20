@@ -54,39 +54,29 @@ class Ai
   
   def make_or_block_fork
     ai_move = false
-# Forks using corners
-    if @board.current_board[0] == @board.current_board[8]
-      if @board.square_empty?(2) and @board.square_empty?(6)
-        ai_move = 2
-      elsif @board.square_empty?(4) and @board.square_empty?(8)
-        ai_move = 4
+
+    [
+      [0,8,2,6,2],
+      [2,6,2,4,2]
+    ].each do |corner_a, corner_b, side_a, side_b, move|
+      if @board.current_board[corner_a] == @board.current_board[corner_b]
+        if @board.square_empty?(side_a) and @board.square_empty?(side_b)
+          ai_move = move
+        end
       end
-    elsif @board.current_board[2] == @board.current_board[6] 
-      if @board.square_empty?(2) and @board.square_empty?(4)
-        ai_move = 2
-      elsif @board.square_empty?(6) and @board.square_empty?(8)
-        ai_move = 4
-      end
-# Forks using sides
-# bottom right
-    elsif @board.current_board[5] == @board.current_board[7]
-      if @board.square_empty?(3) and @board.square_empty?(7) and @board.square_empty?(9)
-        ai_move = 9
-      end
-# top right
-    elsif @board.current_board[1] == @board.current_board[5] and @board.square_empty?(3)
-      if @board.square_empty?(1) and @board.square_empty?(9)
-        ai_move = 3
-      end
-# top left
-    elsif @board.current_board[1] == @board.current_board[3]
-      if @board.square_empty?(3) and @board.square_empty?(7) and @board.square_empty?(1)
-        ai_move = 1
-      end
-# bottom left
-    elsif @board.current_board[3] == @board.current_board[7]
-      if @board.square_empty?(1) and @board.square_empty?(9) and @board.square_empty?(7)
-        ai_move = 7
+    end
+
+    [
+      [5,7,3,7,9],
+      [1,5,3,1,3],
+      [1,3,3,7,1],
+      [3,7,1,9,7],
+      
+    ].each do |side_a, side_b, corner_a, corner_b, move|
+      if @board.current_board[side_a] == @board.current_board[side_b]
+        if @board.square_empty?(corner_a) and @board.square_empty?(corner_b) and @board.square_empty?(move)
+          ai_move = move
+        end
       end
     end
     ai_move
