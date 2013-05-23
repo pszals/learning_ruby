@@ -2,21 +2,21 @@ require "board"
 
 describe Board do
 
-  it "should (re)set board to initial state" do
+  it "(re)sets board to initial state" do
     board = Board.new
     board.reset_board.should == ['1', '2', '3', 
                                  '4', '5', '6', 
                                  '7', '8', '9']
   end
 	
-	it "should return an array of 9 board places" do
+	it "returns an array of 9 board places" do
 		board_class = Board.new
 		board_class.current_board.should == ['1', '2', '3', 
 		                                     '4', '5', '6', 
 		                                     '7', '8', '9']
 	end
 		
-  it "should return 6 as the number of empty squares" do
+  it "returns 6 as the number of empty squares" do
     board = Board.new
     board.current_board = ['X', 'O', 'X', 
                            '4', '5', '6', 
@@ -24,7 +24,7 @@ describe Board do
     board.empty_squares.should == 6
   end
 	
- it "should return false if square 1 is marked" do
+ it "returns false if square 1 is marked" do
     board_class = Board.new
     board_class.current_board = ['X', '2', '3', 
                                  '4', '5', '6', 
@@ -32,7 +32,7 @@ describe Board do
     board_class.square_empty?(1).should == false
   end  
 
-  it "should return true if square 1 is empty" do
+  it "returns true if square 1 is empty" do
     board_class = Board.new
     board_class.current_board = ['1', '2', '3', 
                                  '4', '5', '6', 
@@ -40,13 +40,13 @@ describe Board do
     board_class.square_empty?(1).should == true
   end
   
-  it "should return true if there is an open square on the board" do
+  it "returns true if there is an open square on the board" do
     board = Board.new
     board.reset_board
     board.board_open?.should == true
   end
 
-  it "should return false if there are no open squares on the board" do
+  it "returns false if there are no open squares on the board" do
     board = Board.new
     board.current_board = ['X', 'O', 'O', 
                            'X', 'X', 'O', 
@@ -54,7 +54,7 @@ describe Board do
     board.board_open?.should == false  
   end
 
-  it "should return false if board is tied" do
+  it "returns false if board is tied" do
     board = Board.new
     board.current_board = ['X', 'O', 'X', 
                            'O', 'O', 'X', 
@@ -62,7 +62,7 @@ describe Board do
     board.board_open?.should == false
   end
 
-  it "should return marker type of winner on board" do
+  it "returns marker type of winner on board" do
     board = Board.new
     board.current_board = ['1', '2', '3', 
                            '4', '5', '6', 
@@ -70,7 +70,7 @@ describe Board do
     board.winner_on_board?.should == 'X'
   end
         
-  it "should return false if there is no winner on board" do
+  it "returns false if there is no winner on board" do
     board = Board.new
     board.current_board = ['1', '2', '3', 
                            '4', '5', '6', 
@@ -78,7 +78,7 @@ describe Board do
     board.winner_on_board?.should == false
   end
   
-  it "should return the number of markers present on board" do
+  it "returns the number of markers present on board" do
     board = Board.new
     board.current_board = ['1', '2', '3', 
                            '4', '5', '6', 
@@ -86,7 +86,7 @@ describe Board do
     board.number_of_markers.should == 3
   end
   
-  it "should create a square board of any size" do
+  it "creates a square board of any size" do
     board = Board.new
     board.board_width = 4
     board.squares_with_integers.should == ['1', '2', '3', '4', 
@@ -95,20 +95,20 @@ describe Board do
                                            '13', '14', '15', '16']
   end
   
-  it "should return square board to be printed of any size" do
+  it "returns square board to be printed of any size" do
     board = Board.new
     board.display_board.should == "1 2 3\n"\
                                   "4 5 6\n"\
                                   "7 8 9\n"
   end
     
-  it "should set the width of the board" do
+  it "sets the width of the board" do
     board = Board.new
     width = 3
     board.board_width.should == 3
   end
 
-  it "should make a blank board" do
+  it "makes a blank board" do
       board = Board.new
       board.reset_board.should == ['1', '2', '3', 
                                    '4', '5', '6', 

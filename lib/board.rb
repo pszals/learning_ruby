@@ -42,7 +42,7 @@ class Board
   def number_of_markers
     count = 0
     @current_board.each do |square| 
-      if square == 'X' || square == 'O'
+      if /[^0-9]/.match(square) != nil
       count += 1
       end
     end
