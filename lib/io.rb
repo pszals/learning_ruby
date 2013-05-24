@@ -12,6 +12,14 @@ class Io
     put_to_console("Enter 'X' or 'O.'")
   end
   
+  def ask_for_marker_type
+    put_to_console("Enter a character that is not a decimal to serve as your marker type")
+  end
+  
+  def get_marker_type
+    get_input
+  end
+  
   def get_first_player
     get_input
   end
@@ -61,6 +69,6 @@ class Io
   end  
 
   def get_input
-    gets.chomp.to_i
+    gets.chomp.to_i #This will have to change
   end
 end

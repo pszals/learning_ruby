@@ -168,6 +168,19 @@ describe Game do
     game.should_receive(:exit)
     game.find_winner
   end
+  
+  it "configures the type of game pieces used" do
+    board = Board.new
+    io = mock.as_null_object
+    game = Game.new(board, io)
+    game.io.should_receive(:ask_for_marker_type)
+    game.io.should_receive(:get_marker_type)
+    game.configure_markers
+  end
+  
+  it "rejects integers as game pieces" do
+    
+  end
 
   it "starts game on empty board" do
     board = Board.new

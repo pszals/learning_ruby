@@ -85,5 +85,10 @@ class Game
       @ai.opponent = false 
     end 
   end
+  
+  def configure_markers
+    @io.ask_for_marker_type
+    marker = @io.get_marker_type
+  end
 
 end

@@ -2,19 +2,31 @@ require 'io'
 
 describe Io do
 
-  it "should print 'It's X's turn" do
+  it "prints 'It's X's turn" do
     io = Io.new
     io.should_receive(:put_to_console)
     io.puts_turn("X")
   end
   
-  it "should get the square number to be marked from user" do
+  it "gets the square number to be marked from user" do
     io = Io.new
     io.should_receive(:get_input)
     io.get_square_to_mark
   end
   
-  it "should ask for the square number to be marked" do
+  it "asks for the marker type" do
+    io = Io.new
+    io.should_receive(:put_to_console)
+    io.ask_for_marker_type
+  end
+  
+  it "gets the marker type" do
+    io = Io.new
+    io.should_receive(:get_input)
+    io.get_marker_type
+  end
+
+  it "asks for the square number to be marked" do
     io = Io.new
     io.should_receive(:put_to_console)
     io.ask_for_square_to_mark
@@ -61,18 +73,14 @@ describe Io do
     io.should_receive(:put_to_console)
     io.ask_for_width_of_board
   end
-  
-  it "should expose behavior of accessing marker type, but hide the data itself" do
     
-  end
-  
-  it "should get the width of the board" do
+  it "gets the width of the board" do
     io = Io.new
     io.should_receive(:get_input)
     io.get_size_of_board
   end  
   
-  it "should print the board" do
+  it "prints the board" do
     io = Io.new
     board = "board"
     io.should_receive(:put_to_console)
