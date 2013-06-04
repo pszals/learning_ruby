@@ -181,6 +181,10 @@ describe Game do
   it "rejects integers as game pieces" do
     
   end
+  
+  it "rejects input longer than one character" do
+  
+  end
 
   it "starts game on empty board" do
     board = Board.new

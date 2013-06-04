@@ -13,7 +13,7 @@ class Io
   end
   
   def ask_for_marker_type
-    put_to_console("Enter a character that is not a decimal to serve as your marker type")
+    put_to_console("Enter a character that is not a number to serve as your marker type")
   end
   
   def get_marker_type
@@ -25,7 +25,7 @@ class Io
   end
   
   def ask_for_opponent
-    put_to_console("Enter 1 for human opponent or 2 for computer opponent")
+    put_to_console("Enter 1 for human opponent or any key for computer opponent")
   end
   
   def get_opponent
@@ -69,6 +69,6 @@ class Io
   end  
 
   def get_input
-    gets.chomp.to_i #This will have to change
+    gets.chomp.to_i
   end
 end
