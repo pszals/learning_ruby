@@ -79,7 +79,7 @@ class Game
   def configure_opponent
     @io.ask_for_opponent
     opponent_type = @io.get_opponent
-    if opponent_type == 2  
+    if opponent_type == 1  
       @ai.opponent = true
     else
       @ai.opponent = false 

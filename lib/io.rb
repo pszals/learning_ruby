@@ -25,7 +25,7 @@ class Io
   end
   
   def ask_for_opponent
-    put_to_console("Enter 1 for human opponent or any key for computer opponent")
+    put_to_console("Enter 1 for computer opponent or any key for human opponent")
   end
   
   def get_opponent
