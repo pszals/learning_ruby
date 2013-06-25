@@ -29,6 +29,11 @@ describe UnbeatableAI do
     ai.score_board(board).should == 0
   end
   
+  it "gets opponent's marker" do
+    ai = UnbeatableAI.new
+    ai.get_opponent('X').should == 'O'
+  end
+  
   it "returns best index" do
     
   end

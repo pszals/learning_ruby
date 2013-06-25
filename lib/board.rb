@@ -26,6 +26,10 @@ class Board
   def set_square(square, marker)
     @current_board[square - 1] = marker
   end
+  
+  def undo_set_square(square)
+    set_square(square, square.to_s)
+  end
 	
   def square_empty?(square)
     @current_board[square - 1] == square.to_s ? true : false

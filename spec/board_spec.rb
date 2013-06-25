@@ -125,6 +125,17 @@ describe Board do
                                   "4 5 6\n"\
                                   "7 8 9\n"
   end
+  
+  it "undoes the placement of a marker" do
+    board_class = Board.new
+    board_class.current_board = ['X', '2', '3', 
+                                 '4', '5', '6', 
+                                 '7', '8', '9']
+    board_class.undo_set_square(1)
+    board_class.current_board.should == ['1', '2', '3', 
+                                         '4', '5', '6', 
+                                         '7', '8', '9']
+  end
     
   it "sets the width of the board" do
     board = Board.new

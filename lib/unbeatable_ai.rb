@@ -7,6 +7,10 @@ class UnbeatableAI
   def initialize
     @board = Board.new
   end
+  
+  def get_opponent(marker)
+    marker == 'X' ? 'O' : 'X'
+  end
 
   def score_board(board)
     if !board.board_open? and !board.winner_on_board?
