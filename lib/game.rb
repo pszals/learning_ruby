@@ -29,19 +29,23 @@ class Game
     square = nil
     marker = whose_turn
     declare_turn(marker)
+   
     if marker == 'O' and @ai.opponent == true
       square = @ai.make_move
     else
       square = @io.get_square_to_mark
     end
+   
     place_marker(square, marker)
   end
 
   def place_marker(square, marker)
+   
     if @board.square_empty?(square) == false 
       @io.marker_error
       select_square
     end
+   
     @board.set_square(square, marker)
     find_winner
   end
@@ -49,14 +53,16 @@ class Game
   def find_winner
     winner = @board.winner_on_board?
     open_board = @board.board_open?
-    if winner == false and open_board == true
+   
+    if winner == false and open_board
       select_square
     elsif winner != false
       game_over(@io.puts_winner(winner))
     else
       game_over(@io.puts_tie)
     end
-  end
+  
+end
   
   def game_over(final_game_message)
     @io.print_board(@board.display_board)

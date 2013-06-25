@@ -11,8 +11,8 @@ describe Game do
     game.player_1.marker.should ==  'X'
     game.player_2.marker.should ==  'O'    
     game.board.current_board.should == ['1', '2', '3', 
-                                          '4', '5', '6', 
-                                          '7', '8', '9'] 
+                                        '4', '5', '6', 
+                                        '7', '8', '9'] 
   end
   
   it "initializes game with IO class" do
@@ -29,8 +29,8 @@ describe Game do
     game = Game.new(board, io)
     board.set_square(5, 'X')
     game.board.current_board.should == ['1', '2', '3', 
-                                          '4', 'X', '6', 
-                                          '7', '8', '9'] 
+                                        '4', 'X', '6', 
+                                        '7', '8', '9'] 
   end
       
   it "returns 'X' if it is X's turn" do

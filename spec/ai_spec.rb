@@ -2,7 +2,7 @@ require 'ai'
 
 describe Ai do
 
-  it "returns true when two markers of the top row are the same" do
+  it "returns 3 when two markers of the top row are the same" do
     board = Board.new
     board.current_board = ['X', 'X', '3', 
                            '4', '5', '6', 

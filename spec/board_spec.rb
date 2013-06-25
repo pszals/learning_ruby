@@ -40,6 +40,30 @@ describe Board do
     board_class.square_empty?(1).should == true
   end
   
+  it "returns array of squares that are open" do
+    board = Board.new
+    board.current_board = ['X', 'O', 'O', 
+                           'X', 'X', 'O', 
+                           'X', 'X', '9']
+    board.list_of_open_squares.should == ['9']  
+  end
+
+  it "returns array of squares that are open" do
+    board = Board.new
+    board.current_board = ['1', '2', 'O', 
+                           'X', 'X', 'O', 
+                           'X', '8', '9']
+    board.list_of_open_squares.should == ['1', '2', '8', '9']  
+  end
+  
+  it "returns an empty array if no squares are open" do
+    board = Board.new
+    board.current_board = ['X', 'O', 'O', 
+                           'X', 'X', 'O', 
+                           'X', 'X', 'X']
+    board.list_of_open_squares.should == []  
+  end
+  
   it "returns true if there is an open square on the board" do
     board = Board.new
     board.reset_board
@@ -83,7 +107,7 @@ describe Board do
     board.current_board = ['1', '2', '3', 
                            '4', '5', '6', 
                            'O', 'X', 'X']
-    board.number_of_markers.should == 3
+    board.number_of_filled_squares.should == 3
   end
   
   it "creates a square board of any size" do

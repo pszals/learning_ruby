@@ -31,15 +31,25 @@ class Board
     @current_board[square - 1] == square.to_s ? true : false
   end
   
+  def list_of_open_squares
+    open_squares = []
+    @current_board.each do |square|
+      if square_empty?(square.to_i)
+        open_squares << square
+      end
+    end
+    open_squares
+  end
+  
   def empty_squares
-    @board_width**2 - number_of_markers
+    list_of_open_squares.length
   end
 
   def board_open?
     empty_squares >= 1? true : false
   end	
 
-  def number_of_markers
+  def number_of_filled_squares
     count = 0
     @current_board.each do |square| 
       if /[^0-9]/.match(square) != nil
