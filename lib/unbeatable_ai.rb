@@ -16,7 +16,8 @@ class Unbeatable_AI
     end
   end
 
-  def minimax(board, marker, depth, alpha=1.0/0)
+  def minimax(board, marker, depth, alpha)
+    alpha = 1.0/0
     opponent = get_opponent(marker)
     
     if board.game_over?
@@ -26,7 +27,9 @@ class Unbeatable_AI
         board.set_square(square, marker)
         score = -minimax(board, opponent, depth + 1, alpha)
         board.undo_set_square(square)
-        alpha = score
+        if score < alpha
+          alpha = score
+        end
       end
       return alpha
     end
@@ -35,13 +38,13 @@ class Unbeatable_AI
   def make_move(board, marker)
     opponent = get_opponent(marker)
     best_square = '1'
-    best_score = -1.0/0
+    best_score = 1.0/0
     board.list_of_open_squares.each do |square|
       board.set_square(square, marker)
-      score = -minimax(board, opponent, 0)
+      score = -minimax(board, opponent, 0, -1.0/0)
       board.undo_set_square(square)
       
-      if score > best_score
+      if score < best_score
         score = best_score
         best_square = square
       end
@@ -49,50 +52,4 @@ class Unbeatable_AI
     return best_square
     end
   end
-
-  
- #  def minimax(board, marker, alpha, beta, depth)
-#     alpha = alpha
-#     beta = beta
-#     opponent = get_opponent(marker)
-#     if board.winner_on_board?
-#       return score_board(board) + depth
-#     else
-#       new_alpha = alpha
-#       board.list_of_open_squares.each do |square|
-#         board.set_square(square, marker)
-#         score = -minimax(board, opponent, -new_alpha, -beta, depth+1)
-#         board.undo_set_square(square)
-#         new_alpha = score
-#   
-#         if new_alpha >= beta
-#           return new_alpha
-#         end 
-#   
-#       end
-#     end
-#     
-#     return new_alpha
-#   end
-#   
 end
-
-
-=begin
-  
-    IF it is marker's turn
-      For each empty square on board, set_square(square, marker)
-      IF winner_on_board == True
-        square_score += 1
-        undo_set_square(square)
-
-      ELSE 
-        put a O in that square
-        undo_set_square(square)
-    
-    IF it is O's turn and Find winner on board == True
-      square_score -= 1
-    ELSIF it is X's turn and Find winner on board == True
-      square_score += 1
-      
-=end

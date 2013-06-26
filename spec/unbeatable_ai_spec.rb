@@ -42,7 +42,7 @@ describe Unbeatable_AI do
     board.current_board = ['O', 'O', 'X', 
                            'X', 'X', 'O', 
                            'O', 'X', 'O']
-    ai.minimax(board, 'X', 0).should == 0
+    ai.minimax(board, 'X', 0, 1.0/0).should == 0
   end
 
   it "returns score for a given board and marker" do
@@ -51,7 +51,7 @@ describe Unbeatable_AI do
     board.current_board = ['O', 'O', 'X', 
                            'X', 'X', 'O', 
                            '7', 'X', 'O']
-    ai.minimax(board, 'X', 0).should == 0
+    ai.minimax(board, 'X', 0, 1.0/0).should == 0
   end
 
   it "returns score for a given board and marker" do
@@ -60,7 +60,7 @@ describe Unbeatable_AI do
     board.current_board = ['O', 'X', 'X', 
                            'X', 'O', 'O', 
                            '7', 'X', 'X']
-    ai.minimax(board, 'O', 0).should == -1
+    ai.minimax(board, 'O', 0, 1.0/0).should == -1
   end
 
   it "returns square to be marked that completes three in a row" do
@@ -76,8 +76,8 @@ describe Unbeatable_AI do
     ai = Unbeatable_AI.new
     board = Board.new
     board.current_board = ['O', 'O', 'X', 
-                           '4', 'X', '6', 
-                           'O', '8', '9']
+                           'O', '5', '6', 
+                           '7', '8', 'X']
     ai.make_move(board, 'X').should == '4'  
   end
   
@@ -89,4 +89,5 @@ describe Unbeatable_AI do
                            '7', '8', '9']
     ai.make_move(board, 'X').should == '6'
   end
+
 end
