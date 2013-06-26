@@ -16,40 +16,38 @@ class Unbeatable_AI
     end
   end
 
-  def minimax(board, marker, depth, alpha)
-    alpha = 1.0/0
+  def minimax(board, marker, depth)
     opponent = get_opponent(marker)
-    
+    score = 0
+    best_score = -1.0/0
     if board.game_over?
       return score_board(board, marker) + depth
     else
       board.list_of_open_squares.each do |square|
         board.set_square(square, marker)
-        score = -minimax(board, opponent, depth + 1, alpha)
+        score = -minimax(board, opponent, depth + 1)
+        best_score = score if score > best_score
         board.undo_set_square(square)
-        if score < alpha
-          alpha = score
-        end
       end
-      return alpha
+      return best_score 
     end
   end
   
   def make_move(board, marker)
+    best_square = nil
+    best_score = -1.0/0
     opponent = get_opponent(marker)
-    best_square = '1'
-    best_score = 1.0/0
     board.list_of_open_squares.each do |square|
       board.set_square(square, marker)
-      score = -minimax(board, opponent, 0, -1.0/0)
+      score = -minimax(board, opponent, 0)
       board.undo_set_square(square)
       
-      if score < best_score
-        score = best_score
+      if score > best_score
+        best_score = score
         best_square = square
       end
-      
-    return best_square
     end
+    return best_square
   end
+  
 end

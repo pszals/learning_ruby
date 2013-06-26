@@ -13,13 +13,13 @@ describe Unbeatable_AI do
     ai.score_board(board, 'X').should == 1
   end
   
-  it "returns 1 if O wins" do
+  it "returns -1 if O wins" do
     ai = Unbeatable_AI.new
     board = Board.new
     board.current_board = ['O', 'O', 'O', 
                            '4', '5', '6', 
                            '7', '8', '9']
-    ai.score_board(board, 'O').should == 1
+    ai.score_board(board, 'X').should == -1
   end
   
   it "returns 0 if game is tied" do
@@ -42,7 +42,7 @@ describe Unbeatable_AI do
     board.current_board = ['O', 'O', 'X', 
                            'X', 'X', 'O', 
                            'O', 'X', 'O']
-    ai.minimax(board, 'X', 0, 1.0/0).should == 0
+    ai.minimax(board, 'X', 0).should == 0
   end
 
   it "returns score for a given board and marker" do
@@ -51,7 +51,7 @@ describe Unbeatable_AI do
     board.current_board = ['O', 'O', 'X', 
                            'X', 'X', 'O', 
                            '7', 'X', 'O']
-    ai.minimax(board, 'X', 0, 1.0/0).should == 0
+    ai.minimax(board, 'X', 0).should == 0
   end
 
   it "returns score for a given board and marker" do
@@ -60,7 +60,7 @@ describe Unbeatable_AI do
     board.current_board = ['O', 'X', 'X', 
                            'X', 'O', 'O', 
                            '7', 'X', 'X']
-    ai.minimax(board, 'O', 0, 1.0/0).should == -1
+    ai.minimax(board, 'O', 0).should == -1
   end
 
   it "returns square to be marked that completes three in a row" do
@@ -75,10 +75,10 @@ describe Unbeatable_AI do
   it "blocks three in a row" do
     ai = Unbeatable_AI.new
     board = Board.new
-    board.current_board = ['O', 'O', 'X', 
+    board.current_board = ['O', 'X', '3', 
                            'O', '5', '6', 
-                           '7', '8', 'X']
-    ai.make_move(board, 'X').should == '4'  
+                           '7', '8', '9']
+    ai.make_move(board, 'X').should == '7'  
   end
   
   it "completes three in a row instead of blocking 3 in a row" do
@@ -89,5 +89,33 @@ describe Unbeatable_AI do
                            '7', '8', '9']
     ai.make_move(board, 'X').should == '6'
   end
+
+  it "completes three in a row instead of tying" do
+    ai = Unbeatable_AI.new
+    board = Board.new
+    board.current_board = ['O', 'X', '3', 
+                           'X', 'O', 'X', 
+                           'X', 'X', '9']
+    ai.make_move(board, 'O').should == '9'
+  end
+
+  it "ties instead of loses" do
+    ai = Unbeatable_AI.new
+    board = Board.new
+    board.current_board = ['O', 'O', 'X', 
+                           'X', 'O', 'O', 
+                           '7', '8', 'X']
+    ai.make_move(board, 'X').should == '8'
+  end
+  
+  it "blocks by choosing 1" do
+    ai = Unbeatable_AI.new
+    board = Board.new
+    board.current_board = ['1', 'O', '3', 
+                           'X', '5', '6', 
+                           'X', 'X', 'O']
+    ai.make_move(board, 'O').should == '1'
+  end
+
 
 end
