@@ -2,10 +2,11 @@ require 'player'
 require 'board'
 require 'io'
 require 'ai'
+require 'unbeatable_ai'
 
 class Game
   
-  attr_reader :io, :board, :player_1, :player_2, :ai 
+  attr_reader :io, :board, :player_1, :player_2, :ai, :unbeatable_ai
 
   def initialize(board, io)
     @player_1 = Player.new('X')
@@ -13,6 +14,7 @@ class Game
     @board = board
     @io = io
     @ai = Ai.new(board)
+    @unbeatable_ai = Unbeatable_AI.new
   end
               
   def whose_turn
@@ -31,7 +33,7 @@ class Game
     declare_turn(marker)
    
     if marker == 'O' and @ai.opponent == true
-      square = @ai.make_move
+      square = @unbeatable_ai.make_move(@board, marker)
     else
       square = @io.get_square_to_mark
     end

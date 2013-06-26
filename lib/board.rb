@@ -32,7 +32,7 @@ class Board
   end
 	
   def square_empty?(square)
-    @current_board[square - 1] == square.to_s ? true : false
+    @current_board[square.to_i - 1] == square.to_s ? true : false
   end
   
   def list_of_open_squares
