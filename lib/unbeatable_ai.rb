@@ -10,9 +10,9 @@ class Unbeatable_AI
     if !board.board_open? and !board.winner_on_board?
       return 0 
     elsif board.game_won?(marker)
-      return 1
+      1.0
     else
-      return -1
+      -1.0
     end
   end
 
@@ -21,7 +21,7 @@ class Unbeatable_AI
     score = 0
     best_score = -1.0/0
     if board.game_over?
-      return score_board(board, marker) + depth
+      return score_board(board, marker) / depth
     else
       board.list_of_open_squares.each do |square|
         board.set_square(square, marker)
@@ -34,20 +34,24 @@ class Unbeatable_AI
   end
   
   def make_move(board, marker)
+    list_of_scores = []
     best_square = nil
     best_score = -1.0/0
     opponent = get_opponent(marker)
     board.list_of_open_squares.each do |square|
       board.set_square(square, marker)
-      score = -minimax(board, opponent, 0)
+      score = -minimax(board, opponent, 1)
       board.undo_set_square(square)
-      
+      list_of_scores << score      
       if score > best_score
+
         best_score = score
         best_square = square
       end
     end
+    p list_of_scores
     return best_square
+
   end
   
 end
