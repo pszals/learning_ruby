@@ -24,7 +24,7 @@ class Board
   end
 		
   def set_square(square, marker)
-    @current_board[square - 1] = marker
+    @current_board[square.to_i - 1] = marker
   end
   
   def undo_set_square(square)
@@ -86,6 +86,14 @@ class Board
       end
     end
     return winning_marker
+  end
+  
+  def game_over?
+    (!board_open? or winner_on_board?) ? true : false
+  end
+  
+  def game_won?(marker)
+    winner_on_board? == marker ? true : false
   end
 
 end

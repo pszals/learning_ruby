@@ -149,4 +149,20 @@ describe Board do
                                    '4', '5', '6', 
                                    '7', '8', '9']
   end
+  
+  it "returns true if game is over" do
+    board = Board.new
+    board.current_board = ['X', 'O', 'O', 
+                           'X', 'X', 'O', 
+                           'X', 'X', 'X']
+    board.game_over?.should == true    
+  end
+  
+  it "returns true if game is won by a given marker" do
+    board = Board.new
+    board.current_board = ['X', 'O', 'O', 
+                           'X', 'X', 'O', 
+                           'X', 'X', 'X']
+    board.game_won?('X').should == true    
+  end
 end
