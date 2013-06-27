@@ -116,6 +116,4 @@ describe Unbeatable_AI do
                            'X', 'X', 'O']
     ai.make_move(board, 'O').should == '1'
   end
-
-
 end

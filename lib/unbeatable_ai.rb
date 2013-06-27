@@ -34,7 +34,6 @@ class Unbeatable_AI
   end
   
   def make_move(board, marker)
-    list_of_scores = []
     best_square = nil
     best_score = -1.0/0
     opponent = get_opponent(marker)
@@ -42,16 +41,11 @@ class Unbeatable_AI
       board.set_square(square, marker)
       score = -minimax(board, opponent, 1)
       board.undo_set_square(square)
-      list_of_scores << score      
       if score > best_score
-
         best_score = score
         best_square = square
-      end
+      end 
     end
-    p list_of_scores
     return best_square
-
   end
-  
 end

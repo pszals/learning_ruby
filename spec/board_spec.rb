@@ -121,9 +121,11 @@ describe Board do
   
   it "returns square board to be printed of any size" do
     board = Board.new
-    board.display_board.should == "1 2 3\n"\
-                                  "4 5 6\n"\
-                                  "7 8 9\n"
+    board.display_board.should == " 1 | 2 | 3 \n"\
+                                  "---|---|---\n"\
+                                  " 4 | 5 | 6 \n"\
+                                  "---|---|---\n"\
+                                  " 7 | 8 | 9 \n"
   end
   
   it "undoes the placement of a marker" do
