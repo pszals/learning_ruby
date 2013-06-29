@@ -36,13 +36,7 @@ class Board
   end
   
   def list_of_open_squares
-    open_squares = []
-    @current_board.each do |square|
-      if square_empty?(square.to_i)
-        open_squares << square
-      end
-    end
-    open_squares
+    @current_board.reject {|square| !square_empty?(square.to_i)}
   end
   
   def empty_squares
@@ -54,13 +48,7 @@ class Board
   end	
 
   def number_of_filled_squares
-    count = 0
-    @current_board.each do |square| 
-      if /[^0-9]/.match(square) != nil
-      count += 1
-      end
-    end
-    count
+    @current_board.length - list_of_open_squares.length
   end
 
   def winner_on_board?
