@@ -36,7 +36,7 @@ class Board
   end
   
   def list_of_open_squares
-    @current_board.reject {|square| !square_empty?(square.to_i)}
+    @current_board.select {|square| square_empty?(square.to_i)}
   end
   
   def empty_squares

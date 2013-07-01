@@ -3,18 +3,20 @@ require 'board'
 require 'io'
 require 'ai'
 require 'unbeatable_ai'
+require 'runner'
 
 class Game
   
-  attr_reader :io, :board, :player_1, :player_2, :ai, :unbeatable_ai
+  attr_reader :io, :board, :player_1, :player_2, :ai, :unbeatable_ai, :runner
 
-  def initialize(board, io)
+  def initialize(board, io, ai)
     @player_1 = Player.new('X')
     @player_2 = Player.new('O')
     @board = board
     @io = io
-    @ai = Ai.new(board)
+    @ai = ai
     @unbeatable_ai = Unbeatable_AI.new
+    @runner = Runner.new
   end
               
   def whose_turn
@@ -75,28 +77,11 @@ end
   end
   
   def restart?(input)
-    input == 1 ? play_game : exit  
+    input == 1 ? @runner.start_game : exit  
   end
     
   def play_game
-    @board.reset_board
-    configure_opponent
     select_square
   end  
-
-  def configure_opponent
-    @io.ask_for_opponent
-    opponent_type = @io.get_opponent
-    if opponent_type == 1  
-      @ai.opponent = true
-    else
-      @ai.opponent = false 
-    end 
-  end
-  
-  def configure_markers
-    @io.ask_for_marker_type
-    marker = @io.get_marker_type
-  end
 
 end
