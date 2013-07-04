@@ -110,9 +110,9 @@ describe Board do
     board.number_of_filled_squares.should == 3
   end
   
-  it "creates a square board of any size" do
+  it "creates a 16-square board with a given width of 4" do
     board = Board.new
-    board.board_width = 4
+    board.width = 4
     board.squares_with_integers.should == ['1', '2', '3', '4', 
                                            '5', '6', '7', '8', 
                                            '9', '10', '11', '12', 
@@ -142,7 +142,7 @@ describe Board do
   it "sets the width of the board" do
     board = Board.new
     width = 3
-    board.board_width.should == 3
+    board.width.should == 3
   end
 
   it "makes a blank board" do
@@ -167,4 +167,65 @@ describe Board do
                            'X', 'X', 'X']
     board.game_won?('X').should == true    
   end
+
+
+#   it "returns list of all winning marker combinations for any size board" do
+#     board = Board.new
+#     board.width = 4
+#   end
+
+  it "algorithmically provides a list of winning rows for any size board" do
+    board = Board.new
+    board.width = 3
+    board.winning_rows.should == [
+                                    [0, 1, 2],
+                                    [3, 4, 5],
+                                    [6, 7, 8],
+                                  ]
+
+  end
+  
+  it "generates a column for any size board" do
+    board = Board.new
+    board.width = 3
+    board.generate_column(0).should == [0,3,6]
+    board.generate_column(1).should == [1,4,7]
+    board.generate_column(2).should == [2,5,8]
+    board.width = 4
+    board.generate_column(0).should == [0,4,8,12]
+  end
+    
+  it "provides a list of winning columns for any size board" do
+    board = Board.new
+    board.width = 3
+    board.winning_columns.should == [
+                                      [0, 3, 6],
+                                      [1, 4, 7],
+                                      [2, 5, 8]
+                                    ]
+  end
+  
+  it "generates diagonal down from left to right for any size board" do
+    board = Board.new
+    board.width = 3
+    board.diagonal_down.should == [0,4,8]  
+  end
+
+  it "generates diagonal up from left to right for any size board" do
+    board = Board.new
+    board.width = 3
+    board.diagonal_up.should == [2,4,6]  
+  end
+
+  it "provides a list of winning diagonals for any size board" do
+    board = Board.new
+    board.width = 3
+    board.winning_diagonals.should include(
+                                        [0, 4, 8],
+                                        [2, 4, 6]
+                                      )
+    board.width = 4
+    board.winning_diagonals.should include( [0,5,10,15],[3,6,9,12] )
+  end
+
 end

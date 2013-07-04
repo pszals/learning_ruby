@@ -1,20 +1,23 @@
 class Board
 
-  attr_accessor :board_width, :current_board
+  attr_accessor :width, :current_board
 	
   def initialize
-    @board_width = 3
+    @width = 3
     @current_board = squares_with_integers
+  end
+  
+  def integer_board
+    (1..@width**2).to_a
   end
 	
   def squares_with_integers
-    integer_board = (1..@board_width**2).to_a
     string_board = integer_board.map {|square| square.to_s}
     string_board
   end
 	
   def display_board
-    @current_board.each_slice(@board_width).
+    @current_board.each_slice(@width).
                    map { |a,b,c| " #{a} | #{b} | #{c} \n" }.
                    join("---|---|---\n")
   end
@@ -82,6 +85,44 @@ class Board
   
   def game_won?(marker)
     winner_on_board? == marker ? true : false
+  end
+  
+  def board_indices
+    (0..@width**2-1).to_a
+  end
+  
+  def winning_rows
+    rows = []
+    board_indices.each_slice(@width) {|slice| rows << slice}
+    rows
+  end
+  
+  def generate_column(starting_index)
+    (0...@width).reduce([]) {|column, index| 
+      column << (index*@width+starting_index)
+    }
+  end
+  
+  def winning_columns
+    (0...@width).reduce([]) {|set_of_columns, index| 
+      set_of_columns << generate_column(index)
+    }
+  end
+  
+  def diagonal_down
+    (0...@width).reduce([]) {|diagonal, index| 
+      diagonal << index*(@width + 1)
+    }
+  end
+  
+  def diagonal_up
+    (0...@width).reduce([]) {|diagonal, index| 
+      diagonal << (index + 1)*(@width - 1)
+    }
+  end
+
+  def winning_diagonals
+    [] << diagonal_down << diagonal_up 
   end
 
 end

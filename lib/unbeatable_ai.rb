@@ -16,7 +16,7 @@ class Unbeatable_AI
     end
   end
 
-  def minimax(board, marker, depth)
+  def minimax(board, marker, depth)#, alpha, beta)
     opponent = get_opponent(marker)
     score = 0
     best_score = -1.0/0
@@ -25,8 +25,9 @@ class Unbeatable_AI
     else
       board.list_of_open_squares.each do |square|
         board.set_square(square, marker)
-        score = -minimax(board, opponent, depth + 1)
+        score = -minimax(board, opponent, depth + 1)#, new_alpha, new_beta)
         best_score = score if score > best_score
+#        new_alpha = best_score if score > alpha
         board.undo_set_square(square)
       end
       return best_score 
