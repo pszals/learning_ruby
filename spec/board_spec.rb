@@ -93,6 +93,18 @@ describe Board do
                            'X', 'X', 'X']
     board.winner_on_board?.should == 'X'
   end
+  
+  it "returns marker type of winner on board" do
+    board = Board.new
+    board.width = 4
+    board.winning_combos = board.gather_winning_combinations
+    board.current_board == [ 'X', 'X', '3', 'X', 
+                             'X', '6', '7', '8', 
+                             'X', '10', '11', '12', 
+                             'X', '14', '15', '16']
+    board.winner_on_board?.should == 'X'
+  end
+
         
   it "returns false if there is no winner on board" do
     board = Board.new
@@ -168,12 +180,6 @@ describe Board do
     board.game_won?('X').should == true    
   end
 
-
-#   it "returns list of all winning marker combinations for any size board" do
-#     board = Board.new
-#     board.width = 4
-#   end
-
   it "algorithmically provides a list of winning rows for any size board" do
     board = Board.new
     board.width = 3
@@ -225,7 +231,24 @@ describe Board do
                                         [2, 4, 6]
                                       )
     board.width = 4
-    board.winning_diagonals.should include( [0,5,10,15],[3,6,9,12] )
+    board.winning_diagonals.should include(
+                                            [0,5,10,15],
+                                            [3,6,9,12]
+                                      )
   end
-
+  
+  it "gathers all winning board combinations" do
+    board = Board.new
+    board.width = 3
+    board.gather_winning_combinations.should ==  [
+                                          [0, 1, 2],
+                                          [3, 4, 5],
+                                          [6, 7, 8],
+                                          [0, 4, 8],
+                                          [2, 4, 6],
+                                          [0, 3, 6],
+                                          [1, 4, 7],
+                                          [2, 5, 8]
+                                         ]
+  end
 end

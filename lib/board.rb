@@ -1,10 +1,11 @@
 class Board
 
-  attr_accessor :width, :current_board
+  attr_accessor :width, :current_board, :winning_combos
 	
   def initialize
     @width = 3
     @current_board = squares_with_integers
+    @winning_combos = gather_winning_combinations
   end
   
   def integer_board
@@ -13,7 +14,6 @@ class Board
 	
   def squares_with_integers
     string_board = integer_board.map {|square| square.to_s}
-    string_board
   end
 	
   def display_board
@@ -56,22 +56,11 @@ class Board
 
   def winner_on_board?
     winning_marker = false
-    combos = [
-              [0, 1, 2],
-              [3, 4, 5],
-              [6, 7, 8],
-              [0, 3, 6],
-              [1, 4, 7],
-              [2, 5, 8],
-              [0, 4, 8],
-              [6, 4, 2]
-             ]
-    combos.each do |combo|
+    @winning_combos.each do |combo|
       marker = @current_board[combo[0]]
       winner = []
-      winner << @current_board[combo[0]]
-      winner << @current_board[combo[1]]
-      winner << @current_board[combo[2]]
+      positions = (0...@width).to_a
+      positions.each {|position| winner << @current_board[combo[position]]}
       if winner.all? { |square| square == marker }
         winning_marker = marker
       end
@@ -92,9 +81,7 @@ class Board
   end
   
   def winning_rows
-    rows = []
-    board_indices.each_slice(@width) {|slice| rows << slice}
-    rows
+    board_indices.each_slice(@width).reduce([]) {|rows, slice| rows << slice}
   end
   
   def generate_column(starting_index)
@@ -122,7 +109,16 @@ class Board
   end
 
   def winning_diagonals
-    [] << diagonal_down << diagonal_up 
+    [] << diagonal_down << diagonal_up
+  end
+  
+  def gather_winning_combinations
+    combos = []
+    winning_rows.each {|row| combos << row } and
+    combos << diagonal_down and
+    combos << diagonal_up and
+    winning_columns.each {|column| combos << column}
+    combos
   end
 
 end
