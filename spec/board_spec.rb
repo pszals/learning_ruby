@@ -97,8 +97,9 @@ describe Board do
   it "returns marker type of winner on board" do
     board = Board.new
     board.width = 4
+    board.width.should == 4
     board.winning_combos = board.gather_winning_combinations
-    board.current_board == [ 'X', 'X', '3', 'X', 
+    board.current_board == [ 'X', 'X', 'X', 'X', 
                              'X', '6', '7', '8', 
                              'X', '10', '11', '12', 
                              'X', '14', '15', '16']
@@ -237,7 +238,7 @@ describe Board do
                                       )
   end
   
-  it "gathers all winning board combinations" do
+  it "gathers winning board combinations for 3x3" do
     board = Board.new
     board.width = 3
     board.gather_winning_combinations.should ==  [
@@ -249,6 +250,23 @@ describe Board do
                                           [0, 3, 6],
                                           [1, 4, 7],
                                           [2, 5, 8]
+                                         ]
+  end
+  
+  it "gathers winning board combinations for 4x4" do
+    board = Board.new
+    board.width = 4
+    board.gather_winning_combinations.should ==  [
+                                          [0, 1, 2, 3],
+                                          [4, 5, 6, 7],
+                                          [8, 9, 10, 11],
+                                          [12, 13, 14, 15],
+                                          [0, 5, 10, 15],
+                                          [3, 6, 9, 12],
+                                          [0, 4, 8, 12],
+                                          [1, 5, 9, 13],
+                                          [2, 6, 10, 14],
+                                          [3, 7, 11, 15],
                                          ]
   end
 end
