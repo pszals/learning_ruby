@@ -17,9 +17,15 @@ class Board
   end
 	
   def display_board
-    @current_board.each_slice(@width).
-                   map { |a,b,c| " #{a} | #{b} | #{c} \n" }.
-                   join("---|---|---\n")
+    if @width == 3
+      @current_board.each_slice(@width).
+                     map { |a,b,c| " #{a} | #{b} | #{c} \n" }.
+                     join("---|---|---\n")
+    else
+      @current_board.each_slice(@width).
+                     map { |a,b,c,d| " #{a} | #{b} | #{c} | #{d} \n" }.
+                     join("---|---|---|---\n")      
+    end
   end
 		
   def reset_board

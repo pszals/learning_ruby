@@ -131,7 +131,7 @@ describe Board do
                                            '13', '14', '15', '16']
   end
   
-  it "returns square board to be printed of any size" do
+  it "returns square board to be printed of 3x3 size" do
     board = Board.new
     board.display_board.should == " 1 | 2 | 3 \n"\
                                   "---|---|---\n"\
@@ -139,6 +139,32 @@ describe Board do
                                   "---|---|---\n"\
                                   " 7 | 8 | 9 \n"
   end
+
+  it "returns square board to be printed of 4x4 size" do
+    board = Board.new
+    board.width = 4
+    board.current_board = board.squares_with_integers
+    board.display_board.should == 
+                                  " 1 | 2 | 3 | 4 \n"\
+                                  "---|---|---|---\n"\
+                                  " 5 | 6 | 7 | 8 \n"\
+                                  "---|---|---|---\n"\
+                                  " 9 | 10 | 11 | 12 \n"\
+                                  "---|---|---|---\n"\
+                                  " 13 | 14 | 15 | 16 \n"
+  end
+
+#   it "returns square board to be printed of 4x4 size" do
+#     board = Board.new
+#     board.display_board.should == 
+#                                   " 01 | 02 | 03 | 04 \n"\
+#                                   "----|----|----|----\n"\
+#                                   " 05 | 06 | 07 | 08 \n"\
+#                                   "----|----|----|----\n"\
+#                                   " 09 | 10 | 11 | 12 \n"\
+#                                   "----|----|----|----\n"\
+#                                   " 13 | 14 | 15 | 16 \n"
+#   end
   
   it "undoes the placement of a marker" do
     board_class = Board.new
