@@ -7,7 +7,13 @@ describe Io do
     io.should_receive(:put_to_console)
     io.puts_turn("X")
   end
-  
+
+  it "gets the width of the board" do
+    io = Io.new
+    io.should_receive(:get_input)
+    io.get_width_of_board
+  end  
+    
   it "gets the square number to be marked from user" do
     io = Io.new
     io.should_receive(:get_input)
@@ -74,12 +80,6 @@ describe Io do
     io.ask_for_width_of_board
   end
     
-  it "gets the width of the board" do
-    io = Io.new
-    io.should_receive(:get_input)
-    io.get_size_of_board
-  end  
-  
   it "prints the board" do
     io = Io.new
     board = "board"

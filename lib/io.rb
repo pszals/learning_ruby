@@ -4,7 +4,7 @@ class Io
     put_to_console("Enter 3 for a 3x3 board or 4 for a 4x4 board.")
   end
 
-  def get_size_of_board
+  def get_width_of_board
     get_input
   end
   

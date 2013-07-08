@@ -97,7 +97,6 @@ describe Board do
   it "returns marker type of winner on board" do
     board = Board.new
     board.width = 4
-    board.winning_combos = board.gather_winning_combinations
     board.current_board = [ 'X', 'X', 'X', 'X', 
                              'X', '6', '7', '8', 
                              'X', '10', '11', '12', 

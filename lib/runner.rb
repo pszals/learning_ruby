@@ -12,6 +12,7 @@ class Runner
     game = Game.new(board, io, ai)
     configuration = Configuration.new(board, ai, game)
     configuration.configure_opponent
+    configuration.configure_width
     game.play_game
   end
 end

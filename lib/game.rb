@@ -66,7 +66,7 @@ class Game
       game_over(@io.puts_tie)
     end
   
-end
+  end
   
   def game_over(final_game_message)
     @io.print_board(@board.display_board)

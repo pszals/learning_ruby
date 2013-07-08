@@ -1,11 +1,10 @@
 class Board
 
-  attr_accessor :width, :current_board, :winning_combos
+  attr_accessor :width, :current_board
 	
   def initialize
     @width = 3
     @current_board = squares_with_integers
-    @winning_combos = gather_winning_combinations
   end
   
   def integer_board
@@ -62,7 +61,7 @@ class Board
 
   def winner_on_board?
     winning_marker = false
-    @winning_combos.each do |combo|
+    gather_winning_combinations.each do |combo|
       marker = @current_board[combo[0]]
       winner = []
       positions = (0...@width).to_a

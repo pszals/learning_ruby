@@ -1,6 +1,12 @@
 require 'board'
 
 class Unbeatable_AI
+  
+  attr_accessor :board
+  
+  def initialize
+    @board = board
+  end
 
   def get_opponent(marker)
     marker == 'X' ? 'O' : 'X'
@@ -16,7 +22,7 @@ class Unbeatable_AI
     end
   end
 
-  def minimax(board, marker, depth)#, alpha, beta)
+   def minimax(board, marker, depth)#, alpha, beta)
     opponent = get_opponent(marker)
     score = 0
     best_score = -1.0/0
