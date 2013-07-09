@@ -10,11 +10,11 @@ class Board
   end
   
   def whose_turn
-    empty_squares%2 == 0 ? @player_2.marker : @player_1.marker
+    number_of_empty_squares%2 == 0 ? @player_2.marker : @player_1.marker
   end
   
   def get_opponent
-    empty_squares%2 != 0 ? @player_2.marker : @player_1.marker
+    number_of_empty_squares%2 != 0 ? @player_2.marker : @player_1.marker
   end
   
   def integer_board
@@ -57,12 +57,12 @@ class Board
     @current_board.select {|square| square_empty?(square.to_i)}
   end
   
-  def empty_squares
+  def number_of_empty_squares
     list_of_open_squares.length
   end
 
   def board_open?
-    empty_squares >= 1? true : false
+    number_of_empty_squares >= 1? true : false
   end	
 
   def number_of_filled_squares

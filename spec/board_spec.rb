@@ -32,7 +32,7 @@ describe Board do
     board.current_board = ['X', 'O', 'X', 
                            '4', '5', '6', 
                            '7', '8', '9']
-    board.empty_squares.should == 6
+    board.number_of_empty_squares.should == 6
   end
 	
  it "returns false if square 1 is marked" do
