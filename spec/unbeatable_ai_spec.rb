@@ -9,8 +9,8 @@ describe Unbeatable_AI do
   let(:player_2) { Player.new('O')                             }
   let(:board)    { Board.new(player_1, player_2)               }
   let(:io)       { Io.new                                      }
-  let(:game)     { Game.new(board, io, ai, player_1, player_2) }
   let(:ai)       { Unbeatable_AI.new                           }
+  let(:game)     { Game.new(board, io, ai, player_1, player_2) }
   
   it "returns 1 if X wins" do
     board.current_board = ['X', 'X', 'X', 
