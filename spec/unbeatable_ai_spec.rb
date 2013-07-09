@@ -103,4 +103,13 @@ describe Unbeatable_AI do
                            'X', '8', 'O']
     ai.make_move(board, 'O').should == '1'
   end
+
+#   TEST FOR A-B PRUNING  
+#   it "marks center after corner is chosen as first move" do
+#     board.current_board = ['X', '2', '3', 
+#                            '4', '5', '6', 
+#                            '7', '8', '9']
+#     ai.make_move(board, 'O').should == '5'
+#   end
+  
 end
