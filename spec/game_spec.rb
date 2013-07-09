@@ -66,6 +66,7 @@ describe Game do
   end  
   
   it "ends and restarts the game" do
+    game.io.should_receive(:puts_winner)    
     game.io.should_receive(:ask_to_restart)
     game.io.should_receive(:print_board)    
     game.io.should_receive(:get_input)
@@ -74,6 +75,7 @@ describe Game do
   end
     
   it "checks for a winner on board" do
+    game.io.should_receive(:puts_winner)    
     board.should_receive(:winner_on_board?)
     game.io.should_receive(:gets).and_return('3')
     game.io.should_receive(:print_board)
@@ -88,6 +90,7 @@ describe Game do
   end
     
   it "checks that the board is open" do
+    game.io.should_receive(:puts_tie)  
     board.should_receive(:board_open?)
     game.should_receive(:restart?) 
     game.io.should_receive(:gets).and_return('3')
@@ -121,6 +124,7 @@ describe Game do
   end
 
   it "asks to restart and gets input to restart" do
+    game.io.should_receive(:puts_winner)  
     board.current_board = ['X', 'O', 'X', 
                            'O', 'O', 'X', 
                            'X', 'X', 'X']
