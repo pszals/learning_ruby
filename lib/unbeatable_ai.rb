@@ -30,13 +30,8 @@ class Unbeatable_AI
       board.list_of_open_squares.each do |square|
         board.set_square(square, marker)
         score = -minimax(board, opponent, depth + 1, -new_alpha, -beta)
-        new_alpha = score
         board.undo_set_square(square)
-#         if new_alpha >= beta
-#           return new_alpha
-#         end
         best_score = score if score > best_score
-#         new_alpha = best_score if score > alpha
       end
       return best_score 
     end
