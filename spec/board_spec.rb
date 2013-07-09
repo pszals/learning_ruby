@@ -3,9 +3,9 @@ require "player"
 
 describe Board do
 
-  let(:player_1) { Player.new('X') }
-  let(:player_2) { Player.new('O') }
-  let(:board) { Board.new(player_1, player_2) }
+  let(:player_1) { Player.new('X')               }
+  let(:player_2) { Player.new('O')               }
+  let(:board)    { Board.new(player_1, player_2) }
     
   it "gets whose turn" do
     board.whose_turn.should == 'X'  
@@ -24,8 +24,8 @@ describe Board do
 	
 	it "returns an array of 9 board places" do
 		board.current_board.should == ['1', '2', '3', 
-		                                     '4', '5', '6', 
-		                                     '7', '8', '9']
+		                               '4', '5', '6', 
+		                               '7', '8', '9']
 	end
 		
   it "returns 6 as the number of empty squares" do
@@ -37,15 +37,15 @@ describe Board do
 	
  it "returns false if square 1 is marked" do
     board.current_board = ['X', '2', '3', 
-                                 '4', '5', '6', 
-                                 '7', '8', '9']
+                           '4', '5', '6', 
+                           '7', '8', '9']
     board.square_empty?(1).should == false
   end  
 
   it "returns true if square 1 is empty" do
     board.current_board = ['1', '2', '3', 
-                                 '4', '5', '6', 
-                                 '7', '8', '9']
+                           '4', '5', '6', 
+                           '7', '8', '9']
     board.square_empty?(1).should == true
   end
   
@@ -99,9 +99,9 @@ describe Board do
   it "returns marker type of winner on board" do
     board.width = 4
     board.current_board = [ 'X', 'X', 'X', 'X', 
-                             'X', '6', '7', '8', 
-                             'X', '10', '11', '12', 
-                             'X', '14', '15', '16']
+                            'X', '6', '7', '8', 
+                            'X', '10', '11', '12', 
+                            'X', '14', '15', '16']
     board.winner_on_board?.should == 'X'
   end
 
@@ -163,12 +163,12 @@ describe Board do
   
   it "undoes the placement of a marker" do
     board.current_board = ['X', '2', '3', 
-                                 '4', '5', '6', 
-                                 '7', '8', '9']
+                           '4', '5', '6', 
+                           '7', '8', '9']
     board.undo_set_square(1)
     board.current_board.should == ['1', '2', '3', 
-                                         '4', '5', '6', 
-                                         '7', '8', '9']
+                                   '4', '5', '6', 
+                                   '7', '8', '9']
   end
     
   it "sets the width of the board" do
@@ -178,8 +178,8 @@ describe Board do
 
   it "makes a blank board" do
     board.reset_board.should == ['1', '2', '3', 
-                                   '4', '5', '6', 
-                                   '7', '8', '9']
+                                 '4', '5', '6', 
+                                  '7', '8', '9']
   end
   
   it "returns true if game is over" do

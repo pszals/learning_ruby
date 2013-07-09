@@ -5,12 +5,12 @@ require 'player'
 
 describe Game do
   
-  let(:player_1) { Player.new('X') }
-  let(:player_2) { Player.new('O') }
-  let(:board) { Board.new(player_1, player_2)      }
-  let(:io)    { Io.new                  }
-  let(:ai)    { Unbeatable_AI.new          }
-  let(:game)  { Game.new(board, io, ai, player_1, player_2) }
+  let(:player_1) { Player.new('X')                             }
+  let(:player_2) { Player.new('O')                             }
+  let(:board)    { Board.new(player_1, player_2)               }
+  let(:io)       { Io.new                                      }
+  let(:ai)       { Unbeatable_AI.new                           }
+  let(:game)     { Game.new(board, io, ai, player_1, player_2) }
   
   
   it "initializes game with a board and two players" do
