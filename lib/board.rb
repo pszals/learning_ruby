@@ -92,7 +92,7 @@ class Board
   end
   
   def board_indices
-    (0..@width**2-1).to_a
+    (0...@width**2).to_a
   end
   
   def winning_rows
