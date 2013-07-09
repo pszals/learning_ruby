@@ -1,28 +1,32 @@
 require 'player'
 require 'board'
 require 'io'
-require 'ai'
 require 'unbeatable_ai'
 require 'runner'
 
 class Game
   
-  attr_reader :io, :board, :player_1, :player_2, :ai, :unbeatable_ai, :runner
+  attr_accessor :player_1, :player_2
+  attr_reader :io, :board, :ai, :unbeatable_ai, :runner
 
-  def initialize(board, io, ai)
-    @player_1 = Player.new('X')
-    @player_2 = Player.new('O')
+  def initialize(board, io, ai, player_1, player_2)
+    @player_1 = player_1
+    @player_2 = player_2
     @board = board
     @io = io
     @ai = ai
     @unbeatable_ai = Unbeatable_AI.new
     @runner = Runner.new
   end
+  
+  def get_player_1_marker
+    @player_1.marker
+  end
               
   def whose_turn
-    @board.empty_squares%2 == 0 ? player_2.marker : player_1.marker
+    @board.empty_squares%2 == 0 ? @player_2.marker : @player_1.marker
   end
-  
+    
   def declare_turn(marker)
     @io.puts_turn(marker)
     @io.print_board(@board.display_board)
@@ -34,7 +38,7 @@ class Game
     marker = whose_turn
     declare_turn(marker)
    
-    if marker == 'O' and @ai.opponent == true
+    if marker == player_2.marker and @ai.opponent == true
       square = @unbeatable_ai.make_move(@board, marker)
     else
       square = @io.get_square_to_mark
@@ -77,9 +81,9 @@ class Game
   end
   
   def restart?(input)
-    input == 1 ? @runner.start_game : exit  
+    input == 1 ? @runner.call : exit  
   end
-    
+      
   def play_game
     select_square
   end  

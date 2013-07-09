@@ -2,4 +2,4 @@
 $LOAD_PATH.unshift File.expand_path('../../lib', __FILE__)
 require 'runner'
 
-Runner.new.start_game
+Runner.new.call

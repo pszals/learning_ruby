@@ -1,10 +1,20 @@
 class Board
 
-  attr_accessor :width, :current_board
+  attr_accessor :width, :current_board, :player_1, :player_2
 	
-  def initialize
+  def initialize(player_1, player_2)
     @width = 3
     @current_board = squares_with_integers
+    @player_1 = player_1
+    @player_2 = player_2
+  end
+  
+  def whose_turn
+    empty_squares%2 == 0 ? @player_2.marker : @player_1.marker
+  end
+  
+  def get_opponent
+    empty_squares%2 != 0 ? @player_2.marker : @player_1.marker
   end
   
   def integer_board

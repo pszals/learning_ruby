@@ -13,11 +13,11 @@ class Io
   end
   
   def ask_for_marker_type
-    put_to_console("Enter a character that is not a number to serve as your marker type")
+    put_to_console("Enter a character A-Z to serve as your marker type")
   end
   
   def get_marker_type
-    get_input
+    gets.chomp
   end
   
   def get_first_player
@@ -41,7 +41,7 @@ class Io
   end
     
   def marker_error
-    put_to_console("That square is already taken or not on the board.")
+    put_to_console("Input error.")
   end
   
   def get_square_to_mark

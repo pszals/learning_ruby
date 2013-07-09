@@ -2,15 +2,18 @@ require 'game'
 require 'board'
 require 'io'
 require 'player'
-require 'ai'
 
 describe Game do
   
+  let(:player_1) { Player.new('X') }
+  let(:player_2) { Player.new('O') }
+  let(:board) { Board.new(player_1, player_2)      }
+  let(:io)    { Io.new                  }
+  let(:ai)    { Unbeatable_AI.new          }
+  let(:game)  { Game.new(board, io, ai, player_1, player_2) }
+  
+  
   it "initializes game with a board and two players" do
-    board = Board.new
-    io = Io.new 
-    ai = Ai.new(board)
-    game = Game.new(board, io, ai)
     game.player_1.marker.should ==  'X'
     game.player_2.marker.should ==  'O'    
     game.board.current_board.should == ['1', '2', '3', 
@@ -19,70 +22,34 @@ describe Game do
   end
   
   it "initializes game with IO class" do
-    board = Board.new
-    io = Io.new 
-    ai = Ai.new(board)
-    game = Game.new(board, io, ai)
     game.io.should_receive(:get_input)
     game.io.get_input
   end
 
   it "places marker by setting square 5 to 'X'" do
-    board = Board.new
-    io = Io.new 
-    ai = Ai.new(board)
-    game = Game.new(board, io, ai)
     board.set_square(5, 'X')
     game.board.current_board.should == ['1', '2', '3', 
                                         '4', 'X', '6', 
                                         '7', '8', '9'] 
   end
-      
+        
   it "returns 'X' if it is X's turn" do
-    board = Board.new
-    io = Io.new 
-    ai = Ai.new(board)
-    game = Game.new(board, io, ai)
     empty_squares = 9
     game.whose_turn.should == 'X'
   end
 
   it "calls restart if selection is 1" do
-    board = Board.new
-    io = Io.new 
-    ai = Ai.new(board)
-    game = Game.new(board, io, ai)
-    game.runner.should_receive(:start_game)
+    game.runner.should_receive(:call)
     game.restart?(1)
   end
   
   it "exits if restart? selection is not 1" do
-    board = Board.new
-    io = Io.new 
-    ai = Ai.new(board)
-    game = Game.new(board, io, ai)
     game.should_receive(:exit)
     game.restart?(2)
   end
-  
-  it "tells the user whose turn it is, print board and ask for square" do
-    board = Board.new
-    io = mock.as_null_object
-    ai = Ai.new(board)
-    game = Game.new(board, io, ai)
-    game.io.should_receive(:puts_turn)
-    game.io.should_receive(:ask_for_square_to_mark)
-    game.io.should_receive(:print_board)
-    game.should_receive(:place_marker)
-    game.select_square
-  end
-  
+    
   it "declares the start of a turn" do
-    board = Board.new
-    io = mock.as_null_object
-    ai = Ai.new(board)
     marker = 'X'
-    game = Game.new(board, io, ai)
     game.io.should_receive(:puts_turn)
     game.io.should_receive(:ask_for_square_to_mark)
     game.io.should_receive(:print_board)
@@ -90,10 +57,6 @@ describe Game do
   end
   
   it "puts marker error, ask for, and get square if square entered is invalid" do
-    board = Board.new
-    io = mock.as_null_object
-    ai = Ai.new(board)
-    game = Game.new(board, io, ai)
     board.current_board = ['X', 'O', '3', 
                            '4', '5', '6', 
                            '7', '8', '9'] 
@@ -103,10 +66,6 @@ describe Game do
   end  
   
   it "ends and restarts the game" do
-    board = Board.new
-    io = mock.as_null_object
-    ai = Ai.new(board)
-    game = Game.new(board, io, ai)
     game.io.should_receive(:ask_to_restart)
     game.io.should_receive(:print_board)    
     game.io.should_receive(:get_input)
@@ -115,39 +74,29 @@ describe Game do
   end
     
   it "checks for a winner on board" do
-    board = Board.new
-    io = mock.as_null_object
-    ai = Ai.new(board)
-    game = Game.new(board, io, ai)
     board.should_receive(:winner_on_board?)
+    game.io.should_receive(:gets).and_return('3')
+    game.io.should_receive(:print_board)
+    game.io.should_receive(:ask_to_restart)    
     game.should_receive(:exit)
     game.find_winner
   end
   
   it "takes turn if there is no winner on board" do
-    board = Board.new
-    io = mock.as_null_object
-    ai = Ai.new(board)
-    game = Game.new(board, io, ai)
-    game.should_receive(:select_square)
+    game.should_receive(:select_square)  
     game.find_winner
   end
     
   it "checks that the board is open" do
-    board = Board.new
-    io = mock.as_null_object
-    ai = Ai.new(board)
-    game = Game.new(board, io, ai)
     board.should_receive(:board_open?)
-    game.should_receive(:restart?)    
+    game.should_receive(:restart?) 
+    game.io.should_receive(:gets).and_return('3')
+    game.io.should_receive(:print_board)
+    game.io.should_receive(:ask_to_restart)
     game.find_winner      
   end
   
   it "puts out that there is a tie, asks to restart and gets choice" do
-    board = Board.new
-    io = mock.as_null_object
-    ai = Ai.new(board)
-    game = Game.new(board, io, ai)
     board.current_board = ['X', 'O', 'X', 
                            'O', 'O', 'X', 
                            'X', 'X', 'O']
@@ -160,38 +109,29 @@ describe Game do
   end
   
   it "puts out the winner" do
-    board = Board.new
-    io = mock.as_null_object
-    ai = Ai.new(board)
-    game = Game.new(board, io, ai)
     board.current_board = ['X', 'O', 'X', 
                            'O', 'X', 'O', 
                            'O', 'O', 'X']
     game.io.should_receive(:puts_winner)
     game.io.should_receive(:print_board)
+    game.io.should_receive(:gets).and_return('3')
+    game.io.should_receive(:ask_to_restart)
     game.should_receive(:exit)
     game.find_winner
   end
 
   it "asks to restart and gets input to restart" do
-    board = Board.new
-    io = mock.as_null_object
-    ai = Ai.new(board)
-    game = Game.new(board, io, ai)
     board.current_board = ['X', 'O', 'X', 
                            'O', 'O', 'X', 
                            'X', 'X', 'X']
     game.io.should_receive(:ask_to_restart)
+    game.io.should_receive(:print_board)
     game.io.should_receive(:get_input)
     game.should_receive(:exit)
     game.find_winner
   end
 
   it "plays the game after a fresh start" do
-    board = Board.new
-    io = Io.new 
-    ai = Ai.new(board)
-    game = Game.new(board, io, ai)
     game.should_receive(:select_square)
     game.play_game
   end
