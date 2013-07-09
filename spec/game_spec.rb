@@ -35,7 +35,7 @@ describe Game do
         
   it "returns 'X' if it is X's turn" do
     empty_squares = 9
-    game.whose_turn.should == 'X'
+    board.whose_turn.should == 'X'
   end
 
   it "calls restart if selection is 1" do

@@ -18,15 +18,7 @@ class Game
     @unbeatable_ai = Unbeatable_AI.new
     @runner = Runner.new
   end
-  
-  def get_player_1_marker
-    @player_1.marker
-  end
-              
-  def whose_turn
-    @board.empty_squares%2 == 0 ? @player_2.marker : @player_1.marker
-  end
-    
+                
   def declare_turn(marker)
     @io.puts_turn(marker)
     @io.print_board(@board.display_board)
@@ -35,7 +27,7 @@ class Game
   
   def select_square
     square = nil
-    marker = whose_turn
+    marker = @board.whose_turn
     declare_turn(marker)
    
     if marker == player_2.marker and @ai.opponent == true
