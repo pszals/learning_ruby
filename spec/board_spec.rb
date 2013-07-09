@@ -233,19 +233,6 @@ describe Board do
     board.width = 3
     board.diagonal_up.should == [2,4,6]  
   end
-
-  it "provides a list of winning diagonals for any size board" do
-    board.width = 3
-    board.winning_diagonals.should include(
-                                        [0, 4, 8],
-                                        [2, 4, 6]
-                                      )
-    board.width = 4
-    board.winning_diagonals.should include(
-                                            [0,5,10,15],
-                                            [3,6,9,12]
-                                      )
-  end
   
   it "gathers winning board combinations for 3x3" do
     board.width = 3

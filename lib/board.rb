@@ -122,10 +122,6 @@ class Board
       diagonal << (index + 1)*(@width - 1)
     }
   end
-
-  def winning_diagonals
-    [] << diagonal_down << diagonal_up
-  end
   
   def gather_winning_combinations
     combos = []
