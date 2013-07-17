@@ -1,6 +1,5 @@
 require 'player'
 require 'board'
-require 'io'
 require 'unbeatable_ai'
 require 'runner'
 
