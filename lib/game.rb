@@ -1,6 +1,3 @@
-require 'player'
-require 'board'
-require 'unbeatable_ai'
 require 'runner'
 
 class Game
