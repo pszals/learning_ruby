@@ -1,18 +1,19 @@
-require 'io'
+
 require 'board'
 require 'game'
-
+require 'unbeatable_ai'
+require 'player'
 
 class Configuration
 
-  attr_accessor :ai, :io, :marker_type, :opponent, :board_width
+  attr_accessor :ai, :io#, :marker_type, :opponent, :board_width
   
   def initialize
     @io = Io.new
     @ai = Unbeatable_AI.new
-    @marker_type = false
-    @opponent = false
-    @board_width = false
+#     @marker_type = false
+#     @opponent = false
+#     @board_width = false
   end
   
   def configure_opponent

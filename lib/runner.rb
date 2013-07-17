@@ -1,6 +1,5 @@
 require 'board'
 require 'game'
-require 'io'
 require 'configuration'
 
 class Runner

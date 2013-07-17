@@ -11,7 +11,7 @@ class Game
     @board = board
     @ui = ui
     @ai = ai
-    @unbeatable_ai = Unbeatable_AI.new
+    @unbeatable_ai = ai
     @runner = Runner.new(ui)
   end
                 

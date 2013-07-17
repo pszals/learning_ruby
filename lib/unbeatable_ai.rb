@@ -1,5 +1,4 @@
 require 'board'
-require 'game'
 
 class Unbeatable_AI
   
