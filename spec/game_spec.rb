@@ -8,9 +8,9 @@ describe Game do
   let(:player_1) { Player.new('X')                             }
   let(:player_2) { Player.new('O')                             }
   let(:board)    { Board.new(player_1, player_2)               }
-  let(:io)       { Io.new                                      }
+  let(:ui)       { Io.new                                      }
   let(:ai)       { Unbeatable_AI.new                           }
-  let(:game)     { Game.new(board, io, ai, player_1, player_2) }
+  let(:game)     { Game.new(board, ui, ai, player_1, player_2) }
   
   
   it "initializes game with a board and two players" do
@@ -22,8 +22,8 @@ describe Game do
   end
   
   it "initializes game with IO class" do
-    game.io.should_receive(:get_input)
-    game.io.get_input
+    game.ui.should_receive(:get_input)
+    game.ui.get_input
   end
 
   it "places marker by setting square 5 to 'X'" do
@@ -50,9 +50,9 @@ describe Game do
     
   it "declares the start of a turn" do
     marker = 'X'
-    game.io.should_receive(:puts_turn)
-    game.io.should_receive(:ask_for_square_to_mark)
-    game.io.should_receive(:print_board)
+    game.ui.should_receive(:puts_turn)
+    game.ui.should_receive(:ask_for_square_to_mark)
+    game.ui.should_receive(:print_board)
     game.declare_turn(marker)
   end
   
@@ -60,26 +60,26 @@ describe Game do
     board.current_board = ['X', 'O', '3', 
                            '4', '5', '6', 
                            '7', '8', '9'] 
-    game.io.should_receive(:marker_error)
+    game.ui.should_receive(:marker_error)
     game.should_receive(:select_square).exactly(2).times
     game.place_marker(1, 'X')
   end  
   
   it "ends and restarts the game" do
-    game.io.should_receive(:puts_winner)    
-    game.io.should_receive(:ask_to_restart)
-    game.io.should_receive(:print_board)    
-    game.io.should_receive(:get_input)
+    game.ui.should_receive(:puts_winner)    
+    game.ui.should_receive(:ask_to_restart)
+    game.ui.should_receive(:print_board)    
+    game.ui.should_receive(:get_input)
     game.should_receive(:restart?)
-    game.game_over(io.puts_winner('X'))
+    game.game_over(game.ui.puts_winner('X'))
   end
     
   it "checks for a winner on board" do
-    game.io.should_receive(:puts_winner)    
+    game.ui.should_receive(:puts_winner)    
     board.should_receive(:winner_on_board?)
-    game.io.should_receive(:gets).and_return('3')
-    game.io.should_receive(:print_board)
-    game.io.should_receive(:ask_to_restart)    
+    game.ui.should_receive(:gets).and_return('3')
+    game.ui.should_receive(:print_board)
+    game.ui.should_receive(:ask_to_restart)    
     game.should_receive(:exit)
     game.find_winner
   end
@@ -90,12 +90,12 @@ describe Game do
   end
     
   it "checks that the board is open" do
-    game.io.should_receive(:puts_tie)  
+    game.ui.should_receive(:puts_tie)  
     board.should_receive(:board_open?)
     game.should_receive(:restart?) 
-    game.io.should_receive(:gets).and_return('3')
-    game.io.should_receive(:print_board)
-    game.io.should_receive(:ask_to_restart)
+    game.ui.should_receive(:gets).and_return('3')
+    game.ui.should_receive(:print_board)
+    game.ui.should_receive(:ask_to_restart)
     game.find_winner      
   end
   
@@ -103,10 +103,10 @@ describe Game do
     board.current_board = ['X', 'O', 'X', 
                            'O', 'O', 'X', 
                            'X', 'X', 'O']
-    game.io.should_receive(:puts_tie)
-    game.io.should_receive(:ask_to_restart)
-    game.io.should_receive(:print_board)    
-    game.io.should_receive(:get_input)
+    game.ui.should_receive(:puts_tie)
+    game.ui.should_receive(:ask_to_restart)
+    game.ui.should_receive(:print_board)    
+    game.ui.should_receive(:get_input)
     game.should_receive(:restart?)
     game.find_winner  
   end
@@ -115,22 +115,22 @@ describe Game do
     board.current_board = ['X', 'O', 'X', 
                            'O', 'X', 'O', 
                            'O', 'O', 'X']
-    game.io.should_receive(:puts_winner)
-    game.io.should_receive(:print_board)
-    game.io.should_receive(:gets).and_return('3')
-    game.io.should_receive(:ask_to_restart)
+    game.ui.should_receive(:puts_winner)
+    game.ui.should_receive(:print_board)
+    game.ui.should_receive(:gets).and_return('3')
+    game.ui.should_receive(:ask_to_restart)
     game.should_receive(:exit)
     game.find_winner
   end
 
   it "asks to restart and gets input to restart" do
-    game.io.should_receive(:puts_winner)  
+    game.ui.should_receive(:puts_winner)  
     board.current_board = ['X', 'O', 'X', 
                            'O', 'O', 'X', 
                            'X', 'X', 'X']
-    game.io.should_receive(:ask_to_restart)
-    game.io.should_receive(:print_board)
-    game.io.should_receive(:get_input)
+    game.ui.should_receive(:ask_to_restart)
+    game.ui.should_receive(:print_board)
+    game.ui.should_receive(:get_input)
     game.should_receive(:exit)
     game.find_winner
   end

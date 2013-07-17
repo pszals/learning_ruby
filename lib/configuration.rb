@@ -5,13 +5,16 @@ require 'game'
 
 class Configuration
 
-  attr_accessor :ai, :io
+  attr_accessor :ai, :io, :marker_type, :opponent, :board_width
   
   def initialize
     @io = Io.new
     @ai = Unbeatable_AI.new
+    @marker_type = false
+    @opponent = false
+    @board_width = false
   end
-   
+  
   def configure_opponent
     @io.ask_for_opponent
     opponent_type = @io.get_opponent

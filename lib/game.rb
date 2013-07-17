@@ -7,22 +7,22 @@ require 'runner'
 class Game
   
   attr_accessor :player_1, :player_2
-  attr_reader :io, :board, :ai, :unbeatable_ai, :runner
+  attr_reader :ui, :board, :ai, :unbeatable_ai, :runner 
 
-  def initialize(board, io, ai, player_1, player_2)
+  def initialize(board, ui, ai, player_1, player_2)
     @player_1 = player_1
     @player_2 = player_2
     @board = board
-    @io = io
+    @ui = ui
     @ai = ai
     @unbeatable_ai = Unbeatable_AI.new
-    @runner = Runner.new
+    @runner = Runner.new(ui)
   end
                 
   def declare_turn(marker)
-    @io.puts_turn(marker)
-    @io.print_board(@board.display_board)
-    @io.ask_for_square_to_mark    
+    @ui.puts_turn(marker)
+    @ui.print_board(@board.display_board)
+    @ui.ask_for_square_to_mark    
   end
   
   def select_square
@@ -33,7 +33,7 @@ class Game
     if marker == player_2.marker and @ai.opponent == true
       square = @unbeatable_ai.make_move(@board, marker)
     else
-      square = @io.get_square_to_mark
+      square = @ui.get_square_to_mark
     end
    
     place_marker(square, marker)
@@ -42,7 +42,7 @@ class Game
   def place_marker(square, marker)
    
     if @board.square_empty?(square) == false 
-      @io.marker_error
+      @ui.marker_error
       select_square
     end
    
@@ -57,18 +57,18 @@ class Game
     if winner == false and open_board
       select_square
     elsif winner != false
-      game_over(@io.puts_winner(winner))
+      game_over(@ui.puts_winner(winner))
     else
-      game_over(@io.puts_tie)
+      game_over(@ui.puts_tie)
     end
   
   end
   
   def game_over(final_game_message)
-    @io.print_board(@board.display_board)
+    @ui.print_board(@board.display_board)
     final_game_message
-    @io.ask_to_restart
-    choice = @io.get_input
+    @ui.ask_to_restart
+    choice = @ui.get_input
     restart?(choice)  
   end
   
