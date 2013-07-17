@@ -1,6 +1,6 @@
 require 'configuration'
 require 'board'
-require 'io'
+
 
 
 describe Configuration do
@@ -21,8 +21,8 @@ describe Configuration do
   end
   
   it "configures the board size" do
-    configuration.io.should_receive(:gets).and_return("4")
-    configuration.io.should_receive(:ask_for_width_of_board)
+    configuration.ui.should_receive(:gets).and_return("4")
+    configuration.ui.should_receive(:ask_for_width_of_board)
     new_board = configuration.configure_board(player_1, player_2)
     new_board.should be_kind_of(Board)
     new_board.player_1.should be_kind_of(Player)
@@ -31,8 +31,8 @@ describe Configuration do
   end
   
   it "sets ai.opponent to be true" do
-    configuration.io.should_receive(:gets).and_return('1')
-    configuration.io.should_receive(:ask_for_opponent)
+    configuration.ui.should_receive(:gets).and_return('1')
+    configuration.ui.should_receive(:ask_for_opponent)
     ai = configuration.configure_opponent
     ai.opponent.should == true
   end

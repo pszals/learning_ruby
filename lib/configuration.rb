@@ -1,4 +1,4 @@
-
+require 'console_ui'
 require 'board'
 require 'game'
 require 'unbeatable_ai'
@@ -6,10 +6,10 @@ require 'player'
 
 class Configuration
 
-  attr_accessor :ai, :io#, :marker_type, :opponent, :board_width
+  attr_accessor :ai, :ui#, :marker_type, :opponent, :board_width
   
   def initialize
-    @io = Io.new
+    @ui = Console_UI.new
     @ai = Unbeatable_AI.new
 #     @marker_type = false
 #     @opponent = false
@@ -17,8 +17,8 @@ class Configuration
   end
   
   def configure_opponent
-    @io.ask_for_opponent
-    opponent_type = @io.get_opponent
+    @ui.ask_for_opponent
+    opponent_type = @ui.get_opponent
     if opponent_type == 1  
       @ai.opponent = true
       @ai
@@ -29,8 +29,8 @@ class Configuration
   end
     
   def get_marker
-    @io.ask_for_marker_type  
-    marker = @io.get_marker_type
+    @ui.ask_for_marker_type  
+    marker = @ui.get_marker_type
     return marker
   end
   
@@ -38,7 +38,7 @@ class Configuration
     if marker.length == 1 and marker =~ /[A-Za-z]/
       player_1 = Player.new(marker)
     else
-      io.marker_error
+      ui.marker_error
       configure_player_1(get_marker) 
     end
   end
@@ -47,15 +47,15 @@ class Configuration
     if marker.length == 1 and marker =~ /[A-Za-z]/
       player_2 = Player.new(marker)
     else
-      io.marker_error
+      ui.marker_error
       configure_player_2(get_marker) 
     end  
   end
 
   def configure_board(player_1, player_2)
     board = Board.new(player_1, player_2)
-    @io.ask_for_width_of_board
-    board_width = @io.get_width_of_board
+    @ui.ask_for_width_of_board
+    board_width = @ui.get_width_of_board
     if board_width == 3
       board.width = 3
       board

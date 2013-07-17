@@ -1,6 +1,5 @@
 require 'runner'
 require 'board'
-require 'io'
 require 'game'
 require 'configuration'
 
