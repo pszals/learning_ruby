@@ -5,10 +5,10 @@ require 'board'
 
 describe Configuration do
 
-  let(:player_1)      { Player.new('X')     }
-  let(:player_2)      { Player.new('O')     }
-  let(:io)            { mock.as_null_object }
-  let(:configuration) { Configuration.new   }
+  let(:player_1)      { Player.new('X')         }
+  let(:player_2)      { Player.new('O')         }
+  let(:io)            { Console_UI.new          }
+  let(:configuration) { Configuration.new(io)   }
 
   it "configures game piece for player 1" do
     configuration.configure_player_1('z').should be_kind_of(Player)

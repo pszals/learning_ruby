@@ -14,7 +14,7 @@ class Runner
   end
 
   def configure_game
-    configuration = Configuration.new
+    configuration = Configuration.new(@ui)
     ai = configuration.configure_opponent
     player_1 = configuration.configure_player_1(configuration.get_marker)
     player_2 = configuration.configure_player_2(configuration.get_marker)
