@@ -6,7 +6,7 @@ require 'player'
 
 class Configuration
 
-  attr_accessor :ai, :ui, :board_width#, :marker_type, :opponent 
+  attr_accessor :ai, :ui, :board_width #, :marker_type, :opponent 
   
   def initialize(user_interface)
     @ui = user_interface
@@ -38,7 +38,7 @@ class Configuration
     if marker.length == 1 and marker =~ /[A-Za-z]/
       player_1 = Player.new(marker)
     else
-      ui.marker_error
+      @ui.marker_error
       configure_player_1(get_marker) 
     end
   end
@@ -47,7 +47,7 @@ class Configuration
     if marker.length == 1 and marker =~ /[A-Za-z]/
       player_2 = Player.new(marker)
     else
-      ui.marker_error
+      @ui.marker_error
       configure_player_2(get_marker) 
     end  
   end
