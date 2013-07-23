@@ -11,5 +11,5 @@ describe Runner do
   it "starts up the game" do
     runner.should_receive(:start_game)
     runner.start_game
-  end  
+  end
 end
