@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 $LOAD_PATH.unshift File.expand_path('../../lib', __FILE__)
 require 'runner'
-require 'console_ui' # same as io.rb
+require 'console_ui'
 
 Runner.new(Console_UI.new).call
