@@ -6,14 +6,12 @@ require 'player'
 
 class Configuration
 
-  attr_accessor :ai, :ui, :board_width #, :marker_type, :opponent 
+  attr_accessor :ai, :ui, :board_width
   
   def initialize(user_interface)
     @ui = user_interface
     @ai = Unbeatable_AI.new
-#     @marker_type = false
-#     @opponent = false
-     @board_width = false
+    @board_width = false
   end
   
   def configure_opponent

@@ -1,8 +1,8 @@
 Gem::Specification.new do |s|
   s.version     = '0.0.0'
-  s.name        = 'tic_tac_toe'
+  s.name        = 'phils_ttt'
   s.description = 'tic tac toe game engine'
-  s.summary     = 'tic tac toe for sinatra'
+  s.summary     = 'a simple tic tac toe game'
   s.authors     = 'Philip Szalwinski'
   s.email       = 'pszalwinski@gmail.com'
   s.files       += Dir.glob("lib/**/*")       

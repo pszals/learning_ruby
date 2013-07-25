@@ -149,18 +149,6 @@ describe Board do
                                   " 13 | 14 | 15 | 16 \n"
   end
 
-#   it "returns square board to be printed of 4x4 size" do
-#     board = Board.new
-#     board.display_board.should == 
-#                                   " 01 | 02 | 03 | 04 \n"\
-#                                   "----|----|----|----\n"\
-#                                   " 05 | 06 | 07 | 08 \n"\
-#                                   "----|----|----|----\n"\
-#                                   " 09 | 10 | 11 | 12 \n"\
-#                                   "----|----|----|----\n"\
-#                                   " 13 | 14 | 15 | 16 \n"
-#   end
-  
   it "undoes the placement of a marker" do
     board.current_board = ['X', '2', '3', 
                            '4', '5', '6', 
