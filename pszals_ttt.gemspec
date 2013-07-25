@@ -7,4 +7,5 @@ Gem::Specification.new do |s|
   s.authors     = ["Philip Szalwinski"]
   s.email       = 'pszalwinski@gmail.com'
   s.files       += Dir.glob("lib/**/*")
+  s.executables << 'tictactoe'
 end
