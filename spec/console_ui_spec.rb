@@ -2,6 +2,8 @@ require 'console_ui'
 
 describe Console_UI do
 
+  let(:ui) {Console_UI.new}
+
   it "prints 'It's X's turn" do
     ui = Console_UI.new
     ui.should_receive(:put_to_console)
@@ -30,6 +32,18 @@ describe Console_UI do
     ui = Console_UI.new
     ui.should_receive(:put_to_console)
     ui.ask_for_square_to_mark
+  end
+
+  it "declares the start of a turn" do
+    marker = 'X'
+    board  = ['1', '2', '3',
+              '4', '5', '6',
+              '7', '8', '9'
+             ]
+    ui.should_receive(:puts_turn)
+    ui.should_receive(:ask_for_square_to_mark)
+    ui.should_receive(:print_board)
+    ui.declare_turn(marker, board)
   end
 
   it "prints error message if square is marked or improper input" do

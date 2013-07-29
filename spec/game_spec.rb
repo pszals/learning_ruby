@@ -48,19 +48,12 @@ describe Game do
     game.restart?(2)
   end
     
-  it "declares the start of a turn" do
-    marker = 'X'
-    game.ui.should_receive(:puts_turn)
-    game.ui.should_receive(:ask_for_square_to_mark)
-    game.ui.should_receive(:print_board)
-    game.declare_turn(marker)
-  end
   
   it "puts marker error, ask for, and get square if square entered is invalid" do
     board.current_board = ['X', 'O', '3', 
                            '4', '5', '6', 
                            '7', '8', '9'] 
-    game.ui.should_receive(:marker_error)
+    ui.should_receive(:marker_error)
     game.should_receive(:select_square).exactly(2).times
     game.place_marker(1, 'X')
   end  

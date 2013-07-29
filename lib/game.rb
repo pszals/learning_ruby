@@ -15,16 +15,10 @@ class Game
     @runner = Runner.new(ui)
   end
                 
-  def declare_turn(marker)
-    @ui.puts_turn(marker)
-    @ui.print_board(@board.display_board)
-    @ui.ask_for_square_to_mark    
-  end
-  
   def select_square
     square = nil
     marker = @board.whose_turn
-    declare_turn(marker)
+    ui.declare_turn(marker, @board.display_board)
    
     if marker == player_2.marker and @ai.opponent == true
       square = @unbeatable_ai.make_move(@board, marker)

@@ -23,7 +23,13 @@ class Console_UI
   def get_first_player
     get_input
   end
-  
+ 
+  def declare_turn(marker, board)
+    puts_turn(marker)
+    ask_for_square_to_mark
+    print_board(board) 
+  end
+
   def ask_for_opponent
     put_to_console("Enter 1 for computer opponent or any key for human opponent")
   end
