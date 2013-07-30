@@ -37,23 +37,21 @@ class Game
     end
    
     @board.set_square(square, marker)
-    find_winner
+    find_winner if game_won?
+  end
+
+  def game_won?
+    @board.game_won?
   end
 
   def find_winner
-    winner = @board.winner_on_board?
-    open_board = @board.board_open?
-   
-    if winner == false and open_board
-      select_square
-    elsif winner != false
-      game_over(@ui.puts_winner(winner))
-    else
-      game_over(@ui.puts_tie)
-    end
-  
+    @board.winner
   end
-  
+ 
+  def take_turn
+
+  end
+
   def game_over(final_game_message)
     @ui.print_board(@board.display_board)
     final_game_message

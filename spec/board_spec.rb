@@ -93,7 +93,7 @@ describe Board do
     board.current_board = ['1', '2', '3', 
                            '4', '5', '6', 
                            'X', 'X', 'X']
-    board.winner_on_board?.should == 'X'
+    board.game_won?.should == true
   end
   
   it "returns marker type of winner on board" do
@@ -102,17 +102,42 @@ describe Board do
                             'X', '6', '7', '8', 
                             'X', '10', '11', '12', 
                             'X', '14', '15', '16']
-    board.winner_on_board?.should == 'X'
+    board.game_won?.should == true
   end
-
         
   it "returns false if there is no winner on board" do
     board.current_board = ['1', '2', '3', 
                            '4', '5', '6', 
                            'O', 'X', 'X']
-    board.winner_on_board?.should == false
+    board.game_won?.should == false
   end
-  
+
+  it "returns marker type of winner on board" do
+    board.width = 4
+    board.current_board = [ 'X', 'X', 'X', 'X', 
+                            'X', '6', '7', '8', 
+                            'X', '10', '11', '12', 
+                            'X', '14', '15', '16']
+    board.winner.should == 'X'
+  end
+
+  it "returns marker type of winner on board" do
+    board.width = 4
+    board.current_board = [ 'O', 'X', 'X', 'X', 
+                            'O', '6', '7', '8', 
+                            'O', '10', '11', '12', 
+                            'O', '14', '15', '16']
+    board.winner.should == 'O'
+  end
+
+
+   it "returns marker type of winner on board" do
+    board.current_board = ['1', '2', '3', 
+                           '4', '5', '6', 
+                           'X', 'X', 'X']
+    board.winner.should == 'X'
+  end
+
   it "returns the number of markers present on board" do
     board.current_board = ['1', '2', '3', 
                            '4', '5', '6', 
@@ -181,7 +206,7 @@ describe Board do
     board.current_board = ['X', 'O', 'O', 
                            'X', 'X', 'O', 
                            'X', 'X', 'X']
-    board.game_won?('X').should == true    
+    board.game_won?.should == true    
   end
 
   it "algorithmically provides a list of winning rows for any size board" do

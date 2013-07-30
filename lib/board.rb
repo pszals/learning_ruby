@@ -69,8 +69,8 @@ class Board
     @current_board.length - list_of_open_squares.length
   end
 
-  def winner_on_board?
-    winning_marker = false
+  def winner
+    winning_marker = :no_winner
     gather_winning_combinations.each do |combo|
       marker = @current_board[combo[0]]
       winner = []
@@ -84,12 +84,12 @@ class Board
   end
   
   def game_over?
-    (!board_open? or winner_on_board?) ? true : false
+     !board_open? or game_won?
   end
   
-  def game_won?(marker)
-    winner_on_board? == marker ? true : false
-  end
+ def game_won?
+    winner == :no_winner ? false : true
+ end
   
   def board_indices
     (0...@width**2).to_a

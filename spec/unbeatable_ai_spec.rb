@@ -16,6 +16,7 @@ describe Unbeatable_AI do
     board.current_board = ['X', 'X', 'X', 
                            '4', '5', '6', 
                            '7', '8', '9']
+    board.should_receive(:winner).exactly(2).times.and_return('X')
     ai.score_board(board, 'X').should == 1
   end
   

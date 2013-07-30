@@ -9,16 +9,16 @@ class Unbeatable_AI
   end
 
   def score_board(board, marker)
-    if !board.board_open? and !board.winner_on_board?
+    if board.winner == :no_winner 
       return 0 
-    elsif board.game_won?(marker)
+    elsif board.winner == marker
       1.0
     else
       -1.0
     end
   end
 
-   def minimax(board, marker, depth, alpha, beta)
+  def minimax(board, marker, depth, alpha, beta)
     opponent = board.get_opponent
     score = 0
     best_score = -1.0/0
