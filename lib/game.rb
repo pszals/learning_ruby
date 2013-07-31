@@ -52,7 +52,6 @@ class Game
   def game_loop 
     if !game_over?
       select_square
-      puts "game_won?"
     elsif game_won?
       game_over(@ui.puts_winner(find_winner))
     else

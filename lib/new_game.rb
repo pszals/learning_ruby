@@ -19,7 +19,7 @@ class New_Game
   end
  
   def play_game
-    find_winner
+    game_loop
   end  
                
   def select_square
@@ -44,17 +44,21 @@ class New_Game
     end
    
     @board.set_square(square, marker)
-    find_winner
+    game_loop
   end
 
-  def find_winner
+  def game_loop
     if !game_over?
-      select_square
+      winner
     elsif winner != :no_winner 
       ui.display_winner(winner) 
     else
       ui.display_tie
     end
+  end
+
+  def best_move 
+    @unbeatable_ai.make_move(@board, @board.whose_turn)
   end
  
   def board_open?
