@@ -38,7 +38,7 @@ class Game
     
     @board.set_square(square, marker)
     find_winner if game_won?
-    select_square
+    game_loop
   end
 
   def game_won?
@@ -52,6 +52,7 @@ class Game
   def game_loop 
     if !game_over?
       select_square
+      puts "game_won?"
     elsif game_won?
       game_over(@ui.puts_winner(find_winner))
     else
