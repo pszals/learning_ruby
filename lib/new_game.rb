@@ -48,23 +48,25 @@ class New_Game
   end
 
   def find_winner
-   
-    if !winner? and board_open?
+    if !game_over?
       select_square
-    elsif winner?
+    elsif winner 
       "Player X Wins!"
     else
       "Tie Game"
     end
-  
   end
  
   def board_open?
     @board.board_open?
   end
 
-  def winner?
-    @board.winner_on_board?
+  def game_over?
+    @board.game_over?
+  end
+
+  def winner 
+    @board.winner
   end
 
   def game_over(final_game_message)

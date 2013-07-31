@@ -67,19 +67,22 @@ describe Game do
     game.game_over(game.ui.puts_winner('X'))
   end
     
-  it "checks for a winner on board" do
+  it "" do
+    board.current_board =  ['X', 'X', 'X', 
+                            'O', 'O', 'X', 
+                            'X', 'X', 'O'
+                           ]
     game.ui.should_receive(:puts_winner)    
-    board.should_receive(:winner_on_board?)
     game.ui.should_receive(:gets).and_return('3')
     game.ui.should_receive(:print_board)
     game.ui.should_receive(:ask_to_restart)    
     game.should_receive(:exit)
-    game.take_turn
+    game.game_loop
   end
   
   it "takes turn if there is no winner on board" do
     game.should_receive(:select_square)  
-    game.take_turn
+    game.game_loop
   end
     
   it "checks that the board is open" do
@@ -89,7 +92,7 @@ describe Game do
     game.ui.should_receive(:gets).and_return('3')
     game.ui.should_receive(:print_board)
     game.ui.should_receive(:ask_to_restart)
-    game.take_turn      
+    game.game_loop      
   end
   
   it "puts out that there is a tie, asks to restart and gets choice" do
@@ -101,7 +104,7 @@ describe Game do
     game.ui.should_receive(:print_board)    
     game.ui.should_receive(:get_input)
     game.should_receive(:restart?)
-    game.take_turn  
+    game.game_loop  
   end
   
   it "puts out the winner" do
@@ -113,7 +116,7 @@ describe Game do
     game.ui.should_receive(:gets).and_return('3')
     game.ui.should_receive(:ask_to_restart)
     game.should_receive(:exit)
-    game.take_turn
+    game.game_loop
   end
 
   it "asks to restart and gets input to restart" do
@@ -125,7 +128,7 @@ describe Game do
     game.ui.should_receive(:print_board)
     game.ui.should_receive(:get_input)
     game.should_receive(:exit)
-    game.take_turn
+    game.game_loop
   end
 
   it "plays the game after a fresh start" do

@@ -48,8 +48,18 @@ class Game
     @board.winner
   end
  
-  def take_turn
+  def game_loop 
+    if !game_over?
+      select_square
+    elsif game_won?
+      game_over(@ui.puts_winner(find_winner))
+    else
+      game_over(@ui.puts_tie)
+    end
+  end
 
+  def game_over?
+    @board.game_over?
   end
 
   def game_over(final_game_message)
