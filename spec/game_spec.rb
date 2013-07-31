@@ -54,7 +54,7 @@ describe Game do
                            '4', '5', '6', 
                            '7', '8', '9'] 
     ui.should_receive(:marker_error)
-    game.should_receive(:select_square)
+    game.should_receive(:select_square).exactly(2).times
     game.place_marker(1, 'X')
   end  
   

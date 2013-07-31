@@ -35,9 +35,10 @@ class Game
       @ui.marker_error
       select_square
     end
-   
+    
     @board.set_square(square, marker)
     find_winner if game_won?
+    select_square
   end
 
   def game_won?

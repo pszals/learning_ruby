@@ -23,7 +23,7 @@ class Runner
   end
     
   def play_game
-    @game.play_game
+    @game.game_loop
   end
   
 end
