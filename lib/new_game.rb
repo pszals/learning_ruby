@@ -7,7 +7,7 @@ class New_Game
   attr_accessor :player_1, :player_2
   attr_reader :ui, :board, :ai, :unbeatable_ai, :runner 
 
-  def initialize(current_board, ai = Unbeatable_AI.new)
+  def initialize(ui, current_board, ai = Unbeatable_AI.new)
     @player_1 = Player.new('X')
     @player_2 = Player.new('O')
     @board = Board.new(@player_1, @player_2) 
@@ -53,7 +53,7 @@ class New_Game
     elsif winner != :no_winner 
       ui.display_winner(winner) 
     else
-      "Tie Game"
+      ui.display_tie
     end
   end
  
