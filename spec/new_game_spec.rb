@@ -38,7 +38,9 @@ describe New_Game do
                      'O', 'X', 'O',
                     ]
     game = New_Game.new(current_board)
-    game.play_game.should == "Tie Game"
+    game.ui.should_receive(:display_tie)
+    game.find_winner
+
   end
 
    it "takes a full board with a winner and returns 'Player X Wins!'" do
@@ -47,16 +49,19 @@ describe New_Game do
                      'O', 'X', 'X',
                     ]
     game = New_Game.new(current_board)
-    game.play_game.should == "Player X Wins!"
+    game.ui.should_receive(:display_winner).with('X')
+    game.find_winner
+
   end
 
-  it "takes a full board with a winner and returns 'Player O Wins!'" do
+  it "takes a full board with a winner and sends message to UI" do
     current_board = ['O', 'O', 'X',
                      'O', 'X', 'O',
                      'O', 'X', 'X',
                     ]
     game = New_Game.new(current_board)
-    game.play_game.should == "Player O Wins!"
+    game.ui.should_receive(:display_winner).with('O')
+    game.find_winner
   end
 
 end

@@ -50,8 +50,8 @@ class New_Game
   def find_winner
     if !game_over?
       select_square
-    elsif winner 
-      "Player X Wins!"
+    elsif winner != :no_winner 
+      ui.display_winner(winner) 
     else
       "Tie Game"
     end
