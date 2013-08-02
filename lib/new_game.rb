@@ -19,21 +19,28 @@ class New_Game
   end
  
   def play_game
-    game_loop
+    run_game
   end  
                
   def select_square
-    square = nil
+    square = 'square' 
     marker = @board.whose_turn
-    ui.declare_turn(marker, @board.display_board)
-   
-    if marker == player_2.marker and @ai.opponent == true
+    @ai.opponent = true
+
+    if marker == @player_2.marker 
       square = @unbeatable_ai.make_move(@board, marker)
+      place_marker(square, marker)
+    end 
+    
+    if !game_over?
+      return square
+    elsif winner != :no_winner 
+      puts "display winner"
+      ui.display_winner(winner) 
     else
-      square = @ui.get_square_to_mark
+      puts "display tie"
+      ui.display_tie
     end
-   
-    place_marker(square, marker)
   end
 
   def place_marker(square, marker)
@@ -44,12 +51,12 @@ class New_Game
     end
    
     @board.set_square(square, marker)
-    game_loop
+    run_game
   end
 
-  def game_loop
+  def run_game
     if !game_over?
-      winner
+      ui.place_marker(select_square)
     elsif winner != :no_winner 
       ui.display_winner(winner) 
     else
