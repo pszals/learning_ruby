@@ -9,7 +9,8 @@ class WebGame
   attr_reader :ui, :board, :ai, :unbeatable_ai, :runner 
 
   #=> {'X' => UnbeatableAI, 'O' => Human}
-  def initialize(board_size, player_configuration)
+  def initialize
+    @board_width = board_width
     configs = configure_game!(board_size, player_configuration)
     start_game!(configs)
   end
