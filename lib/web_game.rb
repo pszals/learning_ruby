@@ -8,21 +8,6 @@ class WebGame
   attr_accessor :player_1, :player_2
   attr_reader :ui, :board, :ai, :unbeatable_ai, :runner 
 
-  #=> {'X' => UnbeatableAI, 'O' => Human}
-  def initialize
-    @board_width = board_width
-    configs = configure_game!(board_size, player_configuration)
-    start_game!(configs)
-  end
-
-  def configure_game!(board_size, player_configuration)
-    Configuration.new(board_size, kjsdkfjskdf, :web)
-  end
-
-  def start_game!(configs)
-    @web_game = WebGame.new(configs).start!
-  end
-
   def make_move(peice)
     @game.make_move(peice)
   end
@@ -98,5 +83,4 @@ class WebGame
   def restart?(input)
     input == 1 ? @runner.call : exit  
   end
-      
 end

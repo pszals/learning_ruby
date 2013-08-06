@@ -7,8 +7,8 @@ require 'player'
 
 class Configuration
 
-  attr_accessor :ai, :ui, :board_width, :web_game, :player_1, :player_2, :marker
-  
+  attr_accessor  :marker, :opponent, :ui, :board_width, :ai, :player_1, :player_2, :params   
+
   def initialize(marker, opponent, board_width, user_interface)
     @marker = marker
     @opponent = opponent
@@ -16,14 +16,14 @@ class Configuration
     @board_width = board_width
     @ai = Unbeatable_AI.new
   end
-    
-  def get_marker
-    @ui.ask_for_marker_type  
-    marker = @ui.get_marker_type
-    return marker
+
+  def configure_game
+    configure_opponent
+    configure_players
+    configure_board(player_1, player_2)
   end
 
-   def configure_opponent
+  def configure_opponent
     if @opponent == 'computer'
       @ai.opponent = true
       @ai
@@ -52,8 +52,6 @@ class Configuration
        board.width = 4
        board.current_board = board.squares_with_integers
        board
-    else
-      configure_board(player_1, player_2)
-    end      
+    end
   end
 end
