@@ -1,8 +1,5 @@
 require "board"
 require "player"
-require 'surrogate'
-require 'surrogate/rspec'
-require File.path('./spec/mock_board')
 
 describe Board do
 
@@ -10,10 +7,6 @@ describe Board do
   let(:player_2) { Player.new('O')               }
   let(:board)    { Board.new(player_1, player_2) }
 
-  it 'has a mock that shares its interface' do
-    described_class.should substitute_for MockBoard
-  end
-     
   it "gets whose turn" do
     board.whose_turn.should == 'X'  
   end

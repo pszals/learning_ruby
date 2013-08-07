@@ -25,11 +25,11 @@ describe Configuration do
   end
   
   it "configures the board size" do
-    new_board = configuration.configure_board(player_1, player_2)
-    new_board.should be_kind_of(Board)
-    new_board.player_1.should be_kind_of(Player)
-    new_board.player_2.should be_kind_of(Player)
-    new_board.width.should == 3
+    configuration.configure_board(player_1, player_2)
+    configuration.board.should be_kind_of(Board)
+    configuration.player_1.should be_kind_of(Player)
+    configuration.player_2.should be_kind_of(Player)
+    configuration.board.width.should == 3
   end
   
   it "configures AI opponent" do

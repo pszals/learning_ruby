@@ -1,6 +1,6 @@
 class WebGame
   
-  attr_accessor :player_1, :player_2
+  attr_accessor :player_1, :player_2, :over, :winning_piece
   attr_reader :ui, :board, :ai, :runner 
 
   def initialize(configuration)
@@ -10,14 +10,43 @@ class WebGame
     @marker        = configuration.marker
     @player_1      = configuration.player_1
     @player_2      = configuration.player_2
+    @over          = false
   end
 
   def make_move(square)
     if board.square_empty?(square)
       board.set_square(square, board.whose_turn)
       @success = true
+      game_over?
     else
       @success = false
+    end
+  end
+
+  def check_game_over
+    if game_over?
+    end
+  end
+
+  def game_over(final_game_message)
+    @ui.print_board(@board.display_board)
+    final_game_message
+    @ui.ask_to_restart
+    choice = @ui.get_input
+    restart?(choice)  
+  end
+
+  def game_over?
+    if @board.game_over?
+      @over = true
+    end
+  end
+
+  def find_winner
+    if winning_piece != :no_winner
+      ui.display_winner(@winning_piece)
+    else
+      ui.display_tie
     end
   end
 
@@ -81,21 +110,10 @@ class WebGame
     @board.board_open?
   end
 
-  def game_over?
-    @board.game_over?
-  end
-
   def winner 
-    @board.winner
+    @winning_piece = @board.winner
   end
 
-  def game_over(final_game_message)
-    @ui.print_board(@board.display_board)
-    final_game_message
-    @ui.ask_to_restart
-    choice = @ui.get_input
-    restart?(choice)  
-  end
   
   def restart?(input)
     input == 1 ? @runner.call : exit  
