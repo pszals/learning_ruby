@@ -1,17 +1,34 @@
-require 'board'    
-require 'runner'
-require 'player'
-require 'configuration'
-
 class WebGame
   
   attr_accessor :player_1, :player_2
-  attr_reader :ui, :board, :ai, :unbeatable_ai, :runner 
+  attr_reader :ui, :board, :ai, :runner 
 
-  def make_move(peice)
-    @game.make_move(peice)
+  def initialize(configuration)
+    @ui            = configuration.ui
+    @board         = configuration.board
+    @ai            = configuration.ai
+    @marker        = configuration.marker
+    @player_1      = configuration.player_1
+    @player_2      = configuration.player_2
   end
- 
+
+  def make_move(square)
+    if board.square_empty?(square)
+      board.set_square(square, board.whose_turn)
+      @success = true
+    else
+      @success = false
+    end
+  end
+
+  def successful_move?
+    @success
+  end
+
+  def square_empty?(square)
+    board.square_empty?(square)
+  end
+
   def play_game
     run_game
   end  
@@ -22,11 +39,11 @@ class WebGame
     @ai.opponent = true
 
     if marker == @player_2.marker 
-      square = @unbeatable_ai.make_move(@board, marker)
-      place_marker(square, marker)
+      square = @ai.make_move(@board, marker)
+      @board.place_marker(square, marker)
     end 
     
-    if !game_over?
+    if !@board.game_over?
       return square
     elsif winner != :no_winner 
       ui.display_winner(winner) 
@@ -83,4 +100,5 @@ class WebGame
   def restart?(input)
     input == 1 ? @runner.call : exit  
   end
+      
 end

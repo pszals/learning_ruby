@@ -1,9 +1,9 @@
-require 'web_game'
+require 'game'
 require 'board'
 require 'player'
 require 'console_ui'
 
-describe WebGame do
+describe Game do
   
   let(:player_1) { Player.new('X')                             }
   let(:player_2) { Player.new('O')                             }

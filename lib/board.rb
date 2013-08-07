@@ -22,7 +22,7 @@ class Board
   end
 	
   def squares_with_integers
-    string_board = integer_board.map {|square| square.to_s}
+    integer_board.map {|square| square.to_s}
   end
 	
   def display_board

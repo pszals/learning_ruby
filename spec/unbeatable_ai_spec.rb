@@ -1,6 +1,5 @@
 require 'unbeatable_ai'
 require 'board'
-require 'pry'
 require 'game'
 
 describe Unbeatable_AI do

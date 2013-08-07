@@ -7,7 +7,7 @@ require 'player'
 
 class Configuration
 
-  attr_accessor  :marker, :opponent, :ui, :board_width, :ai, :player_1, :player_2, :params   
+  attr_accessor  :marker, :opponent, :ui, :board_width, :ai, :player_1, :player_2, :board 
 
   def initialize(marker, opponent, board_width, user_interface)
     @marker = marker
@@ -15,6 +15,7 @@ class Configuration
     @ui = user_interface
     @board_width = board_width
     @ai = Unbeatable_AI.new
+    configure_game
   end
 
   def configure_game
@@ -44,14 +45,12 @@ class Configuration
   end
 
   def configure_board(player_1, player_2)
-    board = Board.new(player_1, player_2)
+    @board = Board.new(player_1, player_2)
     if @board_width == '3'
-       board.width = 3
-       board
+       @board.width = 3
     elsif @board_width == '4'
-       board.width = 4
-       board.current_board = board.squares_with_integers
-       board
+       @board.width = 4
+       @board.current_board = board.squares_with_integers
     end
   end
 end
