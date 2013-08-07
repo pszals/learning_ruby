@@ -31,8 +31,8 @@ describe WebGame do
 
   context 'game is over' do
     it 'tells who won' do
-      game.over          = true
-      game.winning_piece = 'X'
+      game.over   = true
+      game.winner = 'X'
       game.ui.should_receive(:display_winner).with('X')
       game.find_winner
     end

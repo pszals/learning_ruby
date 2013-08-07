@@ -1,6 +1,6 @@
 class WebGame
   
-  attr_accessor :player_1, :player_2, :over, :winning_piece
+  attr_accessor :player_1, :player_2, :over, :winner
   attr_reader :ui, :board, :ai, :runner 
 
   def initialize(configuration)
@@ -11,6 +11,7 @@ class WebGame
     @player_1      = configuration.player_1
     @player_2      = configuration.player_2
     @over          = false
+    @winner        = board.winner
   end
 
   def make_move(square)
@@ -43,8 +44,8 @@ class WebGame
   end
 
   def find_winner
-    if winning_piece != :no_winner
-      ui.display_winner(@winning_piece)
+    if winner != :no_winner
+      ui.display_winner(winner)
     else
       ui.display_tie
     end
@@ -109,11 +110,6 @@ class WebGame
   def board_open?
     @board.board_open?
   end
-
-  def winner 
-    @winning_piece = @board.winner
-  end
-
   
   def restart?(input)
     input == 1 ? @runner.call : exit  
