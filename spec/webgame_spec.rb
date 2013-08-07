@@ -2,7 +2,7 @@ require 'webgame'
 require 'configuration'
 
 describe WebGame do
-    let(:configs) {Configuration.new('X', :human, 3, double(:ui))}
+    let(:configs) {Configuration.new('X', 'human', 3, double(:ui))}
     let(:game)    {described_class.new(configs)}
 
   context 'making a move' do
@@ -27,14 +27,26 @@ describe WebGame do
       game.over.should == false
       game.make_move(1)
     end
+
+    it 'turns AI on' do
+      game.toggle_ai
+      game.ai_on.should == false
+    end
   end
 
   context 'game is over' do
+    it 'tells if there is a tie game' do
+      game.over = true
+      game.winner = :no_winner
+      game.ui.should_receive(:display_tie)
+      game.end_game
+    end
+
     it 'tells who won' do
       game.over   = true
       game.winner = 'X'
       game.ui.should_receive(:display_winner).with('X')
-      game.find_winner
+      game.end_game
     end
   end
 end

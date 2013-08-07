@@ -1,7 +1,7 @@
 class WebGame
   
-  attr_accessor :player_1, :player_2, :over, :winner
-  attr_reader :ui, :board, :ai, :runner 
+  attr_accessor :player_1, :player_2, :over, :winner, :ai_on, :ai 
+  attr_reader :ui, :board, :runner 
 
   def initialize(configuration)
     @ui            = configuration.ui
@@ -11,7 +11,8 @@ class WebGame
     @player_1      = configuration.player_1
     @player_2      = configuration.player_2
     @over          = false
-    @winner        = board.winner
+    @winner        = :no_winner
+    @ai_on         = ai.opponent
   end
 
   def make_move(square)
@@ -26,6 +27,7 @@ class WebGame
 
   def check_game_over
     if game_over?
+      end_game
     end
   end
 
@@ -37,13 +39,20 @@ class WebGame
     restart?(choice)  
   end
 
-  def game_over?
-    if @board.game_over?
-      @over = true
+  def toggle_ai 
+    if ai.opponent == true
+      ai_on = true
     end
   end
 
-  def find_winner
+  def game_over?
+    if @board.game_over?
+      over = true
+      winner = board.winner
+    end
+  end
+  
+  def end_game 
     if winner != :no_winner
       ui.display_winner(winner)
     else
@@ -112,7 +121,7 @@ class WebGame
   end
   
   def restart?(input)
-    input == 1 ? @runner.call : exit  
+    input == 1 ? @Sinatra_TTT.new_game : exit  
   end
       
 end
