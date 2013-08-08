@@ -20,8 +20,16 @@ class WebGame
       board.set_square(square, board.whose_turn)
       @success = true
       game_over?
+      ai_move
     else
       @success = false
+    end
+  end
+
+  def game_over?
+    if @board.game_over?
+      over = true
+      @winner = board.winner
     end
   end
 
@@ -29,6 +37,20 @@ class WebGame
     if game_over?
       end_game
     end
+  end
+
+  def ai_move
+    if computer_turn?
+      board.set_square(computer_move, board.whose_turn)
+    end
+  end 
+
+  def computer_turn?
+    board.whose_turn == player_2.marker && ai.opponent == true
+  end
+
+  def computer_move
+    ai.make_move(@board, board.whose_turn)
   end
 
   def game_over(final_game_message)
@@ -42,13 +64,6 @@ class WebGame
   def toggle_ai 
     if ai.opponent == true
       ai_on = true
-    end
-  end
-
-  def game_over?
-    if @board.game_over?
-      over = true
-      winner = board.winner
     end
   end
   
@@ -123,5 +138,4 @@ class WebGame
   def restart?(input)
     input == 1 ? @Sinatra_TTT.new_game : exit  
   end
-      
 end

@@ -2,10 +2,11 @@ require 'webgame'
 require 'configuration'
 
 describe WebGame do
+
+  context 'making a move' do
     let(:configs) {Configuration.new('X', 'human', 3, double(:ui))}
     let(:game)    {described_class.new(configs)}
 
-  context 'making a move' do
     it 'sets the move for the current player' do
       game.square_empty?(1).should be_true
 
@@ -34,7 +35,24 @@ describe WebGame do
     end
   end
 
+  context 'using AI' do 
+    let(:configs) {Configuration.new('X', 'computer', 3, double(:ui))}
+    let(:game)    {described_class.new(configs)}
+
+    it 'makes a move with AI if it is computer turn' do
+#     game.board.should_receive(:set_square).exactly(2).times
+      game.ai.should_receive(:make_move)
+      game.ai.opponent = true
+      game.toggle_ai
+      game.ai_on.should == true
+      game.make_move(1)
+    end
+  end
+
   context 'game is over' do
+    let(:configs) {Configuration.new('X', 'human', 3, double(:ui))}
+    let(:game)    {described_class.new(configs)}
+
     it 'tells if there is a tie game' do
       game.over = true
       game.winner = :no_winner
