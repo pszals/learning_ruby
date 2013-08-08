@@ -39,8 +39,8 @@ class Configuration
       @player_1 = Player.new(@marker)
       @player_2 = Player.new('O')
     else
-      @player_1 = Player.new('O')
-      @player_2 = Player.new(@marker)
+      @player_1 = Player.new(@marker)
+      @player_2 = Player.new('X')
     end
   end
 
