@@ -209,6 +209,11 @@ describe Board do
     board.game_won?.should == true    
   end
 
+  it "slices board by row" do
+    board.width = 3
+    board.rows.class.should == Enumerator 
+  end
+
   it "algorithmically provides a list of winning rows for any size board" do
     board.width = 3
     board.winning_rows.should == [

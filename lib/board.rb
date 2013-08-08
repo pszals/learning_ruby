@@ -90,6 +90,10 @@ class Board
  def game_won?
     winner == :no_winner ? false : true
  end
+
+ def rows
+    @current_board.each_slice(@width)
+ end
   
   def board_indices
     (0...@width**2).to_a
