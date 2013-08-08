@@ -21,6 +21,7 @@ class WebGame
       @success = true
       game_over?
       ai_move
+      game_over?
     else
       @success = false
     end
