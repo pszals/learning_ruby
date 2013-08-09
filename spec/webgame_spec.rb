@@ -61,14 +61,14 @@ describe WebGame do
       game.over = true
       game.winner = :no_winner
       game.ui.should_receive(:display_tie)
-      game.end_game
+      game.game_over_message
     end
 
     it 'tells who won' do
       game.over   = true
       game.winner = 'X'
       game.ui.should_receive(:display_winner).with('X')
-      game.end_game
+      game.game_over_message
     end
   end
 end
