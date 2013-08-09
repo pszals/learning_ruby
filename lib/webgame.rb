@@ -10,13 +10,13 @@ class WebGame
     @marker        = configuration.marker
     @player_1      = configuration.player_1
     @player_2      = configuration.player_2
-    @over          = board.game_over?
+    @over          = false
     @winner        = :no_winner
     @ai_on         = ai.opponent
   end
 
   def make_move(square)
-    if board.square_empty?(square)
+    if board.square_empty?(square) && !over
       board.set_square(square, board.whose_turn)
       @success = true
       find_winner
@@ -30,19 +30,21 @@ class WebGame
   def find_winner
     if @board.game_over?
       @winner = board.winner
+      @over = true
     end
   end
 
   def ai_move
-    if computer_turn? and !game_over?
+    if computer_turn? and !over 
       board.set_square(computer_move, board.whose_turn)
     end
   end 
 
   def game_over_message 
-    if winner != :no_winner and over
+    puts board.current_board
+    if winner != :no_winner
       ui.display_winner(winner)
-    else
+    elsif over
       ui.display_tie
     end
   end
