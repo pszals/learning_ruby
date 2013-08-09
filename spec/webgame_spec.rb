@@ -28,11 +28,6 @@ describe WebGame do
       game.over.should == false
       game.make_move(1)
     end
-
-    it 'turns AI on' do
-      game.toggle_ai
-      game.ai_on.should == false
-    end
   end
 
   context 'using AI' do 
@@ -42,14 +37,13 @@ describe WebGame do
     it 'makes a move with AI if it is computer turn' do
       game.ai.should_receive(:make_move)
       game.ai.opponent = true
-      game.toggle_ai
-      game.ai_on.should == true
       game.make_move(1)
     end
 
     it 'does not make move when game is over' do
       game.over = true
       game.ai_move.should == nil
+      game.make_move(4).should == false
     end
   end
 

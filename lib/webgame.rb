@@ -1,6 +1,6 @@
 class WebGame
   
-  attr_accessor :player_1, :player_2, :over, :winner, :ai_on, :ai 
+  attr_accessor :player_1, :player_2, :over, :winner, :ai 
   attr_reader :ui, :board, :runner 
 
   def initialize(configuration)
@@ -12,11 +12,10 @@ class WebGame
     @player_2      = configuration.player_2
     @over          = false
     @winner        = :no_winner
-    @ai_on         = ai.opponent
   end
 
   def make_move(square)
-    if board.square_empty?(square) && !over
+    if eligible(square)
       board.set_square(square, board.whose_turn)
       @success = true
       find_winner
@@ -41,7 +40,6 @@ class WebGame
   end 
 
   def game_over_message 
-    puts board.current_board
     if winner != :no_winner
       ui.display_winner(winner)
     elsif over
@@ -49,8 +47,8 @@ class WebGame
     end
   end
 
-  def game_over?
-    board.game_over?
+  def eligible(square)
+    square_empty?(square) && !over
   end
 
   def computer_turn?
@@ -61,12 +59,6 @@ class WebGame
     ai.make_move(@board, board.whose_turn)
   end
 
-  def toggle_ai 
-    if ai.opponent == true
-      ai_on = true
-    end
-  end
-  
   def successful_move?
     @success
   end
@@ -75,19 +67,7 @@ class WebGame
     board.square_empty?(square)
   end
 
-  def play_game
-    run_game
-  end  
-               
-  def best_move 
-    @unbeatable_ai.make_move(@board, @board.whose_turn)
-  end
- 
   def board_open?
     @board.board_open?
-  end
-  
-  def restart?(input)
-    input == 1 ? @Sinatra_TTT.new_game : exit  
   end
 end
