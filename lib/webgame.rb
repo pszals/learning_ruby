@@ -14,7 +14,7 @@ class WebGame
     @winner        = :no_winner
   end
 
-  def make_move(square)
+  def play_game(square)
     if eligible?(square)
       board.set_square(square, board.whose_turn)
       @success = true
@@ -52,7 +52,7 @@ class WebGame
   end
 
   def computer_turn?
-    board.whose_turn == player_2.marker && ai.opponent == true
+    board.whose_turn == player_2.marker && ai.opponent
   end
 
   def computer_move

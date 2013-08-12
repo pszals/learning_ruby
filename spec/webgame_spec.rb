@@ -11,29 +11,29 @@ describe WebGame do
     it 'sets the move for the current player' do
       game.square_empty?(1).should be_true
 
-      game.make_move(1)
+      game.play_game(1)
 
       game.square_empty?(1).should be_false
       game.successful_move?.should be_true
     end
 
     it 'throws an error if the square is not empty' do
-      game.make_move(1)
-      game.make_move(1)
+      game.play_game(1)
+      game.play_game(1)
 
       game.successful_move?.should be_false
     end
 
     context 'responses when the game is over' do
       it 'over is false when there is no winner' do
-        game.make_move(1)
+        game.play_game(1)
         game.over.should be_false
       end
 
       it 'sets over to true when there is a winner' do
         configs.board.set_square(1, "X")
         configs.board.set_square(4, "X")
-        game.make_move(7)
+        game.play_game(7)
 
         game.over.should be_true
       end
@@ -51,7 +51,7 @@ describe WebGame do
                                       '7', 'X', '9'
       ]                 
       game.ai.opponent = true
-      game.make_move(4)
+      game.play_game(4)
       game.board.current_board.should == [
                                             'X', 'O', 'X',
                                             'X', 'O', 'O',
@@ -63,7 +63,7 @@ describe WebGame do
     it 'does not make move when game is over' do
       game.over = true
       game.ai_move.should == nil
-      game.make_move(4).should == false
+      game.play_game(4).should == false
     end
   end
 
