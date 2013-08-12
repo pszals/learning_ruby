@@ -1,5 +1,6 @@
 require 'webgame'
 require 'configuration'
+require '../sinatra_ttt/lib/sinatra_ui'
 
 describe WebGame do
 
@@ -23,10 +24,19 @@ describe WebGame do
       game.successful_move?.should be_false
     end
 
-    it 'checks for end of game if move is successful' do
-      game.should_receive(:find_winner).exactly(2).times
-      game.over.should == false
-      game.make_move(1)
+    context 'responses when the game is over' do
+      it 'over is false when there is no winner' do
+        game.make_move(1)
+        game.over.should be_false
+      end
+
+      it 'sets over to true when there is a winner' do
+        configs.board.set_square(1, "X")
+        configs.board.set_square(4, "X")
+        game.make_move(7)
+
+        game.over.should be_true
+      end
     end
   end
 
@@ -35,9 +45,19 @@ describe WebGame do
     let(:game)    {described_class.new(configs)}
 
     it 'makes a move with AI if it is computer turn' do
-      game.ai.should_receive(:make_move)
+      configs.board.current_board = [
+                                      'X', 'O', 'X',
+                                      '4', 'O', 'O',
+                                      '7', 'X', '9'
+      ]                 
       game.ai.opponent = true
-      game.make_move(1)
+      game.make_move(4)
+      game.board.current_board.should == [
+                                            'X', 'O', 'X',
+                                            'X', 'O', 'O',
+                                            'O', 'X', '9'
+                                
+      ]     
     end
 
     it 'does not make move when game is over' do
@@ -48,21 +68,19 @@ describe WebGame do
   end
 
   context 'game is over' do
-    let(:configs) {Configuration.new('X', 'human', 3, double(:ui))}
+    let(:configs) {Configuration.new('X', 'human', 3, Sinatra_UI.new)}
     let(:game)    {described_class.new(configs)}
 
     it 'tells if there is a tie game' do
       game.over = true
       game.winner = :no_winner
-      game.ui.should_receive(:display_tie)
-      game.game_over_message
+      game.game_over_message.should == "Tie Game!"
     end
 
     it 'tells who won' do
       game.over   = true
       game.winner = 'X'
-      game.ui.should_receive(:display_winner).with('X')
-      game.game_over_message
+      game.game_over_message.should == "Player X wins!"
     end
   end
 end

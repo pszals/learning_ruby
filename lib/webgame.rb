@@ -15,7 +15,7 @@ class WebGame
   end
 
   def make_move(square)
-    if eligible(square)
+    if eligible?(square)
       board.set_square(square, board.whose_turn)
       @success = true
       find_winner
@@ -47,7 +47,7 @@ class WebGame
     end
   end
 
-  def eligible(square)
+  def eligible?(square)
     square_empty?(square) && !over
   end
 

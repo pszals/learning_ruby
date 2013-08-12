@@ -135,5 +135,4 @@ class Board
     winning_columns.each {|column| combos << column}
     combos
   end
-
 end
