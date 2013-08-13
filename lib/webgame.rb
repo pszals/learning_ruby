@@ -48,7 +48,7 @@ class WebGame
   end
 
   def eligible?(square)
-    square_empty?(square) && !over
+    square_empty?(square) and !over
   end
 
   def computer_turn?

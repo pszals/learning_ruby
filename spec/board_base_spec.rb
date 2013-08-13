@@ -1,4 +1,5 @@
 require 'board_base'
+require 'player'
 
 describe BoardBase do
   let(:board) { BoardBase.new }
@@ -27,6 +28,23 @@ describe BoardBase do
       board.width = 2
       board.current_board = ['X', 'A', 'B', 'L']
       board.reset_board
+      board.current_board.should == ['1', '2', '3', '4']
+    end
+  end  
+
+  context 'manipulating the board' do
+    it 'places a marker on the board' do
+      board.width = 2
+      board.reset_board
+      board.set_square(1, 'k')
+      board.current_board.should == ['k', '2', '3', '4']
+    end
+
+    it 'undoes a marker placement' do
+      board.width = 2
+      board.reset_board
+      board.set_square(1, 'd')
+      board.undo_set_square(1)
       board.current_board.should == ['1', '2', '3', '4']
     end
   end
