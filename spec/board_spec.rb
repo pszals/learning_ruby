@@ -138,16 +138,9 @@ describe Board do
     board.winner.should == 'X'
   end
 
-  it "returns the number of markers present on board" do
-    board.current_board = ['1', '2', '3', 
-                           '4', '5', '6', 
-                           'O', 'X', 'X']
-    board.number_of_filled_squares.should == 3
-  end
-  
   it "creates a 16-square board with a given width of 4" do
     board.width = 4
-    board.squares_with_integers.should == ['1', '2', '3', '4', 
+    board.board_to_strings.should == ['1', '2', '3', '4', 
                                            '5', '6', '7', '8', 
                                            '9', '10', '11', '12', 
                                            '13', '14', '15', '16']
@@ -163,7 +156,7 @@ describe Board do
 
   it "returns square board to be printed of 4x4 size" do
     board.width = 4
-    board.current_board = board.squares_with_integers
+    board.current_board = board.board_to_strings
     board.display_board.should == 
                                   " 1 | 2 | 3 | 4 \n"\
                                   "---|---|---|---\n"\
