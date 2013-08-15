@@ -1,11 +1,12 @@
 class WebGame
   
-  attr_accessor :player_1, :player_2, :over, :winner, :ai 
+  attr_accessor :player_1, :player_2, :over, :winner, :ai, :rules
   attr_reader :ui, :board, :runner 
 
   def initialize(configuration)
     @ui            = configuration.ui
     @board         = configuration.board
+    @rules         = configuration.rules  
     @ai            = configuration.ai
     @marker        = configuration.marker
     @player_1      = configuration.player_1
@@ -16,7 +17,8 @@ class WebGame
 
   def play_game(square)
     if eligible?(square)
-      board.set_square(square, board.whose_turn)
+      board.set_square(square, rules.whose_turn)
+      @rules.current_board = @board.current_board
       @success = true
       find_winner
       ai_move
@@ -27,15 +29,15 @@ class WebGame
   end
 
   def find_winner
-    if @board.game_over?
-      @winner = board.winner
+    if rules.game_over?
+      @winner = rules.winner
       @over = true
     end
   end
 
   def ai_move
     if computer_turn? and !over 
-      board.set_square(computer_move, board.whose_turn)
+      board.set_square(computer_move, rules.whose_turn)
     end
   end 
 
@@ -52,11 +54,11 @@ class WebGame
   end
 
   def computer_turn?
-    board.whose_turn == player_2.marker && ai.opponent
+    rules.whose_turn == player_2.marker && ai.opponent
   end
 
   def computer_move
-    ai.make_move(@board, board.whose_turn)
+    ai.make_move(rules, rules.whose_turn)
   end
 
   def successful_move?
@@ -64,10 +66,10 @@ class WebGame
   end
 
   def square_empty?(square)
-    board.square_empty?(square)
+    rules.square_empty?(square)
   end
 
   def board_open?
-    @board.board_open?
+    rules.board_open?
   end
 end

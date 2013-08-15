@@ -1,5 +1,11 @@
 class Console_UI
   
+  def initialize(board)
+    @board         = board
+    @current_board = board.current_board
+    @width         = board.width
+  end
+
   def ask_for_width_of_board
     put_to_console("Enter 3 for a 3x3 board or 4 for a 4x4 board.")
   end
@@ -78,4 +84,15 @@ class Console_UI
     gets.chomp.to_i
   end
 
+  def display_board
+    if @width == 3
+      @current_board.each_slice(@width).
+                     map { |a,b,c| " #{a} | #{b} | #{c} \n" }.
+                     join("---|---|---\n")
+    else
+      @current_board.each_slice(@width).
+                     map { |a,b,c,d| " #{a} | #{b} | #{c} | #{d} \n" }.
+                     join("---|---|---|---\n")      
+    end
+  end
 end

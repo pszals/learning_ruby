@@ -1,10 +1,13 @@
 require 'configuration'
 require 'board'
+require 'ttt_rules'
 
 describe Configuration do
   let(:player_1)      { Player.new('X')                                    }
   let(:player_2)      { Player.new('O')                                    }
-  let(:io)            { Console_UI.new                                     }
+  let(:board)         { Board.new(player_1, player_2)                      }
+  let(:rules)         { TTTRules.new(board)                                }
+  let(:io)            { Console_UI.new(board)                              }
   let(:marker)        { 'X'                                                }
   let(:configuration) { Configuration.new('marker', 'computer', '3', io)   }
  
@@ -24,11 +27,13 @@ describe Configuration do
     configuration.player_2.marker.should_not ==  configuration.player_1.marker
   end
   
-  it "configures the board size" do
+  it "configures the board" do
     configuration.configure_board(player_1, player_2)
+    
     configuration.board.should be_kind_of(Board)
     configuration.player_1.should be_kind_of(Player)
     configuration.player_2.should be_kind_of(Player)
+    configuration.rules.should be_kind_of(TTTRules)
     configuration.board.width.should == 3
   end
   

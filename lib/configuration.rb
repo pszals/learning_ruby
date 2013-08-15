@@ -4,10 +4,11 @@ require 'game'
 require 'webgame'
 require 'unbeatable_ai'
 require 'player'
+require 'ttt_rules'
 
 class Configuration
 
-  attr_accessor  :marker, :opponent, :ui, :board_width, :ai, :player_1, :player_2, :board 
+  attr_accessor  :marker, :opponent, :ui, :board_width, :ai, :player_1, :player_2, :board, :rules 
 
   def initialize(marker, opponent, board_width, user_interface)
     @marker = marker
@@ -48,9 +49,11 @@ class Configuration
     @board = Board.new(player_1, player_2)
     if @board_width == '3'
        @board.width = 3
+       @rules = TTTRules.new(board)
     elsif @board_width == '4'
        @board.width = 4
        @board.current_board = board.squares_with_integers
+       @rules = TTTRules.new(board)
     end
   end
 end
