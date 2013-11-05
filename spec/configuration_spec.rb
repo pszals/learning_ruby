@@ -52,4 +52,12 @@ describe Configuration do
     configuration.should_receive(:configure_board)
     configuration.configure_game
   end
+
+  it 'configures 4x4 game with O as player 1 marker' do
+    new_configuration = Configuration.new('O', 'computer', '4', io)    
+    new_configuration.configure_players
+
+    new_configuration.player_1.marker.should == 'O'
+    new_configuration.player_2.marker.should == 'X'
+  end
 end

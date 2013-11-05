@@ -3,7 +3,6 @@ require 'configuration'
 require '../sinatra_ttt/lib/sinatra_ui'
 
 describe WebGame do
-
   context 'making a move' do
     let(:configs) {Configuration.new('X', 'human', '3', double(:ui))}
     let(:game)    {described_class.new(configs)}

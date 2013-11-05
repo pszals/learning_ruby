@@ -1,3 +1,4 @@
+require 'pry'
 require 'board'
 
 class Unbeatable_AI
@@ -18,17 +19,16 @@ class Unbeatable_AI
     end
   end
 
-  def minimax(rules, marker, depth, alpha, beta)
+  def minimax(rules, marker, depth)
     opponent = rules.get_opponent
     score = 0
     best_score = -1.0/0
     if rules.game_over?
       return score_board(rules, marker) / depth
     else
-      new_alpha = alpha
       rules.list_of_open_squares.each do |square|
         rules.board.set_square(square, marker)
-        score = -minimax(rules, opponent, depth + 1, -new_alpha, -beta)
+        score = -minimax(rules, opponent, depth + 1)
         rules.board.undo_set_square(square)
         best_score = score if score > best_score
       end
@@ -42,7 +42,7 @@ class Unbeatable_AI
     opponent = rules.get_opponent
     rules.list_of_open_squares.each do |square|
       rules.board.set_square(square, marker)
-      score = -minimax(rules, opponent, 1, -1.0/0, 1.0/0)
+      score = -minimax(rules, opponent, 1)
       rules.board.undo_set_square(square)
       if score > best_score
         best_score = score

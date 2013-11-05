@@ -1,5 +1,4 @@
 class WebGame
-  
   attr_accessor :player_1, :player_2, :over, :winner, :ai, :rules
   attr_reader :ui, :board, :runner 
 

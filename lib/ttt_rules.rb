@@ -21,11 +21,7 @@ class TTTRules
   def board_open?
     number_of_empty_squares >= 1 
   end	
-
-  def which_player(conditional)
-    conditional ? player_2.marker : player_1.marker
-  end
-  
+ 
   def whose_turn
     which_player(number_of_empty_squares%2 == 0) 
   end
@@ -34,16 +30,16 @@ class TTTRules
     which_player(whose_turn == player_1.marker) 
   end
 
+  def which_player(conditional)
+    conditional ? player_2.marker : player_1.marker
+  end
+ 
   def square_empty?(square)
     if square.to_i != 0
       @current_board[square.to_i - 1] == square.to_s
     else
       false
     end
-  end
-
-  def game_over?
-    !board_open? or game_won?
   end
 
   def winner
@@ -67,6 +63,10 @@ class TTTRules
     winner != :no_winner
   end
 
+  def game_over?
+    !board_open? or game_won?
+  end
+
   def gather_winning_combinations
     combos = []
     winning_rows.each {|row| combos << row } and
@@ -80,10 +80,6 @@ class TTTRules
     board.board_indices.each_slice(@width).reduce([]) {|rows, slice| rows << slice}
   end
   
-  def rows
-    @current_board.each_slice(@width)
-  end
-
   def generate_column(starting_index)
     (0...@width).reduce([]) {|column, index| 
       column << (index*@width+starting_index)
@@ -107,5 +103,8 @@ class TTTRules
       diagonal << (index + 1)*(@width - 1)
     }
   end
-
+  
+  def rows
+    @current_board.each_slice(@width)
+  end
 end

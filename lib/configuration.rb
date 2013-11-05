@@ -52,7 +52,7 @@ class Configuration
        @rules = TTTRules.new(board)
     elsif @board_width == '4'
        @board.width = 4
-       @board.current_board = board.squares_with_integers
+       @board.reset_board
        @rules = TTTRules.new(board)
     end
   end
